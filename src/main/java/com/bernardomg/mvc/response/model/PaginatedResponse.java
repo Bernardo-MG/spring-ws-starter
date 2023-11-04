@@ -35,56 +35,56 @@ package com.bernardomg.mvc.response.model;
 public interface PaginatedResponse<T> extends Response<T> {
 
     /**
-     * Number of elements in the page.
+     * Returns the number of elements in the page.
      *
      * @return number of elements
      */
     public Integer getElementsInPage();
 
     /**
-     * Flags this is as the first page.
+     * Returns the flags this is as the first page.
      *
      * @return {@code true} if this is the first page, {@code false} otherwise
      */
     public Boolean getFirst();
 
     /**
-     * Flags this is as the last page.
+     * Returns the flags this is as the last page.
      *
      * @return {@code true} if this is the last page, {@code false} otherwise
      */
     public Boolean getLast();
 
     /**
-     * Number of this page.
+     * Returns the number of this page.
      *
      * @return the number of this page
      */
     public Integer getPage();
 
     /**
-     * Size of this page.
+     * Returns the size of this page.
      *
      * @return the size of this page.
      */
     public Integer getSize();
 
     /**
-     * Properties used for sorting.
+     * Returns the properties used for sorting.
      *
      * @return properties used for sorting
      */
     public Iterable<PropertySort> getSort();
 
     /**
-     * Total number of elements among all the pages.
+     * Returns the total number of elements among all the pages.
      *
      * @return the total number of elements
      */
     public Long getTotalElements();
 
     /**
-     * Total number of pages.
+     * Returns the total number of pages.
      *
      * @return the total number of pages
      */

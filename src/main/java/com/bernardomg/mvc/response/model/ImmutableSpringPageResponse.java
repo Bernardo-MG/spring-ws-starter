@@ -46,9 +46,11 @@ public final class ImmutableSpringPageResponse<T> implements PaginatedResponse<I
     /**
      * Wrapped page.
      */
-    @NonNull
     private final Page<T>                page;
 
+    /**
+     * Properties used for sorting.
+     */
     private final Iterable<PropertySort> sort;
 
     /**

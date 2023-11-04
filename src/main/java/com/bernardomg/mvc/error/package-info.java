@@ -22,38 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.exception;
-
-import java.io.Serializable;
-
 /**
- * Exception for a missing id.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
+ * MVC error handling.
  */
-public class MissingIdException extends RuntimeException {
 
-    private static final long  serialVersionUID = -1589290420417721821L;
-
-    /**
-     * Id which caused the exception.
-     */
-    private final Serializable id;
-
-    public MissingIdException(final String resource, final Serializable id) {
-        super(String.format("Missing id %s for %s", id, resource));
-
-        this.id = id;
-    }
-
-    /**
-     * Returns the id which caused the exception.
-     *
-     * @return the id which caused the exception
-     */
-    public final Serializable getId() {
-        return id;
-    }
-
-}
+package com.bernardomg.mvc.error;

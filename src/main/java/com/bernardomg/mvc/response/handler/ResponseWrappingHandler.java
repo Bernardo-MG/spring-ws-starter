@@ -55,7 +55,7 @@ import lombok.extern.slf4j.Slf4j;
 // TODO: This path should be parameterized
 @ControllerAdvice("com.bernardomg")
 @Slf4j
-public class ResponseWrappingHandler implements ResponseBodyAdvice<Object> {
+public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object> {
 
     /**
      * Default constructor.
@@ -65,7 +65,7 @@ public class ResponseWrappingHandler implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public Object beforeBodyWrite(final Object body, final MethodParameter returnType,
+    public final Object beforeBodyWrite(final Object body, final MethodParameter returnType,
             final MediaType selectedContentType, final Class<? extends HttpMessageConverter<?>> selectedConverterType,
             final ServerHttpRequest request, final ServerHttpResponse response) {
         final Object result;
@@ -97,7 +97,7 @@ public class ResponseWrappingHandler implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public boolean supports(final MethodParameter returnType,
+    public final boolean supports(final MethodParameter returnType,
             final Class<? extends HttpMessageConverter<?>> converterType) {
         return true;
     }

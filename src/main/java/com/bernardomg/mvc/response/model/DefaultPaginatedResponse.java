@@ -75,6 +75,9 @@ public final class DefaultPaginatedResponse<T> implements PaginatedResponse<T> {
      */
     private Integer                size           = -1;
 
+    /**
+     * Properties used for sorting.
+     */
     private Iterable<PropertySort> sort           = new ArrayList<>();
 
     /**
