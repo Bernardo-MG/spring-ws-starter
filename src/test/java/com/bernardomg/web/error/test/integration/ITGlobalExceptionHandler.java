@@ -29,49 +29,96 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.bernardomg.test.config.annotation.MvcIntegrationTest;
-import com.bernardomg.web.error.test.util.controller.PersistenceExceptionTestController;
+import com.bernardomg.web.error.test.util.controller.TestExceptionRequest;
 
 @MvcIntegrationTest
 @AutoConfigureMockMvc
-@DisplayName("Controller error handling - persistence exceptions")
-class ITControllerPersistenceException {
+@DisplayName("Global exception handler")
+class ITGlobalExceptionHandler {
 
     @Autowired
     private MockMvc mockMvc;
 
-    public ITControllerPersistenceException() {
+    public ITGlobalExceptionHandler() {
         super();
     }
 
-    private final RequestBuilder getDataIntegrityExceptionRequest() {
-        return MockMvcRequestBuilders.get(PersistenceExceptionTestController.PATH_DATA_INTEGRITY)
-            .contentType(MediaType.APPLICATION_JSON);
-    }
+    @Test
+    @DisplayName("With a field validation exception it returns a failures list")
+    void testErrorHandling_FieldValidationError_Response() throws Exception {
+        final ResultActions result;
 
-    private final RequestBuilder getJdbcGrammarExceptionRequest() {
-        return MockMvcRequestBuilders.get(PersistenceExceptionTestController.PATH_JDBC_GRAMMAR)
-            .contentType(MediaType.APPLICATION_JSON);
-    }
+        result = mockMvc.perform(TestExceptionRequest.fieldValidation());
 
-    private final RequestBuilder getPropertyReferenceExceptionRequest() {
-        return MockMvcRequestBuilders.get(PersistenceExceptionTestController.PATH_PROPERTY_REFERENCE)
-            .contentType(MediaType.APPLICATION_JSON);
+        // The operation was rejected
+        result.andExpect(MockMvcResultMatchers.status()
+            .isBadRequest());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures", Matchers.aMapWithSize(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures", Matchers.hasKey("field")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field']", Matchers.hasSize(1)));
+        result.andExpect(
+            MockMvcResultMatchers.jsonPath("$.failures['field'][0].message", Matchers.equalTo("Error message")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field'][0].field", Matchers.equalTo("field")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field'][0].code", Matchers.equalTo("code")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field'][0].value", Matchers.equalTo("value")));
+
+        // The response contains no generic error fields
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code")
+            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message")
+            .doesNotExist());
+
+        // The response contains no content field
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
+            .doesNotExist());
     }
 
     @Test
-    @DisplayName("Returns the response structure for a data integrity exception")
-    void testErrorHandling_DataIntegrity_Response() throws Exception {
+    @DisplayName("With a method argument exception it returns the failures response")
+    void testErrorHandling_MethodArgumentError_Response() throws Exception {
         final ResultActions result;
 
-        result = mockMvc.perform(getDataIntegrityExceptionRequest());
+        result = mockMvc.perform(TestExceptionRequest.methodArgument());
+
+        // The operation was rejected
+        result.andExpect(MockMvcResultMatchers.status()
+            .isBadRequest());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures", Matchers.aMapWithSize(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures", Matchers.hasKey("name")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['name']", Matchers.hasSize(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['name'][0].field", Matchers.equalTo("name")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['name'][0].value")
+            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['name'][0].code", Matchers.equalTo("empty")));
+        result.andExpect(
+            MockMvcResultMatchers.jsonPath("$.failures['name'][0].message", Matchers.equalTo("must not be null")));
+
+        // The response contains no generic error fields
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code")
+            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message")
+            .doesNotExist());
+
+        // The response contains no content field
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
+            .doesNotExist());
+    }
+
+    @Test
+    @DisplayName("With a runtime exception it returns the generic error response")
+    void testErrorHandling_RuntimeException_Response() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestExceptionRequest.runtime());
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
@@ -85,56 +132,8 @@ class ITControllerPersistenceException {
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
             .doesNotExist());
 
-        // The response contains no errors attribute
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.errors")
-            .doesNotExist());
-    }
-
-    @Test
-    @DisplayName("Returns the response structure for a JDBC grammar exception")
-    void testErrorHandling_JdbcGrammar_Response() throws Exception {
-        final ResultActions result;
-
-        result = mockMvc.perform(getJdbcGrammarExceptionRequest());
-
-        // The operation was rejected
-        result.andExpect(MockMvcResultMatchers.status()
-            .isInternalServerError());
-
-        // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Internal error")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Internal error")));
-
-        // The response contains no content field
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
-            .doesNotExist());
-
-        // The response contains no errors attribute
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.errors")
-            .doesNotExist());
-    }
-
-    @Test
-    @DisplayName("Returns the response structure for a property reference exception")
-    void testErrorHandling_PropertyReference_Response() throws Exception {
-        final ResultActions result;
-
-        result = mockMvc.perform(getPropertyReferenceExceptionRequest());
-
-        // The operation was rejected
-        result.andExpect(MockMvcResultMatchers.status()
-            .isInternalServerError());
-
-        // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Internal error")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Internal error")));
-
-        // The response contains no content field
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
-            .doesNotExist());
-
-        // The response contains no errors attribute
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.errors")
+        // The response contains no failures attribute
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures")
             .doesNotExist());
     }
 
