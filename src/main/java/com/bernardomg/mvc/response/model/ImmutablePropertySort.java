@@ -27,12 +27,24 @@ package com.bernardomg.mvc.response.model;
 import lombok.Builder;
 import lombok.Value;
 
+/**
+ * Immutable implementation of the property sort.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
 @Value
 @Builder
 public final class ImmutablePropertySort implements PropertySort {
 
+    /**
+     * The direction in which the property is sorted.
+     */
     private String direction;
 
+    /**
+     * The property to sort.
+     */
     private String property;
 
 }

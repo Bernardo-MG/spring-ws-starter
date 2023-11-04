@@ -37,8 +37,14 @@ import lombok.Value;
 @Builder
 public final class ImmutableErrorResponse implements ErrorResponse {
 
+    /**
+     * Code identifying the error.
+     */
     private final String code;
 
+    /**
+     * Error message.
+     */
     private final String message;
 
 }

@@ -36,6 +36,11 @@ import com.bernardomg.validation.failure.FieldFailure;
  */
 public interface FailureResponse {
 
+    /**
+     * Returns all the field failures, grouped by field.
+     *
+     * @return all the field failures, grouped by field
+     */
     public Map<String, List<FieldFailure>> getFailures();
 
 }

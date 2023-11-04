@@ -32,8 +32,18 @@ package com.bernardomg.mvc.response.model;
  */
 public interface PropertySort {
 
+    /**
+     * Returns the direction in which the property is sorted.
+     *
+     * @return direction in which the property is sorted.
+     */
     public String getDirection();
 
+    /**
+     * Returns the property to sort.
+     *
+     * @return the property to sort.
+     */
     public String getProperty();
 
 }
