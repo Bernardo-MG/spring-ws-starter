@@ -22,24 +22,29 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.test.config.annotation;
+package com.bernardomg.web.response.model;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import lombok.Builder;
+import lombok.Value;
 
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+/**
+ * Immutable implementation of the property sort.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
+@Value
+@Builder
+public final class ImmutablePropertySort implements PropertySort {
 
-import com.bernardomg.TestApplication;
+    /**
+     * The direction in which the property is sorted.
+     */
+    private String direction;
 
-@SpringJUnitConfig
-@SpringBootTest(classes = TestApplication.class)
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Documented
-public @interface MvcIntegrationTest {
+    /**
+     * The property to sort.
+     */
+    private String property;
 
 }

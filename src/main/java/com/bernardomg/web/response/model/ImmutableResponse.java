@@ -22,24 +22,26 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.test.config.annotation;
+package com.bernardomg.web.response.model;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import lombok.Builder;
+import lombok.Value;
 
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+/**
+ * Immutable implementation of the response.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ * @param <T>
+ *            response content type
+ */
+@Value
+@Builder
+public final class ImmutableResponse<T> implements Response<T> {
 
-import com.bernardomg.TestApplication;
-
-@SpringJUnitConfig
-@SpringBootTest(classes = TestApplication.class)
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Documented
-public @interface MvcIntegrationTest {
+    /**
+     * Response content.
+     */
+    private final T content;
 
 }

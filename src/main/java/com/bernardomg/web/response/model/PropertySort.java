@@ -22,24 +22,28 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.test.config.annotation;
+package com.bernardomg.web.response.model;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+/**
+ * Property used for sorting. Including direction.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
+public interface PropertySort {
 
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+    /**
+     * Returns the direction in which the property is sorted.
+     *
+     * @return direction in which the property is sorted.
+     */
+    public String getDirection();
 
-import com.bernardomg.TestApplication;
-
-@SpringJUnitConfig
-@SpringBootTest(classes = TestApplication.class)
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Documented
-public @interface MvcIntegrationTest {
+    /**
+     * Returns the property to sort.
+     *
+     * @return the property to sort.
+     */
+    public String getProperty();
 
 }

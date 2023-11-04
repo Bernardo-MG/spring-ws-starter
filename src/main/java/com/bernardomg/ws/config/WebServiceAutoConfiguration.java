@@ -22,24 +22,26 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.test.config.annotation;
+package com.bernardomg.ws.config;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+/**
+ * Web service auto configuration.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
+@Configuration
+@ComponentScan({ "com.bernardomg.web", "com.bernardomg.ws" })
+public class WebServiceAutoConfiguration {
 
-import com.bernardomg.TestApplication;
-
-@SpringJUnitConfig
-@SpringBootTest(classes = TestApplication.class)
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Documented
-public @interface MvcIntegrationTest {
+    /**
+     * Default constructor.
+     */
+    public WebServiceAutoConfiguration() {
+        super();
+    }
 
 }
