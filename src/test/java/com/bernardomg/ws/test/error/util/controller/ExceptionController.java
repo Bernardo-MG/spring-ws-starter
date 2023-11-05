@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 @RequestMapping(ExceptionController.PATH)
 public class ExceptionController {
 
-    public static final String PATH                            = "/test/exception";
+    public static final String PATH                            = "/exception";
 
     public static final String PATH_FIELD_EXCEPTION_VALIDATION = PATH + "/field";
 

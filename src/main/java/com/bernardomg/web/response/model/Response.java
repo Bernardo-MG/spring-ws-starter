@@ -58,9 +58,9 @@ public interface Response<T> {
             .build();
     }
 
-    public static FailureResponse failure(final Map<String, List<FieldFailure>> errors) {
+    public static FailureResponse failure(final Map<String, List<FieldFailure>> failures) {
         return ImmutableFailureResponse.builder()
-            .failures(errors)
+            .failures(failures)
             .build();
     }
 

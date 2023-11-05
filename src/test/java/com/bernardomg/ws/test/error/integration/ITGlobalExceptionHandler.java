@@ -50,7 +50,7 @@ class ITGlobalExceptionHandler {
 
     @Test
     @DisplayName("With a field validation exception it returns a failures list")
-    void testErrorHandling_FieldValidationError_Response() throws Exception {
+    void testErrorHandling_FieldValidationError() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestExceptionRequest.fieldValidation());
@@ -82,7 +82,7 @@ class ITGlobalExceptionHandler {
 
     @Test
     @DisplayName("With an illegal argument exception it returns the generic error response")
-    void testErrorHandling_IllegalArgument_Response() throws Exception {
+    void testErrorHandling_IllegalArgument() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestExceptionRequest.illegalArgument());
@@ -106,7 +106,7 @@ class ITGlobalExceptionHandler {
 
     @Test
     @DisplayName("With a method argument exception it returns the failures response")
-    void testErrorHandling_MethodArgumentError_Response() throws Exception {
+    void testErrorHandling_MethodArgumentError() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestExceptionRequest.methodArgument());
@@ -139,7 +139,7 @@ class ITGlobalExceptionHandler {
 
     @Test
     @DisplayName("With a missing id exception it returns the generic error response")
-    void testErrorHandling_MissingId_Response() throws Exception {
+    void testErrorHandling_MissingId() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestExceptionRequest.missingId());
@@ -163,7 +163,7 @@ class ITGlobalExceptionHandler {
 
     @Test
     @DisplayName("With a runtime exception it returns the generic error response")
-    void testErrorHandling_RuntimeException_Response() throws Exception {
+    void testErrorHandling_RuntimeException() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestExceptionRequest.runtime());
@@ -187,7 +187,7 @@ class ITGlobalExceptionHandler {
 
     @Test
     @DisplayName("With a type mismatch exception it returns the generic error response")
-    void testErrorHandling_TypeMismatch_Response() throws Exception {
+    void testErrorHandling_TypeMismatch() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestExceptionRequest.typeMismatch());
@@ -211,7 +211,7 @@ class ITGlobalExceptionHandler {
 
     @Test
     @DisplayName("With an unhandled Spring exception it returns the generic error response")
-    void testErrorHandling_UnhandledSpring_Response() throws Exception {
+    void testErrorHandling_UnhandledSpring() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestExceptionRequest.unhandledSpring());
