@@ -81,6 +81,30 @@ class ITGlobalExceptionHandler {
     }
 
     @Test
+    @DisplayName("With an illegal argument exception it returns the generic error response")
+    void testErrorHandling_IllegalArgument_Response() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestExceptionRequest.illegalArgument());
+
+        // The value was not found
+        result.andExpect(MockMvcResultMatchers.status()
+            .isBadRequest());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Bad request")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Bad request")));
+
+        // The response contains no content field
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
+            .doesNotExist());
+
+        // The response contains no failures attribute
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures")
+            .doesNotExist());
+    }
+
+    @Test
     @DisplayName("With a method argument exception it returns the failures response")
     void testErrorHandling_MethodArgumentError_Response() throws Exception {
         final ResultActions result;
@@ -114,6 +138,30 @@ class ITGlobalExceptionHandler {
     }
 
     @Test
+    @DisplayName("With a missing id exception it returns the generic error response")
+    void testErrorHandling_MissingId_Response() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestExceptionRequest.missingId());
+
+        // The value was not found
+        result.andExpect(MockMvcResultMatchers.status()
+            .isNotFound());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("idNotFound")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Id 1 not found")));
+
+        // The response contains no content field
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
+            .doesNotExist());
+
+        // The response contains no failures attribute
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures")
+            .doesNotExist());
+    }
+
+    @Test
     @DisplayName("With a runtime exception it returns the generic error response")
     void testErrorHandling_RuntimeException_Response() throws Exception {
         final ResultActions result;
@@ -127,6 +175,54 @@ class ITGlobalExceptionHandler {
         // The response contains the expected attributes
         result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Internal error")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Internal error")));
+
+        // The response contains no content field
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
+            .doesNotExist());
+
+        // The response contains no failures attribute
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures")
+            .doesNotExist());
+    }
+
+    @Test
+    @DisplayName("With a type mismatch exception it returns the generic error response")
+    void testErrorHandling_TypeMismatch_Response() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestExceptionRequest.typeMismatch());
+
+        // The value was not found
+        result.andExpect(MockMvcResultMatchers.status()
+            .isBadRequest());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Bad request")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Bad request")));
+
+        // The response contains no content field
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
+            .doesNotExist());
+
+        // The response contains no failures attribute
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures")
+            .doesNotExist());
+    }
+
+    @Test
+    @DisplayName("With an unhandled Spring exception it returns the generic error response")
+    void testErrorHandling_UnhandledSpring_Response() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestExceptionRequest.unhandledSpring());
+
+        // The operation was rejected
+        result.andExpect(MockMvcResultMatchers.status()
+            .isInternalServerError());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("500")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Server error. Contact admin.")));
 
         // The response contains no content field
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content")

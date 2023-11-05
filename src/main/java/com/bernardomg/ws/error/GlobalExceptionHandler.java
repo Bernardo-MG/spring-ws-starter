@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.beans.TypeMismatchException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -41,7 +42,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.bernardomg.exception.MissingIdException;
@@ -69,14 +69,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         super();
     }
 
-    @ExceptionHandler({ MethodArgumentTypeMismatchException.class, HttpMessageConversionException.class,
-            IllegalArgumentException.class, InvalidDataAccessApiUsageException.class })
+    @ExceptionHandler({ IllegalArgumentException.class, HttpMessageConversionException.class,
+            DataAccessException.class })
     public final ResponseEntity<Object> handleBadRequestException(final Exception ex, final WebRequest request)
             throws Exception {
+        final ErrorResponse response;
+
         log.warn(ex.getMessage(), ex);
 
-        // TODO: add response model for these cases
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        response = Response.error("Bad request");
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -102,9 +105,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({ MissingIdException.class })
     public final ResponseEntity<Object> handleMissingDataException(final MissingIdException ex,
             final WebRequest request) throws Exception {
+        final ErrorResponse response;
+        final String        message;
+
         log.warn(ex.getMessage(), ex);
 
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        message = String.format("Id %s not found", String.valueOf(ex.getId()));
+
+        response = Response.error(message, "idNotFound");
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({ FieldFailureException.class })
@@ -138,6 +148,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("{}.{} with value {}: {}", error.getObjectName(), error.getField(), error.getRejectedValue(),
             error.getDefaultMessage());
 
+        // TODO: add an error mapper
         codes = Arrays.asList(error.getCodes());
         if (codes.contains("NotNull")) {
             code = "empty";
@@ -180,6 +191,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         response = Response.failure(failures);
 
         return super.handleExceptionInternal(ex, response, headers, status, request);
+    }
+
+    @Override
+    protected final ResponseEntity<Object> handleTypeMismatch(final TypeMismatchException ex, final HttpHeaders headers,
+            final HttpStatusCode status, final WebRequest request) {
+        final ErrorResponse response;
+
+        log.warn(ex.getMessage(), ex);
+
+        response = Response.error("Bad request");
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
 }
