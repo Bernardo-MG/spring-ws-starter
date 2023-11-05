@@ -1,5 +1,5 @@
 
-package com.bernardomg.web.error.test.util.controller;
+package com.bernardomg.ws.test.error.util.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bernardomg.exception.MissingIdException;
 import com.bernardomg.validation.failure.FieldFailure;
 import com.bernardomg.validation.failure.exception.FieldFailureException;
-import com.bernardomg.web.error.test.util.model.ErrorTestObject;
+import com.bernardomg.ws.test.error.util.model.ErrorTestObject;
 
 import jakarta.validation.Valid;
 

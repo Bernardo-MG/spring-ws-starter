@@ -1,5 +1,5 @@
 
-package com.bernardomg.web.error.test.util.model;
+package com.bernardomg.ws.test.error.util.model;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

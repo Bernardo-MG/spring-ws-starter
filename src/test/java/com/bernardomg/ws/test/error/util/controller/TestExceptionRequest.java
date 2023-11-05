@@ -1,5 +1,5 @@
 
-package com.bernardomg.web.error.test.util.controller;
+package com.bernardomg.ws.test.error.util.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.RequestBuilder;

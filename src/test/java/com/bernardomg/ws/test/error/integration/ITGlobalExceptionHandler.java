@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.error.test.integration;
+package com.bernardomg.ws.test.error.integration;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -33,10 +33,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.bernardomg.test.config.annotation.MvcIntegrationTest;
-import com.bernardomg.web.error.test.util.controller.TestExceptionRequest;
+import com.bernardomg.ws.test.config.annotation.IntegrationTest;
+import com.bernardomg.ws.test.error.util.controller.TestExceptionRequest;
 
-@MvcIntegrationTest
+@IntegrationTest
 @AutoConfigureMockMvc
 @DisplayName("Global exception handler")
 class ITGlobalExceptionHandler {

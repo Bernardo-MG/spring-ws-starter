@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.test.config.annotation;
+package com.bernardomg.ws.test.config.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -40,6 +40,6 @@ import com.bernardomg.TestApplication;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-public @interface MvcIntegrationTest {
+public @interface IntegrationTest {
 
 }
