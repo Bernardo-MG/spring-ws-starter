@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.ws.response.handler;
+package com.bernardomg.ws.response;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.data.domain.Page;

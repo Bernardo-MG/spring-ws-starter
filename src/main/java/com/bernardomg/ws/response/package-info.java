@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * Response handlers.
+ * Response handling.
  */
 
-package com.bernardomg.ws.response.handler;
+package com.bernardomg.ws.response;

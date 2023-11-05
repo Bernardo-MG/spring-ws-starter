@@ -23,7 +23,7 @@
  */
 
 /**
- * Web error handling.
+ * Error handling.
  */
 
 package com.bernardomg.ws.error;
