@@ -31,12 +31,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.bernardomg.TestApplication;
+import com.bernardomg.ws.config.WebServiceAutoConfiguration;
+import com.bernardomg.ws.test.TestApplication;
 
 @SpringJUnitConfig
 @SpringBootTest(classes = TestApplication.class)
+@ContextConfiguration(classes = { WebServiceAutoConfiguration.class })
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
