@@ -45,6 +45,8 @@ public final class ImmutableSpringPageResponse<T> implements PaginatedResponse<I
 
     /**
      * Wrapped page.
+     * <p>
+     * FIXME: Make sure this is ignored when serializing.
      */
     private final Page<T>                page;
 

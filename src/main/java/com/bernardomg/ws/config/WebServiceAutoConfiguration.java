@@ -24,8 +24,11 @@
 
 package com.bernardomg.ws.config;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.context.annotation.Bean;
+
+import com.bernardomg.ws.error.GlobalExceptionHandler;
+import com.bernardomg.ws.response.ResponseWrappingHandler;
 
 /**
  * Web service auto configuration.
@@ -33,8 +36,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-@Configuration
-@ComponentScan({ "com.bernardomg.web", "com.bernardomg.ws" })
+@AutoConfiguration
 public class WebServiceAutoConfiguration {
 
     /**
@@ -42,6 +44,16 @@ public class WebServiceAutoConfiguration {
      */
     public WebServiceAutoConfiguration() {
         super();
+    }
+
+    @Bean("globalExceptionHandler")
+    public GlobalExceptionHandler getGlobalExceptionHandler() {
+        return new GlobalExceptionHandler();
+    }
+
+    @Bean("responseWrappingHandler")
+    public ResponseWrappingHandler getResponseWrappingHandler() {
+        return new ResponseWrappingHandler();
     }
 
 }
