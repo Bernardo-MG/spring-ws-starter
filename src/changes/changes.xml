@@ -11,5 +11,10 @@
             First version.
          </action>
       </release>
+      <release version="0.1.1" date="2023-11-16" description="Corrected auto configuration">
+         <action dev="bmg" type="fix">
+            Corrected auto configuration.
+         </action>
+      </release>
    </body>
 </document>

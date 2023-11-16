@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg;
+package com.bernardomg.ws.test;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
