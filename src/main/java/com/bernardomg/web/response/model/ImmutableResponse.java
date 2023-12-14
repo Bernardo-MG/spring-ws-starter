@@ -25,6 +25,7 @@
 package com.bernardomg.web.response.model;
 
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 
 /**
@@ -42,6 +43,7 @@ public final class ImmutableResponse<T> implements Response<T> {
     /**
      * Response content.
      */
+    @NonNull
     private final T content;
 
 }

@@ -27,6 +27,7 @@ package com.bernardomg.web.response.model;
 import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -42,6 +43,7 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(setterPrefix = "with")
 public final class DefaultPaginatedResponse<T> implements PaginatedResponse<T> {
 
     /**
@@ -53,42 +55,51 @@ public final class DefaultPaginatedResponse<T> implements PaginatedResponse<T> {
     /**
      * Number of elements in the page.
      */
-    private Integer                elementsInPage = -1;
+    @Builder.Default
+    private int                    elementsInPage = -1;
 
     /**
      * Flags this is as the first page.
      */
-    private Boolean                first          = false;
+    @Builder.Default
+    private boolean                first          = false;
 
     /**
      * Flags this is as the last page.
      */
-    private Boolean                last           = false;
+    @Builder.Default
+    private boolean                last           = false;
 
     /**
      * Number of this page.
      */
-    private Integer                page           = -1;
+    @Builder.Default
+    private int                    page           = -1;
 
     /**
      * Size of this page.
      */
-    private Integer                size           = -1;
+    @Builder.Default
+    private int                    size           = -1;
 
     /**
      * Properties used for sorting.
      */
+    @NonNull
+    @Builder.Default
     private Iterable<PropertySort> sort           = new ArrayList<>();
 
     /**
      * Total number of elements among all the pages.
      */
-    private Long                   totalElements  = -1L;
+    @Builder.Default
+    private long                   totalElements  = -1L;
 
     /**
      * Total number of pages.
      */
-    private Integer                totalPages     = -1;
+    @Builder.Default
+    private int                    totalPages     = -1;
 
     /**
      * Constructs a response with the specified content.

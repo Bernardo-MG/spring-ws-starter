@@ -16,5 +16,13 @@
             Corrected auto configuration.
          </action>
       </release>
+      <release version="0.1.2" date="2023-12-14" description="Cleaned up model">
+         <action dev="bmg" type="update">
+            Reduced configuration.
+         </action>
+         <action dev="bmg" type="update">
+            Using only generic pagination object.
+         </action>
+      </release>
    </body>
 </document>

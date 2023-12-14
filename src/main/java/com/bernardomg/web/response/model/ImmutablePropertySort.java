@@ -25,6 +25,7 @@
 package com.bernardomg.web.response.model;
 
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 
 /**
@@ -40,11 +41,15 @@ public final class ImmutablePropertySort implements PropertySort {
     /**
      * The direction in which the property is sorted.
      */
-    private String direction;
+    @NonNull
+    @Builder.Default
+    private String direction = "";
 
     /**
      * The property to sort.
      */
-    private String property;
+    @NonNull
+    @Builder.Default
+    private String property  = "";
 
 }

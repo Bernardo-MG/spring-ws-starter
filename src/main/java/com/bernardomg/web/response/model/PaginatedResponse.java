@@ -39,35 +39,21 @@ public interface PaginatedResponse<T> extends Response<T> {
      *
      * @return number of elements
      */
-    public Integer getElementsInPage();
-
-    /**
-     * Returns the flags this is as the first page.
-     *
-     * @return {@code true} if this is the first page, {@code false} otherwise
-     */
-    public Boolean getFirst();
-
-    /**
-     * Returns the flags this is as the last page.
-     *
-     * @return {@code true} if this is the last page, {@code false} otherwise
-     */
-    public Boolean getLast();
+    public int getElementsInPage();
 
     /**
      * Returns the number of this page.
      *
      * @return the number of this page
      */
-    public Integer getPage();
+    public int getPage();
 
     /**
      * Returns the size of this page.
      *
      * @return the size of this page.
      */
-    public Integer getSize();
+    public int getSize();
 
     /**
      * Returns the properties used for sorting.
@@ -81,13 +67,27 @@ public interface PaginatedResponse<T> extends Response<T> {
      *
      * @return the total number of elements
      */
-    public Long getTotalElements();
+    public long getTotalElements();
 
     /**
      * Returns the total number of pages.
      *
      * @return the total number of pages
      */
-    public Integer getTotalPages();
+    public int getTotalPages();
+
+    /**
+     * Returns the flags this is as the first page.
+     *
+     * @return {@code true} if this is the first page, {@code false} otherwise
+     */
+    public boolean isFirst();
+
+    /**
+     * Returns the flags this is as the last page.
+     *
+     * @return {@code true} if this is the last page, {@code false} otherwise
+     */
+    public boolean isLast();
 
 }

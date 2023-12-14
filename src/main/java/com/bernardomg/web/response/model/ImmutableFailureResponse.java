@@ -30,6 +30,7 @@ import java.util.Map;
 import com.bernardomg.validation.failure.FieldFailure;
 
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 
 /**
@@ -45,6 +46,8 @@ public final class ImmutableFailureResponse implements FailureResponse {
     /**
      * Response failures.
      */
-    private final Map<String, List<FieldFailure>> failures;
+    @NonNull
+    @Builder.Default
+    private final Map<String, List<FieldFailure>> failures = Map.of();
 
 }

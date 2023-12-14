@@ -26,6 +26,7 @@ package com.bernardomg.ws.response;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -34,10 +35,12 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import com.bernardomg.web.response.model.DefaultPaginatedResponse;
 import com.bernardomg.web.response.model.ErrorResponse;
 import com.bernardomg.web.response.model.FailureResponse;
-import com.bernardomg.web.response.model.ImmutableSpringPageResponse;
+import com.bernardomg.web.response.model.ImmutablePropertySort;
 import com.bernardomg.web.response.model.PaginatedResponse;
+import com.bernardomg.web.response.model.PropertySort;
 import com.bernardomg.web.response.model.Response;
 
 import lombok.extern.slf4j.Slf4j;
@@ -85,7 +88,7 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             result = body;
         } else if (body instanceof Page<?>) {
             // Spring pagination
-            result = new ImmutableSpringPageResponse<>((Page<?>) body);
+            result = toPaginated((Page<?>) body);
         } else if (body == null) {
             log.debug("Received null as response body");
             result = Response.empty();
@@ -100,6 +103,42 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
     public final boolean supports(final MethodParameter returnType,
             final Class<? extends HttpMessageConverter<?>> converterType) {
         return true;
+    }
+
+    private final PropertySort getPropertySort(final Order order) {
+        final String direction;
+
+        if (order.isAscending()) {
+            direction = "asc";
+        } else {
+            direction = "desc";
+        }
+
+        return ImmutablePropertySort.builder()
+            .property(order.getProperty())
+            .direction(direction)
+            .build();
+    }
+
+    private final <T> PaginatedResponse<Iterable<T>> toPaginated(final Page<T> page) {
+        final Iterable<PropertySort> sort;
+
+        sort = page.getSort()
+            .stream()
+            .map(this::getPropertySort)
+            .toList();
+
+        return DefaultPaginatedResponse.<Iterable<T>> builder()
+            .withContent(page.getContent())
+            .withSort(sort)
+            .withElementsInPage(page.getNumberOfElements())
+            .withFirst(page.isFirst())
+            .withLast(page.isLast())
+            .withPage(page.getNumber())
+            .withSize(page.getSize())
+            .withTotalElements(page.getTotalElements())
+            .withTotalPages(page.getTotalPages())
+            .build();
     }
 
 }

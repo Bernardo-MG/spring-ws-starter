@@ -25,6 +25,7 @@
 package com.bernardomg.web.response.model;
 
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 
 /**
@@ -40,11 +41,15 @@ public final class ImmutableErrorResponse implements ErrorResponse {
     /**
      * Code identifying the error.
      */
-    private final String code;
+    @NonNull
+    @Builder.Default
+    private final String code    = "";
 
     /**
      * Error message.
      */
-    private final String message;
+    @NonNull
+    @Builder.Default
+    private final String message = "";
 
 }
