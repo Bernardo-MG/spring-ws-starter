@@ -183,10 +183,11 @@
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
       <bernardomg.framework.validation.version>0.1.0</bernardomg.framework.validation.version>
-      <lombok.version>1.18.28</lombok.version>
-      <spring.boot.version>3.1.0</spring.boot.version>
-      <spring.data.version>2023.0.0</spring.data.version>
-      <spring.version>6.0.9</spring.version>
+      <lombok.version>1.18.30</lombok.version>
+      <micrometer.version>1.12.1</micrometer.version>
+      <spring.boot.version>3.2.0</spring.boot.version>
+      <spring.data.version>2023.1.0</spring.data.version>
+      <spring.version>6.1.2</spring.version>
       <!-- ============================================== -->
       <!-- ============ PLUGIN CONFIGURATION ============ -->
       <!-- ============================================== -->
@@ -359,6 +360,21 @@
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-web</artifactId>
          <scope>provided</scope>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- =========== VERSION ENFORCEMENT ============== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Micrometer Observation -->
+         <groupId>io.micrometer</groupId>
+         <artifactId>micrometer-observation</artifactId>
+         <version>${micrometer.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Micrometer Commons -->
+         <groupId>io.micrometer</groupId>
+         <artifactId>micrometer-commons</artifactId>
+         <version>${micrometer.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
