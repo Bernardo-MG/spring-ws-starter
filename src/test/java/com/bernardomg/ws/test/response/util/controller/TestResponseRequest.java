@@ -22,8 +22,18 @@ public final class TestResponseRequest {
             .contentType(MediaType.APPLICATION_JSON);
     }
 
+    public static final RequestBuilder object() {
+        return MockMvcRequestBuilders.get(ResponseController.PATH_OBJECT)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
     public static final RequestBuilder response() {
         return MockMvcRequestBuilders.get(ResponseController.PATH_RESPONSE)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
+    public static final RequestBuilder responseEntity() {
+        return MockMvcRequestBuilders.get(ResponseController.PATH_RESPONSE_ENTITY)
             .contentType(MediaType.APPLICATION_JSON);
     }
 
@@ -32,8 +42,18 @@ public final class TestResponseRequest {
             .contentType(MediaType.APPLICATION_JSON);
     }
 
+    public static final RequestBuilder springPageSorted() {
+        return MockMvcRequestBuilders.get(ResponseController.PATH_SPRING_PAGE_SORTED)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
     public static final RequestBuilder string() {
         return MockMvcRequestBuilders.get(ResponseController.PATH_STRING)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
+    public static final RequestBuilder voidResponse() {
+        return MockMvcRequestBuilders.get(ResponseController.PATH_VOID)
             .contentType(MediaType.APPLICATION_JSON);
     }
 
