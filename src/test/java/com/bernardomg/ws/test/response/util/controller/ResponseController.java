@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,25 +26,27 @@ import com.bernardomg.web.response.model.Response;
 @RequestMapping(ResponseController.PATH)
 public class ResponseController {
 
-    public static final String PATH                  = "/response";
+    public static final String PATH                    = "/response";
 
-    public static final String PATH_ERROR_RESPONSE   = PATH + "/errorResponse";
+    public static final String PATH_ERROR_RESPONSE     = PATH + "/errorResponse";
 
-    public static final String PATH_FAILURE_RESPONSE = PATH + "/failureResponse";
+    public static final String PATH_FAILURE_RESPONSE   = PATH + "/failureResponse";
 
-    public static final String PATH_NULL             = PATH + "/null";
+    public static final String PATH_NULL               = PATH + "/null";
 
-    public static final String PATH_OBJECT           = PATH + "/object";
+    public static final String PATH_OBJECT             = PATH + "/object";
 
-    public static final String PATH_RESPONSE         = PATH + "/response";
+    public static final String PATH_RESPONSE           = PATH + "/response";
 
-    public static final String PATH_RESPONSE_ENTITY  = PATH + "/responseEntity";
+    public static final String PATH_RESPONSE_ENTITY    = PATH + "/responseEntity";
 
-    public static final String PATH_SPRING_PAGE      = PATH + "/springPage";
+    public static final String PATH_SPRING_PAGE        = PATH + "/springPage";
 
-    public static final String PATH_STRING           = PATH + "/string";
+    public static final String PATH_SPRING_PAGE_SORTED = PATH + "/springPageSorted";
 
-    public static final String PATH_VOID             = PATH + "/void";
+    public static final String PATH_STRING             = PATH + "/string";
+
+    public static final String PATH_VOID               = PATH + "/void";
 
     public ResponseController() {
         super();
@@ -100,6 +104,16 @@ public class ResponseController {
     @GetMapping(path = "/springPage", produces = MediaType.APPLICATION_JSON_VALUE)
     public PageImpl<String> springPage() {
         return new PageImpl<>(List.of("abc"));
+    }
+
+    @GetMapping(path = "/springPageSorted", produces = MediaType.APPLICATION_JSON_VALUE)
+    public PageImpl<String> springPageSorted() {
+        final Pageable pageable;
+        final Sort     sort;
+
+        sort = Sort.by("field");
+        pageable = Pageable.unpaged(sort);
+        return new PageImpl<>(List.of("abc"), pageable, 1);
     }
 
     @GetMapping(path = "/void", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -174,6 +174,31 @@ class ITResponseWrappingHandler {
     }
 
     @Test
+    @DisplayName("With a spring page response which is sorted, it gets wrapped into a response structure")
+    void testResponseWrapping_SpringPageSorted() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestResponseRequest.springPageSorted());
+
+        // OK response
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo(List.of("abc"))));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.elementsInPage", Matchers.equalTo(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.page", Matchers.equalTo(0)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.size", Matchers.equalTo(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.totalPages", Matchers.equalTo(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.first", Matchers.equalTo(true)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.last", Matchers.equalTo(true)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort", Matchers.hasSize(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort[0].property", Matchers.equalTo("field")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort[0].direction", Matchers.equalTo("asc")));
+    }
+
+    @Test
     @DisplayName("With a string response, it gets wrapped into a response structure")
     @Disabled("Check why this is not working")
     void testResponseWrapping_String() throws Exception {

@@ -42,6 +42,11 @@ public final class TestResponseRequest {
             .contentType(MediaType.APPLICATION_JSON);
     }
 
+    public static final RequestBuilder springPageSorted() {
+        return MockMvcRequestBuilders.get(ResponseController.PATH_SPRING_PAGE_SORTED)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
     public static final RequestBuilder string() {
         return MockMvcRequestBuilders.get(ResponseController.PATH_STRING)
             .contentType(MediaType.APPLICATION_JSON);
