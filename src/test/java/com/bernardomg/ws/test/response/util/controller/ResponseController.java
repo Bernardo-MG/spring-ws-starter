@@ -40,6 +40,8 @@ public class ResponseController {
 
     public static final String PATH_STRING           = PATH + "/string";
 
+    public static final String PATH_VOID             = PATH + "/void";
+
     public ResponseController() {
         super();
     }
@@ -90,5 +92,8 @@ public class ResponseController {
     public PageImpl<String> springPage() {
         return new PageImpl<>(List.of("abc"));
     }
+
+    @GetMapping(path = "/void", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void voidResponse() {}
 
 }

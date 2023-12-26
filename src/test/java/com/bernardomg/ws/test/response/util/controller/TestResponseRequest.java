@@ -42,6 +42,11 @@ public final class TestResponseRequest {
             .contentType(MediaType.APPLICATION_JSON);
     }
 
+    public static final RequestBuilder voidResponse() {
+        return MockMvcRequestBuilders.get(ResponseController.PATH_VOID)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
     private TestResponseRequest() {
         super();
     }

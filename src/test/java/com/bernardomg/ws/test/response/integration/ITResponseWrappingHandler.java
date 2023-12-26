@@ -27,7 +27,6 @@ package com.bernardomg.ws.test.response.integration;
 import java.util.List;
 
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,8 +89,7 @@ class ITResponseWrappingHandler {
     }
 
     @Test
-    @DisplayName("With a null response, it gets wrapped into a response structure")
-    @Disabled("This doesn't work")
+    @DisplayName("With a null response, nothing is returned")
     void testResponseWrapping_Null() throws Exception {
         final ResultActions result;
 
@@ -102,12 +100,12 @@ class ITResponseWrappingHandler {
             .isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$")
+            .doesNotExist());
     }
 
     @Test
     @DisplayName("With a response wrapper, it doesn't wrap the response")
-    @Disabled("Something is misconfigured")
     void testResponseWrapping_Response() throws Exception {
         final ResultActions result;
 
@@ -123,7 +121,6 @@ class ITResponseWrappingHandler {
 
     @Test
     @DisplayName("With a response entity, it doesn't wrap the response")
-    @Disabled("This doesn't work")
     void testResponseWrapping_ResponseEntity() throws Exception {
         final ResultActions result;
 
@@ -139,7 +136,6 @@ class ITResponseWrappingHandler {
 
     @Test
     @DisplayName("With a spring page response, it gets wrapped into a response structure")
-    @Disabled("Something is misconfigured")
     void testResponseWrapping_SpringPage() throws Exception {
         final ResultActions result;
 
@@ -164,7 +160,6 @@ class ITResponseWrappingHandler {
 
     @Test
     @DisplayName("With a string response, it gets wrapped into a response structure")
-    @Disabled("This doesn't work")
     void testResponseWrapping_String() throws Exception {
         final ResultActions result;
 
@@ -176,6 +171,22 @@ class ITResponseWrappingHandler {
 
         // The response contains the expected attributes
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("abc")));
+    }
+
+    @Test
+    @DisplayName("With a void response, nothing is returned")
+    void testResponseWrapping_Void() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestResponseRequest.voidResponse());
+
+        // OK response
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$")
+            .doesNotExist());
     }
 
 }
