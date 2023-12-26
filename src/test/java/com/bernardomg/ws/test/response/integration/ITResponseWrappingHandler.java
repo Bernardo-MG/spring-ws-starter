@@ -100,8 +100,7 @@ class ITResponseWrappingHandler {
             .isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$")
-            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.nullValue()));
     }
 
     @Test
@@ -185,8 +184,7 @@ class ITResponseWrappingHandler {
             .isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$")
-            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.nullValue()));
     }
 
 }
