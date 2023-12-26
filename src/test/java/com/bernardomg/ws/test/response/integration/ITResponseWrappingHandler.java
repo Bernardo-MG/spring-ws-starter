@@ -52,13 +52,13 @@ class ITResponseWrappingHandler {
     }
 
     @Test
-    @DisplayName("With an error response wrapper it doesn't change")
+    @DisplayName("With an error response wrapper, it doesn't wrap the response")
     void testResponseWrapping_ErrorResponse() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestResponseRequest.errorResponse());
 
-        // The value was not found
+        // OK response
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -68,13 +68,13 @@ class ITResponseWrappingHandler {
     }
 
     @Test
-    @DisplayName("With a failure response wrapper it doesn't change")
+    @DisplayName("With a failure response wrapper, it doesn't wrap the response")
     void testResponseWrapping_FailureResponse() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestResponseRequest.failureResponse());
 
-        // The value was not found
+        // OK response
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -90,30 +90,43 @@ class ITResponseWrappingHandler {
     }
 
     @Test
-    @DisplayName("With a null response it gets wrapped into a response structure")
-    @Disabled("This doesn't work")
+    @DisplayName("With a null response, nothing is returned")
     void testResponseWrapping_Null() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestResponseRequest.nullResponse());
 
-        // The value was not found
+        // OK response
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.nullValue()));
     }
 
     @Test
-    @DisplayName("With a response wrapper it doesn't change")
-    @Disabled("Something is misconfigured")
+    @DisplayName("With an object response, it gets wrapped into a response structure")
+    void testResponseWrapping_Object() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestResponseRequest.object());
+
+        // OK response
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content.name", Matchers.equalTo("name")));
+    }
+
+    @Test
+    @DisplayName("With a response wrapper, it doesn't wrap the response")
     void testResponseWrapping_Response() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestResponseRequest.response());
 
-        // The value was not found
+        // OK response
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -122,14 +135,29 @@ class ITResponseWrappingHandler {
     }
 
     @Test
-    @DisplayName("With a spring page response it gets wrapped into a response structure")
-    @Disabled("Something is misconfigured")
+    @DisplayName("With a response entity, it doesn't wrap the response")
+    @Disabled("Check why this is not working")
+    void testResponseWrapping_ResponseEntity() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestResponseRequest.responseEntity());
+
+        // OK response
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("abc")));
+    }
+
+    @Test
+    @DisplayName("With a spring page response, it gets wrapped into a response structure")
     void testResponseWrapping_SpringPage() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestResponseRequest.springPage());
 
-        // The value was not found
+        // OK response
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -143,23 +171,62 @@ class ITResponseWrappingHandler {
         result.andExpect(MockMvcResultMatchers.jsonPath("$.first", Matchers.equalTo(true)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.last", Matchers.equalTo(true)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.sort", Matchers.equalTo(List.of())));
-
     }
 
     @Test
-    @DisplayName("With a string response it gets wrapped into a response structure")
-    @Disabled("This doesn't work")
+    @DisplayName("With a spring page response which is sorted, it gets wrapped into a response structure")
+    void testResponseWrapping_SpringPageSorted() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestResponseRequest.springPageSorted());
+
+        // OK response
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo(List.of("abc"))));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.elementsInPage", Matchers.equalTo(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.page", Matchers.equalTo(0)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.size", Matchers.equalTo(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.totalPages", Matchers.equalTo(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.first", Matchers.equalTo(true)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.last", Matchers.equalTo(true)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort", Matchers.hasSize(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort[0].property", Matchers.equalTo("field")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort[0].direction", Matchers.equalTo("asc")));
+    }
+
+    @Test
+    @DisplayName("With a string response, it gets wrapped into a response structure")
+    @Disabled("Check why this is not working")
     void testResponseWrapping_String() throws Exception {
         final ResultActions result;
 
         result = mockMvc.perform(TestResponseRequest.string());
 
-        // The value was not found
+        // OK response
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
         // The response contains the expected attributes
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("abc")));
+    }
+
+    @Test
+    @DisplayName("With a void response, nothing is returned")
+    void testResponseWrapping_Void() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestResponseRequest.voidResponse());
+
+        // OK response
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.nullValue()));
     }
 
 }
