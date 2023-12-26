@@ -32,6 +32,8 @@ public class ResponseController {
 
     public static final String PATH_NULL             = PATH + "/null";
 
+    public static final String PATH_OBJECT           = PATH + "/object";
+
     public static final String PATH_RESPONSE         = PATH + "/response";
 
     public static final String PATH_RESPONSE_ENTITY  = PATH + "/responseEntity";
@@ -76,6 +78,13 @@ public class ResponseController {
     @GetMapping(path = "/null", produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<String> nullResponse() {
         return null;
+    }
+
+    @GetMapping(path = "/object", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ReturnedObject object() {
+        return ReturnedObject.builder()
+            .name("name")
+            .build();
     }
 
     @GetMapping(path = "/response", produces = MediaType.APPLICATION_JSON_VALUE)

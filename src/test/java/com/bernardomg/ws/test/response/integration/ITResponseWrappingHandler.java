@@ -105,6 +105,21 @@ class ITResponseWrappingHandler {
     }
 
     @Test
+    @DisplayName("With an object response, it gets wrapped into a response structure")
+    void testResponseWrapping_Object() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestResponseRequest.object());
+
+        // OK response
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content.name", Matchers.equalTo("name")));
+    }
+
+    @Test
     @DisplayName("With a response wrapper, it doesn't wrap the response")
     void testResponseWrapping_Response() throws Exception {
         final ResultActions result;
@@ -156,7 +171,6 @@ class ITResponseWrappingHandler {
         result.andExpect(MockMvcResultMatchers.jsonPath("$.first", Matchers.equalTo(true)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.last", Matchers.equalTo(true)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.sort", Matchers.equalTo(List.of())));
-
     }
 
     @Test
