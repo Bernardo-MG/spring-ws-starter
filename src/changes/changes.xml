@@ -24,6 +24,11 @@
             Using only generic pagination object.
          </action>
       </release>
+      <release version="0.1.3" date="2023-12-26" description="Fixed void response wrapping">
+         <action dev="bmg" type="fix">
+            Fixed void response wrapping.
+         </action>
+      </release>
       <release version="1.0.0" date="2023-12-14" description="">
       </release>
    </body>
