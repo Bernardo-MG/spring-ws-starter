@@ -39,8 +39,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -54,11 +54,11 @@ import com.bernardomg.web.response.model.Response;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Captures and handles general use exceptions. This includes validation exceptions
+ * Captures and handles general use exceptions. This includes validation exceptions.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
