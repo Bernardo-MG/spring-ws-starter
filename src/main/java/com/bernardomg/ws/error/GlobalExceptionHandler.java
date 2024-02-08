@@ -40,6 +40,7 @@ import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -71,15 +72,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ IllegalArgumentException.class, HttpMessageConversionException.class,
             DataAccessException.class })
-    public final ResponseEntity<Object> handleBadRequestException(final Exception ex, final WebRequest request)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public final ErrorResponse handleBadRequestException(final Exception ex, final WebRequest request)
             throws Exception {
-        final ErrorResponse response;
-
         log.warn(ex.getMessage(), ex);
 
-        response = Response.error("Bad request");
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return Response.error("Bad request");
     }
 
     /**
@@ -92,35 +90,30 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return internal error response
      */
     @ExceptionHandler({ RuntimeException.class })
-    public final ResponseEntity<Object> handleExceptionDefault(final Exception ex, final WebRequest request) {
-        final ErrorResponse response;
-
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public final ErrorResponse handleExceptionDefault(final Exception ex, final WebRequest request) {
         log.warn(ex.getMessage(), ex);
 
-        response = Response.error("Internal error");
-
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return Response.error("Internal error");
     }
 
     @ExceptionHandler({ MissingIdException.class })
-    public final ResponseEntity<Object> handleMissingDataException(final MissingIdException ex,
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public final ErrorResponse handleMissingDataException(final MissingIdException ex,
             final WebRequest request) throws Exception {
-        final ErrorResponse response;
         final String        message;
 
         log.warn(ex.getMessage(), ex);
 
         message = String.format("Id %s not found", String.valueOf(ex.getId()));
 
-        response = Response.error(message, "idNotFound");
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        return Response.error(message, "idNotFound");
     }
 
     @ExceptionHandler({ FieldFailureException.class })
-    public final ResponseEntity<Object> handleValidationException(final FieldFailureException ex,
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public final FailureResponse handleValidationException(final FieldFailureException ex,
             final WebRequest request) throws Exception {
-        final FailureResponse                 response;
         final Map<String, List<FieldFailure>> failures;
 
         log.warn(ex.getMessage(), ex);
@@ -129,9 +122,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             .stream()
             .collect(Collectors.groupingBy(FieldFailure::getField));
 
-        response = Response.failure(failures);
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return Response.failure(failures);
     }
 
     /**
