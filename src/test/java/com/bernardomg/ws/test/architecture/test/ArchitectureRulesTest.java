@@ -8,8 +8,7 @@ import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchTests;
 
-@AnalyzeClasses(
-        packages = { "com.bernardomg.exception", "com.bernardomg.web" , "com.bernardomg.ws"  },
+@AnalyzeClasses(packages = { "com.bernardomg.exception", "com.bernardomg.web", "com.bernardomg.ws" },
         importOptions = ImportOption.DoNotIncludeTests.class)
 public class ArchitectureRulesTest {
 
