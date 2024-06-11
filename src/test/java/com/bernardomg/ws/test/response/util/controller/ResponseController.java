@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.validation.failure.FieldFailure;
+import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.web.response.model.ErrorResponse;
 import com.bernardomg.web.response.model.FailureResponse;
 import com.bernardomg.web.response.model.Response;

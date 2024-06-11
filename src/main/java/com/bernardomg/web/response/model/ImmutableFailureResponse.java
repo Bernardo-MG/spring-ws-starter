@@ -27,7 +27,7 @@ package com.bernardomg.web.response.model;
 import java.util.List;
 import java.util.Map;
 
-import com.bernardomg.validation.failure.FieldFailure;
+import com.bernardomg.validation.domain.model.FieldFailure;
 
 import lombok.Builder;
 import lombok.NonNull;

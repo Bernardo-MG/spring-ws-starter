@@ -46,8 +46,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.bernardomg.exception.MissingIdException;
-import com.bernardomg.validation.failure.FieldFailure;
-import com.bernardomg.validation.failure.exception.FieldFailureException;
+import com.bernardomg.validation.domain.exception.FieldFailureException;
+import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.web.response.model.ErrorResponse;
 import com.bernardomg.web.response.model.FailureResponse;
 import com.bernardomg.web.response.model.Response;

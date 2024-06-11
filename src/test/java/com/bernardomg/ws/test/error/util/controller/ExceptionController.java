@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bernardomg.exception.MissingIdException;
-import com.bernardomg.validation.failure.FieldFailure;
-import com.bernardomg.validation.failure.exception.FieldFailureException;
+import com.bernardomg.validation.domain.exception.FieldFailureException;
+import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.ws.test.error.util.model.ErrorTestObject;
 
 import jakarta.validation.Valid;
@@ -55,7 +55,7 @@ public class ExceptionController {
         failures = new ArrayList<>();
         failures.add(failure);
 
-        throw new FieldFailureException(failures);
+        throw new FieldFailureException(null, failures);
     }
 
     @PostMapping(path = "/methodArg", produces = MediaType.APPLICATION_JSON_VALUE)
