@@ -37,7 +37,14 @@ import lombok.Value;
 @Builder(setterPrefix = "with")
 public final class ErrorResponse {
 
-    public static final ErrorResponse of(final String code, final String message) {
+    public static final ErrorResponse of(final String code) {
+        return ErrorResponse.builder()
+            .withCode(code)
+            .withMessage(code)
+            .build();
+    }
+
+    public static final ErrorResponse of(final String message, final String code) {
         return ErrorResponse.builder()
             .withCode(code)
             .withMessage(message)

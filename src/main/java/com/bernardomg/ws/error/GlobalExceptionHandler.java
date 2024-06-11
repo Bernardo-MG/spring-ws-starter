@@ -50,7 +50,6 @@ import com.bernardomg.validation.domain.exception.FieldFailureException;
 import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.web.response.domain.model.ErrorResponse;
 import com.bernardomg.web.response.domain.model.FailureResponse;
-import com.bernardomg.web.response.domain.model.Response;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -77,7 +76,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             throws Exception {
         log.warn(ex.getMessage(), ex);
 
-        return Response.error("Bad request");
+        return ErrorResponse.of("Bad request");
     }
 
     /**
@@ -94,26 +93,26 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public final ErrorResponse handleExceptionDefault(final Exception ex, final WebRequest request) {
         log.warn(ex.getMessage(), ex);
 
-        return Response.error("Internal error");
+        return ErrorResponse.of("Internal error");
     }
 
     @ExceptionHandler({ MissingIdException.class })
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public final ErrorResponse handleMissingDataException(final MissingIdException ex,
-            final WebRequest request) throws Exception {
-        final String        message;
+    public final ErrorResponse handleMissingDataException(final MissingIdException ex, final WebRequest request)
+            throws Exception {
+        final String message;
 
         log.warn(ex.getMessage(), ex);
 
         message = String.format("Id %s not found", String.valueOf(ex.getId()));
 
-        return Response.error(message, "idNotFound");
+        return ErrorResponse.of(message, "idNotFound");
     }
 
     @ExceptionHandler({ FieldFailureException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public final FailureResponse handleValidationException(final FieldFailureException ex,
-            final WebRequest request) throws Exception {
+    public final FailureResponse handleValidationException(final FieldFailureException ex, final WebRequest request)
+            throws Exception {
         final Map<String, List<FieldFailure>> failures;
 
         log.warn(ex.getMessage(), ex);
@@ -122,7 +121,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             .stream()
             .collect(Collectors.groupingBy(FieldFailure::getField));
 
-        return Response.failure(failures);
+        return FailureResponse.of(failures);
     }
 
     /**
@@ -162,7 +161,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         message = "Server error. Contact admin.";
 
-        response = Response.error(message, String.valueOf(statusCode.value()));
+        response = ErrorResponse.of(message, String.valueOf(statusCode.value()));
 
         return super.handleExceptionInternal(ex, response, headers, statusCode, request);
     }
@@ -179,7 +178,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             .map(this::toFieldFailure)
             .collect(Collectors.groupingBy(FieldFailure::getField));
 
-        response = Response.failure(failures);
+        response = FailureResponse.of(failures);
 
         return super.handleExceptionInternal(ex, response, headers, status, request);
     }
@@ -191,7 +190,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         log.warn(ex.getMessage(), ex);
 
-        response = Response.error("Bad request");
+        response = ErrorResponse.of("Bad request");
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

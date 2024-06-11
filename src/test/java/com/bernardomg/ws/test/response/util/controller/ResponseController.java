@@ -54,7 +54,7 @@ public class ResponseController {
 
     @GetMapping(path = "/errorResponse", produces = MediaType.APPLICATION_JSON_VALUE)
     public ErrorResponse errorResponse() {
-        return Response.error("message", "code");
+        return ErrorResponse.of("message", "code");
     }
 
     @GetMapping(path = "/string", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -76,7 +76,7 @@ public class ResponseController {
         failures = new HashMap<>();
         failures.put("field", failuresList);
 
-        return Response.failure(failures);
+        return FailureResponse.of(failures);
     }
 
     @GetMapping(path = "/null", produces = MediaType.APPLICATION_JSON_VALUE)

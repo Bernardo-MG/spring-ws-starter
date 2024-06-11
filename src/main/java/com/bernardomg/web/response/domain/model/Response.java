@@ -24,11 +24,7 @@
 
 package com.bernardomg.web.response.domain.model;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-
-import com.bernardomg.validation.domain.model.FieldFailure;
 
 import lombok.Data;
 
@@ -43,31 +39,11 @@ import lombok.Data;
 @Data
 public class Response<T> {
 
-    public static <T> Response<T> empty() {
+    public static final <T> Response<T> empty() {
         return new Response<>();
     }
 
-    public static ErrorResponse error(final String code) {
-        return ErrorResponse.builder()
-            .withCode(code)
-            .withMessage(code)
-            .build();
-    }
-
-    public static ErrorResponse error(final String message, final String code) {
-        return ErrorResponse.builder()
-            .withCode(code)
-            .withMessage(message)
-            .build();
-    }
-
-    public static FailureResponse failure(final Map<String, List<FieldFailure>> failures) {
-        return FailureResponse.builder()
-            .withFailures(failures)
-            .build();
-    }
-
-    public static <T> Response<T> of(final T content) {
+    public static final <T> Response<T> of(final T content) {
         return new Response<>(content);
     }
 

@@ -42,6 +42,12 @@ import lombok.Value;
 @Builder(setterPrefix = "with")
 public final class FailureResponse {
 
+    public static final FailureResponse of(final Map<String, List<FieldFailure>> failures) {
+        return FailureResponse.builder()
+            .withFailures(failures)
+            .build();
+    }
+
     /**
      * Response failures.
      */
