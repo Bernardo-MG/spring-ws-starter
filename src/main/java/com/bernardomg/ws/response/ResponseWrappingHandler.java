@@ -35,7 +35,6 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.bernardomg.web.response.model.DefaultPaginatedResponse;
 import com.bernardomg.web.response.model.ErrorResponse;
 import com.bernardomg.web.response.model.FailureResponse;
 import com.bernardomg.web.response.model.PaginatedResponse;
@@ -124,7 +123,7 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             .map(this::getPropertySort)
             .toList();
 
-        return DefaultPaginatedResponse.<Iterable<T>> builder()
+        return PaginatedResponse.<Iterable<T>> builder()
             .withContent(page.getContent())
             .withSort(sort)
             .withElementsInPage(page.getNumberOfElements())

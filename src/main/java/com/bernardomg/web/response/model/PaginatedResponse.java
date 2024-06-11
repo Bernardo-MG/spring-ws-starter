@@ -24,6 +24,15 @@
 
 package com.bernardomg.web.response.model;
 
+import java.util.ArrayList;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
 /**
  * Paginated response to the frontend.
  *
@@ -32,62 +41,78 @@ package com.bernardomg.web.response.model;
  * @param <T>
  *            response content type
  */
-public interface PaginatedResponse<T> extends Response<T> {
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(setterPrefix = "with")
+public final class PaginatedResponse<T> extends Response<T> {
 
     /**
-     * Returns the number of elements in the page.
-     *
-     * @return number of elements
+     * Response content.
      */
-    public int getElementsInPage();
+    @NonNull
+    private T                      content;
 
     /**
-     * Returns the number of this page.
-     *
-     * @return the number of this page
+     * Number of elements in the page.
      */
-    public int getPage();
+    @Builder.Default
+    private int                    elementsInPage = -1;
 
     /**
-     * Returns the size of this page.
-     *
-     * @return the size of this page.
+     * Flags this is as the first page.
      */
-    public int getSize();
+    @Builder.Default
+    private boolean                first          = false;
 
     /**
-     * Returns the properties used for sorting.
-     *
-     * @return properties used for sorting
+     * Flags this is as the last page.
      */
-    public Iterable<PropertySort> getSort();
+    @Builder.Default
+    private boolean                last           = false;
 
     /**
-     * Returns the total number of elements among all the pages.
-     *
-     * @return the total number of elements
+     * Number of this page.
      */
-    public long getTotalElements();
+    @Builder.Default
+    private int                    page           = -1;
 
     /**
-     * Returns the total number of pages.
-     *
-     * @return the total number of pages
+     * Size of this page.
      */
-    public int getTotalPages();
+    @Builder.Default
+    private int                    size           = -1;
 
     /**
-     * Returns the flags this is as the first page.
-     *
-     * @return {@code true} if this is the first page, {@code false} otherwise
+     * Properties used for sorting.
      */
-    public boolean isFirst();
+    @NonNull
+    @Builder.Default
+    private Iterable<PropertySort> sort           = new ArrayList<>();
 
     /**
-     * Returns the flags this is as the last page.
-     *
-     * @return {@code true} if this is the last page, {@code false} otherwise
+     * Total number of elements among all the pages.
      */
-    public boolean isLast();
+    @Builder.Default
+    private long                   totalElements  = -1L;
+
+    /**
+     * Total number of pages.
+     */
+    @Builder.Default
+    private int                    totalPages     = -1;
+
+    /**
+     * Constructs a response with the specified content.
+     *
+     * @param cont
+     *            content
+     */
+    public PaginatedResponse(@NonNull final T cont) {
+        super();
+
+        content = cont;
+    }
 
 }

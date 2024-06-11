@@ -26,8 +26,11 @@ package com.bernardomg.web.response.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.bernardomg.validation.domain.model.FieldFailure;
+
+import lombok.Data;
 
 /**
  * Response to the frontend.
@@ -37,11 +40,11 @@ import com.bernardomg.validation.domain.model.FieldFailure;
  * @param <T>
  *            response content type
  */
-public interface Response<T> {
+@Data
+public class Response<T> {
 
     public static <T> Response<T> empty() {
-        return ImmutableResponse.<T> builder()
-            .build();
+        return new Response<>();
     }
 
     public static ErrorResponse error(final String code) {
@@ -65,16 +68,24 @@ public interface Response<T> {
     }
 
     public static <T> Response<T> of(final T content) {
-        return ImmutableResponse.<T> builder()
-            .withContent(content)
-            .build();
+        return new Response<>(content);
     }
 
     /**
-     * Returns the response content.
-     *
-     * @return the response content
+     * Response content.
      */
-    public T getContent();
+    private final T content;
+
+    public Response() {
+        super();
+
+        content = null;
+    }
+
+    public Response(final T cnt) {
+        super();
+
+        content = Objects.requireNonNull(cnt);
+    }
 
 }
