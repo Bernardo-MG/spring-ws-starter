@@ -139,7 +139,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             error.getDefaultMessage());
 
         // TODO: add an error mapper
-        codes = Arrays.asList(error.getCodes());
+        if (error.getCodes() == null) {
+            codes = List.of();
+        } else {
+            codes = Arrays.asList(error.getCodes());
+        }
         if (codes.contains("NotNull")) {
             code = "empty";
         } else if (codes.contains("NotEmpty")) {
