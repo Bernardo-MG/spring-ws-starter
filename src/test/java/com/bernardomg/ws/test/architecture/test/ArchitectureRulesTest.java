@@ -3,6 +3,7 @@ package com.bernardomg.ws.test.architecture.test;
 
 import com.bernardomg.ws.test.architecture.rule.CodingRules;
 import com.bernardomg.ws.test.architecture.rule.ConfigurationRules;
+import com.bernardomg.ws.test.architecture.rule.DependencyRules;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
@@ -17,5 +18,8 @@ public class ArchitectureRulesTest {
 
     @ArchTest
     static final ArchTests configurationRules = ArchTests.in(ConfigurationRules.class);
+
+    @ArchTest
+    static final ArchTests dependencyRules    = ArchTests.in(DependencyRules.class);
 
 }
