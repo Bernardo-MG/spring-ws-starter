@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.model;
+package com.bernardomg.web.response.domain.model;
 
 import java.util.ArrayList;
 

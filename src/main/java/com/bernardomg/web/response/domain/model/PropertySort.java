@@ -22,31 +22,41 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.model;
-
-import java.util.List;
-import java.util.Map;
-
-import com.bernardomg.validation.domain.model.FieldFailure;
+package com.bernardomg.web.response.domain.model;
 
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
 /**
- * Failure response to the frontend.
+ * Property used for sorting. Including direction.
  *
  * @author Bernardo Mart&iacute;nez Garrido
+ *
  */
 @Value
 @Builder(setterPrefix = "with")
-public final class FailureResponse {
+public final class PropertySort {
+
+    public static final PropertySort of(final String property, final String direction) {
+        return PropertySort.builder()
+            .withProperty(property)
+            .withDirection(direction)
+            .build();
+    }
 
     /**
-     * Response failures.
+     * The direction in which the property is sorted.
      */
     @NonNull
     @Builder.Default
-    private final Map<String, List<FieldFailure>> failures = Map.of();
+    private String direction = "";
+
+    /**
+     * The property to sort.
+     */
+    @NonNull
+    @Builder.Default
+    private String property  = "";
 
 }

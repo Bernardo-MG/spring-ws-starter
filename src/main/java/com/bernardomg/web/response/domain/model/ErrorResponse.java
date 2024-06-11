@@ -22,70 +22,40 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.model;
+package com.bernardomg.web.response.domain.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import com.bernardomg.validation.domain.model.FieldFailure;
-
-import lombok.Data;
+import lombok.Builder;
+import lombok.NonNull;
+import lombok.Value;
 
 /**
- * Response to the frontend.
+ * Error response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
- *
- * @param <T>
- *            response content type
  */
-@Data
-public class Response<T> {
+@Value
+@Builder(setterPrefix = "with")
+public final class ErrorResponse {
 
-    public static <T> Response<T> empty() {
-        return new Response<>();
-    }
-
-    public static ErrorResponse error(final String code) {
-        return ErrorResponse.builder()
-            .withCode(code)
-            .withMessage(code)
-            .build();
-    }
-
-    public static ErrorResponse error(final String message, final String code) {
+    public static final ErrorResponse of(final String code, final String message) {
         return ErrorResponse.builder()
             .withCode(code)
             .withMessage(message)
             .build();
     }
 
-    public static FailureResponse failure(final Map<String, List<FieldFailure>> failures) {
-        return FailureResponse.builder()
-            .withFailures(failures)
-            .build();
-    }
-
-    public static <T> Response<T> of(final T content) {
-        return new Response<>(content);
-    }
+    /**
+     * Code identifying the error.
+     */
+    @NonNull
+    @Builder.Default
+    private final String code    = "";
 
     /**
-     * Response content.
+     * Error message.
      */
-    private final T content;
-
-    public Response() {
-        super();
-
-        content = null;
-    }
-
-    public Response(final T cnt) {
-        super();
-
-        content = Objects.requireNonNull(cnt);
-    }
+    @NonNull
+    @Builder.Default
+    private final String message = "";
 
 }

@@ -22,40 +22,70 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.model;
+package com.bernardomg.web.response.domain.model;
 
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import com.bernardomg.validation.domain.model.FieldFailure;
+
+import lombok.Data;
 
 /**
- * Error response to the frontend.
+ * Response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
+ *
+ * @param <T>
+ *            response content type
  */
-@Value
-@Builder(setterPrefix = "with")
-public final class ErrorResponse {
+@Data
+public class Response<T> {
 
-    public static final ErrorResponse of(final String code, final String message) {
+    public static <T> Response<T> empty() {
+        return new Response<>();
+    }
+
+    public static ErrorResponse error(final String code) {
+        return ErrorResponse.builder()
+            .withCode(code)
+            .withMessage(code)
+            .build();
+    }
+
+    public static ErrorResponse error(final String message, final String code) {
         return ErrorResponse.builder()
             .withCode(code)
             .withMessage(message)
             .build();
     }
 
-    /**
-     * Code identifying the error.
-     */
-    @NonNull
-    @Builder.Default
-    private final String code    = "";
+    public static FailureResponse failure(final Map<String, List<FieldFailure>> failures) {
+        return FailureResponse.builder()
+            .withFailures(failures)
+            .build();
+    }
+
+    public static <T> Response<T> of(final T content) {
+        return new Response<>(content);
+    }
 
     /**
-     * Error message.
+     * Response content.
      */
-    @NonNull
-    @Builder.Default
-    private final String message = "";
+    private final T content;
+
+    public Response() {
+        super();
+
+        content = null;
+    }
+
+    public Response(final T cnt) {
+        super();
+
+        content = Objects.requireNonNull(cnt);
+    }
 
 }

@@ -21,8 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/**
- * Response model.
- */
 
-package com.bernardomg.web.response.model;
+package com.bernardomg.web.response.domain.model;
+
+import java.util.List;
+import java.util.Map;
+
+import com.bernardomg.validation.domain.model.FieldFailure;
+
+import lombok.Builder;
+import lombok.NonNull;
+import lombok.Value;
+
+/**
+ * Failure response to the frontend.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ */
+@Value
+@Builder(setterPrefix = "with")
+public final class FailureResponse {
+
+    /**
+     * Response failures.
+     */
+    @NonNull
+    @Builder.Default
+    private final Map<String, List<FieldFailure>> failures = Map.of();
+
+}

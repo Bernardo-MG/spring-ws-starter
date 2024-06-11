@@ -21,42 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.bernardomg.web.response.model;
-
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
-
 /**
- * Property used for sorting. Including direction.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
+ * Response model.
  */
-@Value
-@Builder(setterPrefix = "with")
-public final class PropertySort {
 
-    public static final PropertySort of(final String property, final String direction) {
-        return PropertySort.builder()
-            .withProperty(property)
-            .withDirection(direction)
-            .build();
-    }
-
-    /**
-     * The direction in which the property is sorted.
-     */
-    @NonNull
-    @Builder.Default
-    private String direction = "";
-
-    /**
-     * The property to sort.
-     */
-    @NonNull
-    @Builder.Default
-    private String property  = "";
-
-}
+package com.bernardomg.web.response.domain.model;
