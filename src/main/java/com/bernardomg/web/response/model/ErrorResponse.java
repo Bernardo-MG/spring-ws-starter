@@ -24,25 +24,31 @@
 
 package com.bernardomg.web.response.model;
 
+import lombok.Builder;
+import lombok.NonNull;
+import lombok.Value;
+
 /**
  * Error response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-public interface ErrorResponse {
+@Value
+@Builder
+public final class ErrorResponse {
 
     /**
-     * Returns a code identifying the error.
-     *
-     * @return a code identifying the error
+     * Code identifying the error.
      */
-    public String getCode();
+    @NonNull
+    @Builder.Default
+    private final String code    = "";
 
     /**
-     * Returns the error message.
-     *
-     * @return the error message.
+     * Error message.
      */
-    public String getMessage();
+    @NonNull
+    @Builder.Default
+    private final String message = "";
 
 }

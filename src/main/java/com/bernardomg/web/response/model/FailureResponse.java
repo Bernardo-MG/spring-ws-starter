@@ -29,18 +29,24 @@ import java.util.Map;
 
 import com.bernardomg.validation.domain.model.FieldFailure;
 
+import lombok.Builder;
+import lombok.NonNull;
+import lombok.Value;
+
 /**
  * Failure response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-public interface FailureResponse {
+@Value
+@Builder
+public final class FailureResponse {
 
     /**
-     * Returns all the field failures, grouped by field.
-     *
-     * @return all the field failures, grouped by field
+     * Response failures.
      */
-    public Map<String, List<FieldFailure>> getFailures();
+    @NonNull
+    @Builder.Default
+    private final Map<String, List<FieldFailure>> failures = Map.of();
 
 }

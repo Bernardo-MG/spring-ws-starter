@@ -45,21 +45,21 @@ public interface Response<T> {
     }
 
     public static ErrorResponse error(final String code) {
-        return ImmutableErrorResponse.builder()
+        return ErrorResponse.builder()
             .code(code)
             .message(code)
             .build();
     }
 
     public static ErrorResponse error(final String message, final String code) {
-        return ImmutableErrorResponse.builder()
+        return ErrorResponse.builder()
             .code(code)
             .message(message)
             .build();
     }
 
     public static FailureResponse failure(final Map<String, List<FieldFailure>> failures) {
-        return ImmutableFailureResponse.builder()
+        return FailureResponse.builder()
             .failures(failures)
             .build();
     }

@@ -38,7 +38,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import com.bernardomg.web.response.model.DefaultPaginatedResponse;
 import com.bernardomg.web.response.model.ErrorResponse;
 import com.bernardomg.web.response.model.FailureResponse;
-import com.bernardomg.web.response.model.ImmutablePropertySort;
 import com.bernardomg.web.response.model.PaginatedResponse;
 import com.bernardomg.web.response.model.PropertySort;
 import com.bernardomg.web.response.model.Response;
@@ -114,7 +113,7 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             direction = "desc";
         }
 
-        return ImmutablePropertySort.builder()
+        return PropertySort.builder()
             .property(order.getProperty())
             .direction(direction)
             .build();

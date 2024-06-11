@@ -24,26 +24,32 @@
 
 package com.bernardomg.web.response.model;
 
+import lombok.Builder;
+import lombok.NonNull;
+import lombok.Value;
+
 /**
  * Property used for sorting. Including direction.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-public interface PropertySort {
+@Value
+@Builder
+public final class PropertySort {
 
     /**
-     * Returns the direction in which the property is sorted.
-     *
-     * @return direction in which the property is sorted.
+     * The direction in which the property is sorted.
      */
-    public String getDirection();
+    @NonNull
+    @Builder.Default
+    private String direction = "";
 
     /**
-     * Returns the property to sort.
-     *
-     * @return the property to sort.
+     * The property to sort.
      */
-    public String getProperty();
+    @NonNull
+    @Builder.Default
+    private String property  = "";
 
 }
