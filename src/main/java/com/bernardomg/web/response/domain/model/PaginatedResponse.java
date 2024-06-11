@@ -22,18 +22,19 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.model;
+package com.bernardomg.web.response.domain.model;
 
 import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 /**
- * Default implementation of the paginated response.
+ * Paginated response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
@@ -41,10 +42,11 @@ import lombok.NonNull;
  *            response content type
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(setterPrefix = "with")
-public final class DefaultPaginatedResponse<T> implements PaginatedResponse<T> {
+public final class PaginatedResponse<T> extends Response<T> {
 
     /**
      * Response content.
@@ -107,7 +109,7 @@ public final class DefaultPaginatedResponse<T> implements PaginatedResponse<T> {
      * @param cont
      *            content
      */
-    public DefaultPaginatedResponse(@NonNull final T cont) {
+    public PaginatedResponse(@NonNull final T cont) {
         super();
 
         content = cont;

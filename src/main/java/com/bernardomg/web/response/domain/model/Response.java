@@ -22,34 +22,46 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.model;
+package com.bernardomg.web.response.domain.model;
 
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
+import java.util.Objects;
+
+import lombok.Data;
 
 /**
- * Immutable implementation of the property sort.
+ * Response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
+ * @param <T>
+ *            response content type
  */
-@Value
-@Builder
-public final class ImmutablePropertySort implements PropertySort {
+@Data
+public class Response<T> {
+
+    public static final <T> Response<T> empty() {
+        return new Response<>();
+    }
+
+    public static final <T> Response<T> of(final T content) {
+        return new Response<>(content);
+    }
 
     /**
-     * The direction in which the property is sorted.
+     * Response content.
      */
-    @NonNull
-    @Builder.Default
-    private String direction = "";
+    private final T content;
 
-    /**
-     * The property to sort.
-     */
-    @NonNull
-    @Builder.Default
-    private String property  = "";
+    public Response() {
+        super();
+
+        content = null;
+    }
+
+    public Response(final T cnt) {
+        super();
+
+        content = Objects.requireNonNull(cnt);
+    }
 
 }

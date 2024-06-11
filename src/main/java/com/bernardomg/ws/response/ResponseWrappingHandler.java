@@ -35,13 +35,11 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.bernardomg.web.response.model.DefaultPaginatedResponse;
-import com.bernardomg.web.response.model.ErrorResponse;
-import com.bernardomg.web.response.model.FailureResponse;
-import com.bernardomg.web.response.model.ImmutablePropertySort;
-import com.bernardomg.web.response.model.PaginatedResponse;
-import com.bernardomg.web.response.model.PropertySort;
-import com.bernardomg.web.response.model.Response;
+import com.bernardomg.web.response.domain.model.ErrorResponse;
+import com.bernardomg.web.response.domain.model.FailureResponse;
+import com.bernardomg.web.response.domain.model.PaginatedResponse;
+import com.bernardomg.web.response.domain.model.PropertySort;
+import com.bernardomg.web.response.domain.model.Response;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -114,10 +112,7 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             direction = "desc";
         }
 
-        return ImmutablePropertySort.builder()
-            .property(order.getProperty())
-            .direction(direction)
-            .build();
+        return PropertySort.of(order.getProperty(), direction);
     }
 
     private final <T> PaginatedResponse<Iterable<T>> toPaginated(final Page<T> page) {
@@ -128,7 +123,7 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             .map(this::getPropertySort)
             .toList();
 
-        return DefaultPaginatedResponse.<Iterable<T>> builder()
+        return PaginatedResponse.<Iterable<T>> builder()
             .withContent(page.getContent())
             .withSort(sort)
             .withElementsInPage(page.getNumberOfElements())

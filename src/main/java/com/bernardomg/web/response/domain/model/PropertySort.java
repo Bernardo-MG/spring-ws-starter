@@ -22,7 +22,11 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.model;
+package com.bernardomg.web.response.domain.model;
+
+import lombok.Builder;
+import lombok.NonNull;
+import lombok.Value;
 
 /**
  * Property used for sorting. Including direction.
@@ -30,20 +34,29 @@ package com.bernardomg.web.response.model;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-public interface PropertySort {
+@Value
+@Builder(setterPrefix = "with")
+public final class PropertySort {
+
+    public static final PropertySort of(final String property, final String direction) {
+        return PropertySort.builder()
+            .withProperty(property)
+            .withDirection(direction)
+            .build();
+    }
 
     /**
-     * Returns the direction in which the property is sorted.
-     *
-     * @return direction in which the property is sorted.
+     * The direction in which the property is sorted.
      */
-    public String getDirection();
+    @NonNull
+    @Builder.Default
+    private String direction = "";
 
     /**
-     * Returns the property to sort.
-     *
-     * @return the property to sort.
+     * The property to sort.
      */
-    public String getProperty();
+    @NonNull
+    @Builder.Default
+    private String property  = "";
 
 }

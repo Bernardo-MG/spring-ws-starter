@@ -22,32 +22,47 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.model;
-
-import java.util.List;
-import java.util.Map;
-
-import com.bernardomg.validation.failure.FieldFailure;
+package com.bernardomg.web.response.domain.model;
 
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
 /**
- * Immutable implementation of the failure response.
+ * Error response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
- *
  */
 @Value
-@Builder
-public final class ImmutableFailureResponse implements FailureResponse {
+@Builder(setterPrefix = "with")
+public final class ErrorResponse {
+
+    public static final ErrorResponse of(final String code) {
+        return ErrorResponse.builder()
+            .withCode(code)
+            .withMessage(code)
+            .build();
+    }
+
+    public static final ErrorResponse of(final String message, final String code) {
+        return ErrorResponse.builder()
+            .withCode(code)
+            .withMessage(message)
+            .build();
+    }
 
     /**
-     * Response failures.
+     * Code identifying the error.
      */
     @NonNull
     @Builder.Default
-    private final Map<String, List<FieldFailure>> failures = Map.of();
+    private final String code    = "";
+
+    /**
+     * Error message.
+     */
+    @NonNull
+    @Builder.Default
+    private final String message = "";
 
 }

@@ -39,26 +39,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.bernardomg.exception.MissingIdException;
-import com.bernardomg.validation.failure.FieldFailure;
-import com.bernardomg.validation.failure.exception.FieldFailureException;
-import com.bernardomg.web.response.model.ErrorResponse;
-import com.bernardomg.web.response.model.FailureResponse;
-import com.bernardomg.web.response.model.Response;
+import com.bernardomg.validation.domain.exception.FieldFailureException;
+import com.bernardomg.validation.domain.model.FieldFailure;
+import com.bernardomg.web.response.domain.model.ErrorResponse;
+import com.bernardomg.web.response.domain.model.FailureResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Captures and handles general use exceptions. This includes validation exceptions
+ * Captures and handles general use exceptions. This includes validation exceptions.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -71,15 +71,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ IllegalArgumentException.class, HttpMessageConversionException.class,
             DataAccessException.class })
-    public final ResponseEntity<Object> handleBadRequestException(final Exception ex, final WebRequest request)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public final ErrorResponse handleBadRequestException(final Exception ex, final WebRequest request)
             throws Exception {
-        final ErrorResponse response;
-
         log.warn(ex.getMessage(), ex);
 
-        response = Response.error("Bad request");
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return ErrorResponse.of("Bad request");
     }
 
     /**
@@ -92,35 +89,30 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return internal error response
      */
     @ExceptionHandler({ RuntimeException.class })
-    public final ResponseEntity<Object> handleExceptionDefault(final Exception ex, final WebRequest request) {
-        final ErrorResponse response;
-
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public final ErrorResponse handleExceptionDefault(final Exception ex, final WebRequest request) {
         log.warn(ex.getMessage(), ex);
 
-        response = Response.error("Internal error");
-
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return ErrorResponse.of("Internal error");
     }
 
     @ExceptionHandler({ MissingIdException.class })
-    public final ResponseEntity<Object> handleMissingDataException(final MissingIdException ex,
-            final WebRequest request) throws Exception {
-        final ErrorResponse response;
-        final String        message;
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public final ErrorResponse handleMissingDataException(final MissingIdException ex, final WebRequest request)
+            throws Exception {
+        final String message;
 
         log.warn(ex.getMessage(), ex);
 
         message = String.format("Id %s not found", String.valueOf(ex.getId()));
 
-        response = Response.error(message, "idNotFound");
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        return ErrorResponse.of(message, "idNotFound");
     }
 
     @ExceptionHandler({ FieldFailureException.class })
-    public final ResponseEntity<Object> handleValidationException(final FieldFailureException ex,
-            final WebRequest request) throws Exception {
-        final FailureResponse                 response;
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public final FailureResponse handleValidationException(final FieldFailureException ex, final WebRequest request)
+            throws Exception {
         final Map<String, List<FieldFailure>> failures;
 
         log.warn(ex.getMessage(), ex);
@@ -129,9 +121,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             .stream()
             .collect(Collectors.groupingBy(FieldFailure::getField));
 
-        response = Response.failure(failures);
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return FailureResponse.of(failures);
     }
 
     /**
@@ -149,7 +139,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             error.getDefaultMessage());
 
         // TODO: add an error mapper
-        codes = Arrays.asList(error.getCodes());
+        if (error.getCodes() == null) {
+            codes = List.of();
+        } else {
+            codes = Arrays.asList(error.getCodes());
+        }
         if (codes.contains("NotNull")) {
             code = "empty";
         } else if (codes.contains("NotEmpty")) {
@@ -171,7 +165,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         message = "Server error. Contact admin.";
 
-        response = Response.error(message, String.valueOf(statusCode.value()));
+        response = ErrorResponse.of(message, String.valueOf(statusCode.value()));
 
         return super.handleExceptionInternal(ex, response, headers, statusCode, request);
     }
@@ -188,7 +182,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             .map(this::toFieldFailure)
             .collect(Collectors.groupingBy(FieldFailure::getField));
 
-        response = Response.failure(failures);
+        response = FailureResponse.of(failures);
 
         return super.handleExceptionInternal(ex, response, headers, status, request);
     }
@@ -200,7 +194,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         log.warn(ex.getMessage(), ex);
 
-        response = Response.error("Bad request");
+        response = ErrorResponse.of("Bad request");
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

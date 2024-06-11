@@ -21,27 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.bernardomg.web.response.model;
-
-import lombok.Builder;
-import lombok.Value;
-
 /**
- * Immutable implementation of the response.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
- * @param <T>
- *            response content type
+ * Response model.
  */
-@Value
-@Builder
-public final class ImmutableResponse<T> implements Response<T> {
 
-    /**
-     * Response content.
-     */
-    private final T content;
-
-}
+package com.bernardomg.web.response.domain.model;

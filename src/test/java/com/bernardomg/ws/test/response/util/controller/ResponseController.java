@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.validation.failure.FieldFailure;
-import com.bernardomg.web.response.model.ErrorResponse;
-import com.bernardomg.web.response.model.FailureResponse;
-import com.bernardomg.web.response.model.Response;
+import com.bernardomg.validation.domain.model.FieldFailure;
+import com.bernardomg.web.response.domain.model.ErrorResponse;
+import com.bernardomg.web.response.domain.model.FailureResponse;
+import com.bernardomg.web.response.domain.model.Response;
 
 @RestController
 @RequestMapping(ResponseController.PATH)
@@ -54,7 +54,7 @@ public class ResponseController {
 
     @GetMapping(path = "/errorResponse", produces = MediaType.APPLICATION_JSON_VALUE)
     public ErrorResponse errorResponse() {
-        return Response.error("message", "code");
+        return ErrorResponse.of("message", "code");
     }
 
     @GetMapping(path = "/string", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -76,7 +76,7 @@ public class ResponseController {
         failures = new HashMap<>();
         failures.put("field", failuresList);
 
-        return Response.failure(failures);
+        return FailureResponse.of(failures);
     }
 
     @GetMapping(path = "/null", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -87,7 +87,7 @@ public class ResponseController {
     @GetMapping(path = "/object", produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnedObject object() {
         return ReturnedObject.builder()
-            .name("name")
+            .withName("name")
             .build();
     }
 
