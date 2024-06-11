@@ -113,10 +113,7 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             direction = "desc";
         }
 
-        return PropertySort.builder()
-            .property(order.getProperty())
-            .direction(direction)
-            .build();
+        return PropertySort.of(order.getProperty(), direction);
     }
 
     private final <T> PaginatedResponse<Iterable<T>> toPaginated(final Page<T> page) {

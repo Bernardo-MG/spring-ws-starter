@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Value;
 
 @Value
-@Builder
+@Builder(setterPrefix = "with")
 public class ReturnedObject {
 
     private final String name;

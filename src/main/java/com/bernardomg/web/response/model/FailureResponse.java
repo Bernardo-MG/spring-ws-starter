@@ -39,7 +39,7 @@ import lombok.Value;
  * @author Bernardo Mart&iacute;nez Garrido
  */
 @Value
-@Builder
+@Builder(setterPrefix = "with")
 public final class FailureResponse {
 
     /**

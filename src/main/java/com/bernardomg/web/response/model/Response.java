@@ -46,27 +46,27 @@ public interface Response<T> {
 
     public static ErrorResponse error(final String code) {
         return ErrorResponse.builder()
-            .code(code)
-            .message(code)
+            .withCode(code)
+            .withMessage(code)
             .build();
     }
 
     public static ErrorResponse error(final String message, final String code) {
         return ErrorResponse.builder()
-            .code(code)
-            .message(message)
+            .withCode(code)
+            .withMessage(message)
             .build();
     }
 
     public static FailureResponse failure(final Map<String, List<FieldFailure>> failures) {
         return FailureResponse.builder()
-            .failures(failures)
+            .withFailures(failures)
             .build();
     }
 
     public static <T> Response<T> of(final T content) {
         return ImmutableResponse.<T> builder()
-            .content(content)
+            .withContent(content)
             .build();
     }
 

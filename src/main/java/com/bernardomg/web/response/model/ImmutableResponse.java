@@ -36,7 +36,7 @@ import lombok.Value;
  *            response content type
  */
 @Value
-@Builder
+@Builder(setterPrefix = "with")
 public final class ImmutableResponse<T> implements Response<T> {
 
     /**

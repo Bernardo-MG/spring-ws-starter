@@ -87,7 +87,7 @@ public class ResponseController {
     @GetMapping(path = "/object", produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnedObject object() {
         return ReturnedObject.builder()
-            .name("name")
+            .withName("name")
             .build();
     }
 

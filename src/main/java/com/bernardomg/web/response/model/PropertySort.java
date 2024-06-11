@@ -35,8 +35,15 @@ import lombok.Value;
  *
  */
 @Value
-@Builder
+@Builder(setterPrefix = "with")
 public final class PropertySort {
+
+    public static final PropertySort of(final String property, final String direction) {
+        return PropertySort.builder()
+            .withProperty(property)
+            .withDirection(direction)
+            .build();
+    }
 
     /**
      * The direction in which the property is sorted.

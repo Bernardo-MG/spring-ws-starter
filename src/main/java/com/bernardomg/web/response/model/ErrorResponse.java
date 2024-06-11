@@ -34,8 +34,15 @@ import lombok.Value;
  * @author Bernardo Mart&iacute;nez Garrido
  */
 @Value
-@Builder
+@Builder(setterPrefix = "with")
 public final class ErrorResponse {
+
+    public static final ErrorResponse of(final String code, final String message) {
+        return ErrorResponse.builder()
+            .withCode(code)
+            .withMessage(message)
+            .build();
+    }
 
     /**
      * Code identifying the error.
