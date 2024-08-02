@@ -72,8 +72,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({ IllegalArgumentException.class, HttpMessageConversionException.class,
             DataAccessException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public final ErrorResponse handleBadRequestException(final Exception ex, final WebRequest request)
-            throws Exception {
+    public final ErrorResponse handleBadRequestException(final Exception ex, final WebRequest request) {
         log.warn(ex.getMessage(), ex);
 
         return ErrorResponse.of("Bad request");
@@ -98,8 +97,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ MissingIdException.class })
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public final ErrorResponse handleMissingDataException(final MissingIdException ex, final WebRequest request)
-            throws Exception {
+    public final ErrorResponse handleMissingDataException(final MissingIdException ex, final WebRequest request) {
         final String message;
 
         log.warn(ex.getMessage(), ex);
@@ -111,8 +109,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ FieldFailureException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public final FailureResponse handleValidationException(final FieldFailureException ex, final WebRequest request)
-            throws Exception {
+    public final FailureResponse handleValidationException(final FieldFailureException ex, final WebRequest request) {
         final Map<String, List<FieldFailure>> failures;
 
         log.warn(ex.getMessage(), ex);
