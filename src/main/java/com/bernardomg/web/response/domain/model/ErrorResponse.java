@@ -24,45 +24,26 @@
 
 package com.bernardomg.web.response.domain.model;
 
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
+import java.util.Objects;
 
 /**
  * Error response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-@Value
-@Builder(setterPrefix = "with")
-public final class ErrorResponse {
+public record ErrorResponse(String code, String message) {
+
+    public ErrorResponse {
+        Objects.requireNonNull(code, "Received null code");
+        Objects.requireNonNull(message, "Received null message");
+    }
 
     public static final ErrorResponse of(final String code) {
-        return ErrorResponse.builder()
-            .withCode(code)
-            .withMessage(code)
-            .build();
+        return new ErrorResponse(code, code);
     }
 
     public static final ErrorResponse of(final String message, final String code) {
-        return ErrorResponse.builder()
-            .withCode(code)
-            .withMessage(message)
-            .build();
+        return new ErrorResponse(code, message);
     }
-
-    /**
-     * Code identifying the error.
-     */
-    @NonNull
-    @Builder.Default
-    private final String code    = "";
-
-    /**
-     * Error message.
-     */
-    @NonNull
-    @Builder.Default
-    private final String message = "";
 
 }

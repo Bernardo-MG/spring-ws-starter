@@ -24,9 +24,7 @@
 
 package com.bernardomg.web.response.domain.model;
 
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
+import java.util.Objects;
 
 /**
  * Property used for sorting. Including direction.
@@ -34,29 +32,15 @@ import lombok.Value;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-@Value
-@Builder(setterPrefix = "with")
-public final class PropertySort {
+public record PropertySort(String property, String direction) {
 
-    public static final PropertySort of(final String property, final String direction) {
-        return PropertySort.builder()
-            .withProperty(property)
-            .withDirection(direction)
-            .build();
+    public PropertySort {
+        Objects.requireNonNull(property, "Received null property");
+        Objects.requireNonNull(direction, "Received null direction");
     }
 
-    /**
-     * The direction in which the property is sorted.
-     */
-    @NonNull
-    @Builder.Default
-    private String direction = "";
-
-    /**
-     * The property to sort.
-     */
-    @NonNull
-    @Builder.Default
-    private String property  = "";
+    public static final PropertySort of(final String property, final String direction) {
+        return new PropertySort(property, direction);
+    }
 
 }
