@@ -38,12 +38,4 @@ public record ErrorResponse(String code, String message) {
         Objects.requireNonNull(message, "Received null message");
     }
 
-    public static final ErrorResponse of(final String code) {
-        return new ErrorResponse(code, code);
-    }
-
-    public static final ErrorResponse of(final String message, final String code) {
-        return new ErrorResponse(code, message);
-    }
-
 }

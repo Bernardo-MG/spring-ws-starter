@@ -35,14 +35,10 @@ import com.bernardomg.validation.domain.model.FieldFailure;
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-public record FailureResponse(Map<String, List<FieldFailure>> failures) {
+public record FailureResponse(String code, String message, Map<String, List<FieldFailure>> failures) {
 
     public FailureResponse {
         Objects.requireNonNull(failures, "Received null failures");
-    }
-
-    public static final FailureResponse of(final Map<String, List<FieldFailure>> failures) {
-        return new FailureResponse(failures);
     }
 
 }

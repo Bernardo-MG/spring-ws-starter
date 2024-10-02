@@ -39,8 +39,4 @@ public record PropertySort(String property, String direction) {
         Objects.requireNonNull(direction, "Received null direction");
     }
 
-    public static final PropertySort of(final String property, final String direction) {
-        return new PropertySort(property, direction);
-    }
-
 }

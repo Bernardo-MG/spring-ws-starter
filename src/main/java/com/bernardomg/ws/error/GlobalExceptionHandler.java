@@ -75,7 +75,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public final ErrorResponse handleBadRequestException(final Exception ex, final WebRequest request) {
         log.warn(ex.getMessage(), ex);
 
-        return ErrorResponse.of("Bad request");
+        return new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Bad request");
     }
 
     /**
@@ -92,7 +92,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public final ErrorResponse handleExceptionDefault(final Exception ex, final WebRequest request) {
         log.warn(ex.getMessage(), ex);
 
-        return ErrorResponse.of("Internal error");
+        return new ErrorResponse(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), "Internal error");
     }
 
     @ExceptionHandler({ MissingIdException.class })
@@ -104,7 +104,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         message = String.format("Id %s not found", String.valueOf(ex.getId()));
 
-        return ErrorResponse.of(message, "idNotFound");
+        return new ErrorResponse(String.valueOf(HttpStatus.NOT_FOUND.value()), message);
     }
 
     @ExceptionHandler({ FieldFailureException.class })
@@ -118,7 +118,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             .stream()
             .collect(Collectors.groupingBy(FieldFailure::getField));
 
-        return FailureResponse.of(failures);
+        return new FailureResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Field validation failure",
+            failures);
     }
 
     /**
@@ -141,9 +142,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         } else {
             codes = Arrays.asList(error.getCodes());
         }
-        if (codes.contains("NotNull")) {
-            code = "empty";
-        } else if (codes.contains("NotEmpty")) {
+        if (codes.contains("NotNull") || codes.contains("NotEmpty")) {
             code = "empty";
         } else {
             code = "";
@@ -162,7 +161,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         message = "Server error. Contact admin.";
 
-        response = ErrorResponse.of(message, String.valueOf(statusCode.value()));
+        response = new ErrorResponse(String.valueOf(statusCode.value()), message);
 
         return super.handleExceptionInternal(ex, response, headers, statusCode, request);
     }
@@ -179,7 +178,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             .map(this::toFieldFailure)
             .collect(Collectors.groupingBy(FieldFailure::getField));
 
-        response = FailureResponse.of(failures);
+        response = new FailureResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Field validation failure",
+            failures);
 
         return super.handleExceptionInternal(ex, response, headers, status, request);
     }
@@ -191,7 +191,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         log.warn(ex.getMessage(), ex);
 
-        response = ErrorResponse.of("Bad request");
+        response = new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Bad request");
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

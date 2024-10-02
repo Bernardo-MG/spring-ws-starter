@@ -70,10 +70,8 @@ class ITGlobalExceptionHandler {
         result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field'][0].value", Matchers.equalTo("value")));
 
         // The response contains no generic error fields
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code")
-            .doesNotExist());
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.message")
-            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("400")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Field validation failure")));
 
         // The response contains no content field
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
@@ -92,7 +90,7 @@ class ITGlobalExceptionHandler {
             .isBadRequest());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Bad request")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("400")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Bad request")));
 
         // The response contains no content field
@@ -127,10 +125,8 @@ class ITGlobalExceptionHandler {
             MockMvcResultMatchers.jsonPath("$.failures['name'][0].message", Matchers.equalTo("must not be null")));
 
         // The response contains no generic error fields
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code")
-            .doesNotExist());
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.message")
-            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("400")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Field validation failure")));
 
         // The response contains no content field
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
@@ -149,7 +145,7 @@ class ITGlobalExceptionHandler {
             .isNotFound());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("idNotFound")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("404")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Id 1 not found")));
 
         // The response contains no content field
@@ -173,7 +169,7 @@ class ITGlobalExceptionHandler {
             .isInternalServerError());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Internal error")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("500")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Internal error")));
 
         // The response contains no content field
@@ -197,7 +193,7 @@ class ITGlobalExceptionHandler {
             .isBadRequest());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Bad request")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("400")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Bad request")));
 
         // The response contains no content field
