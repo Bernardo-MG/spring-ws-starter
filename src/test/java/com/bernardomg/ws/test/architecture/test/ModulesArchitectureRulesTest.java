@@ -23,7 +23,7 @@ public class ModulesArchitectureRulesTest {
         .layer("WS error")
         .definedBy("com.bernardomg.ws.error..")
         .layer("WS config")
-        .definedBy("com.bernardomg.ws.config..")
+        .definedBy("com.bernardomg.ws.configuration..")
 
         .whereLayer("Exceptions")
         .mayOnlyBeAccessedByLayers("WS error")
