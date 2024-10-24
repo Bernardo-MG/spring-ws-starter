@@ -116,7 +116,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         failures = ex.getFailures()
             .stream()
-            .collect(Collectors.groupingBy(FieldFailure::getField));
+            .collect(Collectors.groupingBy(FieldFailure::field));
 
         return new FailureResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Field validation failure",
             failures);
@@ -148,7 +148,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             code = "";
         }
 
-        return FieldFailure.of(error.getDefaultMessage(), error.getField(), code, error.getRejectedValue());
+        return new FieldFailure(code, error.getDefaultMessage(), error.getField(), error.getRejectedValue());
     }
 
     @Override
@@ -176,7 +176,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             .getFieldErrors()
             .stream()
             .map(this::toFieldFailure)
-            .collect(Collectors.groupingBy(FieldFailure::getField));
+            .collect(Collectors.groupingBy(FieldFailure::field));
 
         response = new FailureResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Field validation failure",
             failures);
