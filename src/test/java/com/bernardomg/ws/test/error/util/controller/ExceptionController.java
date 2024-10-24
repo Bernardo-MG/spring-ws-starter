@@ -50,7 +50,7 @@ public class ExceptionController {
         final FieldFailure             failure;
         final Collection<FieldFailure> failures;
 
-        failure = FieldFailure.of("Error message", "field", "code", "value");
+        failure = new FieldFailure("code", "Error message", "field", "value");
 
         failures = new ArrayList<>();
         failures.add(failure);
