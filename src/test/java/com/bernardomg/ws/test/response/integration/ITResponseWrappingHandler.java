@@ -56,9 +56,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_ErrorResponse() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.errorResponse());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -72,9 +73,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_FailureResponse() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.failureResponse());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -94,9 +96,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_Null() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.nullResponse());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -109,9 +112,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_Object() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.object());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -124,9 +128,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_Resource() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.resource());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
     }
@@ -136,9 +141,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_Response() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.response());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -152,9 +158,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_ResponseEntity() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.responseEntity());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -167,9 +174,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_SpringPage() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.springPage());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -190,9 +198,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_SpringPageSorted() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.springPageSorted());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -216,9 +225,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_String() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.string());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 
@@ -231,9 +241,10 @@ class ITResponseWrappingHandler {
     void testResponseWrapping_Void() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestResponseRequest.voidResponse());
 
-        // OK response
+        // THEN
         result.andExpect(MockMvcResultMatchers.status()
             .isOk());
 

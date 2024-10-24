@@ -53,7 +53,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_FieldValidationError() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.fieldValidation());
+
+        // THEN
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
@@ -83,7 +86,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_IllegalArgument() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.illegalArgument());
+
+        // THEN
 
         // The value was not found
         result.andExpect(MockMvcResultMatchers.status()
@@ -107,7 +113,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_MethodArgumentError() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.methodArgument());
+
+        // THEN
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
@@ -138,7 +147,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_MissingId() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.missingId());
+
+        // THEN
 
         // The value was not found
         result.andExpect(MockMvcResultMatchers.status()
@@ -162,7 +174,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_RuntimeException() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.runtime());
+
+        // THEN
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
@@ -186,7 +201,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_TypeMismatch() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.typeMismatch());
+
+        // THEN
 
         // The value was not found
         result.andExpect(MockMvcResultMatchers.status()
@@ -210,7 +228,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_UnhandledSpring() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.unhandledSpring());
+
+        // THEN
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
