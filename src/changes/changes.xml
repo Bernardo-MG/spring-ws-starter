@@ -29,7 +29,22 @@
             Fixed void response wrapping.
          </action>
       </release>
-      <release version="1.0.0" date="2023-12-14" description="">
+      <release version=".1.4" date="2024-06-12" description="Cleaned up code">
+         <action dev="bmg" type="update">
+            Updated dependencies.
+         </action>
+         <action dev="bmg" type="fix">
+            Fixed response wrapping for voids.
+         </action>
+         <action dev="bmg" type="update">
+            Using REST advice for exception handler.
+         </action>
+         <action dev="bmg" type="update">
+            Added archunit.
+         </action>
+         <action dev="bmg" type="update">
+            Reorganized factory methods.
+         </action>
       </release>
    </body>
 </document>

@@ -19,6 +19,7 @@ jobs:
     - name: Deploy to Github
       uses: bernardo-mg/maven-github-deployment-action@v1
       with:
+        jdk: 17
         token: ${{ secrets.GITHUB_TOKEN }}
 
   ossrh:
@@ -33,6 +34,7 @@ jobs:
     - name: Deploy
       uses: bernardo-mg/maven-signed-deployment-action@v1
       with:
+        jdk: 17
         username: ${{ secrets.OSSRH_USERNAME }}
         password: ${{ secrets.OSSRH_TOKEN }}
         gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
