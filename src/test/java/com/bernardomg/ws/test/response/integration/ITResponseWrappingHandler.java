@@ -120,6 +120,18 @@ class ITResponseWrappingHandler {
     }
 
     @Test
+    @DisplayName("With a resource, it doesn't wrap the response")
+    void testResponseWrapping_Resource() throws Exception {
+        final ResultActions result;
+
+        result = mockMvc.perform(TestResponseRequest.resource());
+
+        // OK response
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+    }
+
+    @Test
     @DisplayName("With a response wrapper, it doesn't wrap the response")
     void testResponseWrapping_Response() throws Exception {
         final ResultActions result;

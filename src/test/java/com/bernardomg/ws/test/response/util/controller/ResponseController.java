@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.mockito.Mockito;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -35,6 +37,8 @@ public class ResponseController {
     public static final String PATH_NULL               = PATH + "/null";
 
     public static final String PATH_OBJECT             = PATH + "/object";
+
+    public static final String PATH_RESOURCE           = PATH + "/resource";
 
     public static final String PATH_RESPONSE           = PATH + "/response";
 
@@ -89,6 +93,11 @@ public class ResponseController {
         return ReturnedObject.builder()
             .withName("name")
             .build();
+    }
+
+    @GetMapping(path = "/resource", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Resource resource() {
+        return Mockito.mock(Resource.class);
     }
 
     @GetMapping(path = "/response", produces = MediaType.APPLICATION_JSON_VALUE)
