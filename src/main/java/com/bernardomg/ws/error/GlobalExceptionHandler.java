@@ -95,39 +95,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ErrorResponse(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), "Internal error");
     }
 
-    @Override
-    protected final ResponseEntity<Object> handleExceptionInternal(final Exception ex, @Nullable final Object body,
-            final HttpHeaders headers, final HttpStatusCode statusCode, final WebRequest request) {
-        final ErrorResponse response;
-        final String        message;
-
-        log.error(ex.getMessage());
-
-        message = "Server error. Contact admin.";
-
-        response = new ErrorResponse(String.valueOf(statusCode.value()), message);
-
-        return super.handleExceptionInternal(ex, response, headers, statusCode, request);
-    }
-
-    @Override
-    protected final ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
-            final HttpHeaders headers, final HttpStatusCode status, final WebRequest request) {
-        final Map<String, List<FieldFailure>> failures;
-        final FailureResponse                 response;
-
-        failures = ex.getBindingResult()
-            .getFieldErrors()
-            .stream()
-            .map(this::toFieldFailure)
-            .collect(Collectors.groupingBy(FieldFailure::field));
-
-        response = new FailureResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Field validation failure",
-            failures);
-
-        return super.handleExceptionInternal(ex, response, headers, status, request);
-    }
-
     @ExceptionHandler({ MissingIdException.class })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public final ErrorResponse handleMissingDataException(final MissingIdException ex, final WebRequest request) {
@@ -138,18 +105,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         message = String.format("Id %s not found", String.valueOf(ex.getId()));
 
         return new ErrorResponse(String.valueOf(HttpStatus.NOT_FOUND.value()), message);
-    }
-
-    @Override
-    protected final ResponseEntity<Object> handleTypeMismatch(final TypeMismatchException ex, final HttpHeaders headers,
-            final HttpStatusCode status, final WebRequest request) {
-        final ErrorResponse response;
-
-        log.warn(ex.getMessage(), ex);
-
-        response = new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Bad request");
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({ FieldFailureException.class })
@@ -194,6 +149,51 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         return new FieldFailure(code, error.getDefaultMessage(), error.getField(), error.getRejectedValue());
+    }
+
+    @Override
+    protected final ResponseEntity<Object> handleExceptionInternal(final Exception ex, @Nullable final Object body,
+            final HttpHeaders headers, final HttpStatusCode statusCode, final WebRequest request) {
+        final ErrorResponse response;
+        final String        message;
+
+        log.error(ex.getMessage());
+
+        message = "Server error. Contact admin.";
+
+        response = new ErrorResponse(String.valueOf(statusCode.value()), message);
+
+        return super.handleExceptionInternal(ex, response, headers, statusCode, request);
+    }
+
+    @Override
+    protected final ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
+            final HttpHeaders headers, final HttpStatusCode status, final WebRequest request) {
+        final Map<String, List<FieldFailure>> failures;
+        final FailureResponse                 response;
+
+        failures = ex.getBindingResult()
+            .getFieldErrors()
+            .stream()
+            .map(this::toFieldFailure)
+            .collect(Collectors.groupingBy(FieldFailure::field));
+
+        response = new FailureResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Field validation failure",
+            failures);
+
+        return super.handleExceptionInternal(ex, response, headers, status, request);
+    }
+
+    @Override
+    protected final ResponseEntity<Object> handleTypeMismatch(final TypeMismatchException ex, final HttpHeaders headers,
+            final HttpStatusCode status, final WebRequest request) {
+        final ErrorResponse response;
+
+        log.warn(ex.getMessage(), ex);
+
+        response = new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Bad request");
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
 }
