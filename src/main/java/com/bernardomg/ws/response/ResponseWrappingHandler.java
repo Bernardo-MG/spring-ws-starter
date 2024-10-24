@@ -25,6 +25,7 @@
 package com.bernardomg.ws.response;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.MediaType;
@@ -72,17 +73,12 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
         final Object result;
 
         log.trace("Received {} as response body", body);
-        if (body instanceof ResponseEntity<?>) {
-            // Avoid wrapping Spring responses
+        if ((body instanceof ResponseEntity<?>) || (body instanceof Response) || (body instanceof ErrorResponse)
+                || (body instanceof FailureResponse)) {
+            // Avoid wrapping wrapped responses
             result = body;
-        } else if (body instanceof Response) {
-            // Avoid wrapping responses
-            result = body;
-        } else if (body instanceof ErrorResponse) {
-            // Avoid wrapping error responses
-            result = body;
-        } else if (body instanceof FailureResponse) {
-            // Avoid wrapping failure responses
+        } else if (body instanceof Resource) {
+            // Avoid wrapping resources
             result = body;
         } else if (body instanceof Page<?>) {
             // Spring pagination
@@ -97,12 +93,6 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
         return result;
     }
 
-    @Override
-    public final boolean supports(final MethodParameter returnType,
-            final Class<? extends HttpMessageConverter<?>> converterType) {
-        return true;
-    }
-
     private final PropertySort getPropertySort(final Order order) {
         final String direction;
 
@@ -112,7 +102,13 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             direction = "desc";
         }
 
-        return PropertySort.of(order.getProperty(), direction);
+        return new PropertySort(order.getProperty(), direction);
+    }
+
+    @Override
+    public final boolean supports(final MethodParameter returnType,
+            final Class<? extends HttpMessageConverter<?>> converterType) {
+        return true;
     }
 
     private final <T> PaginatedResponse<Iterable<T>> toPaginated(final Page<T> page) {

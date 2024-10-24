@@ -1,9 +1,9 @@
 
 package com.bernardomg.ws.test.architecture.test;
 
-import com.bernardomg.ws.test.architecture.rule.CodingRules;
-import com.bernardomg.ws.test.architecture.rule.ConfigurationRules;
-import com.bernardomg.ws.test.architecture.rule.DependencyRules;
+import com.bernardomg.framework.testing.architecture.rule.CodingRules;
+import com.bernardomg.framework.testing.architecture.rule.ConfigurationRules;
+import com.bernardomg.framework.testing.architecture.rule.DependencyRules;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;

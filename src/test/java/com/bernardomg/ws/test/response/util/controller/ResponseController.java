@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.mockito.Mockito;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -36,6 +38,8 @@ public class ResponseController {
 
     public static final String PATH_OBJECT             = PATH + "/object";
 
+    public static final String PATH_RESOURCE           = PATH + "/resource";
+
     public static final String PATH_RESPONSE           = PATH + "/response";
 
     public static final String PATH_RESPONSE_ENTITY    = PATH + "/responseEntity";
@@ -54,7 +58,7 @@ public class ResponseController {
 
     @GetMapping(path = "/errorResponse", produces = MediaType.APPLICATION_JSON_VALUE)
     public ErrorResponse errorResponse() {
-        return ErrorResponse.of("message", "code");
+        return new ErrorResponse("code", "message");
     }
 
     @GetMapping(path = "/string", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -68,7 +72,7 @@ public class ResponseController {
         final List<FieldFailure>              failuresList;
         final Map<String, List<FieldFailure>> failures;
 
-        failure = FieldFailure.of("Error message", "field", "code", "value");
+        failure = new FieldFailure("code", "Error message", "field", "value");
 
         failuresList = new ArrayList<>();
         failuresList.add(failure);
@@ -76,7 +80,7 @@ public class ResponseController {
         failures = new HashMap<>();
         failures.put("field", failuresList);
 
-        return FailureResponse.of(failures);
+        return new FailureResponse("400", "Failure", failures);
     }
 
     @GetMapping(path = "/null", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -89,6 +93,11 @@ public class ResponseController {
         return ReturnedObject.builder()
             .withName("name")
             .build();
+    }
+
+    @GetMapping(path = "/resource", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Resource resource() {
+        return Mockito.mock(Resource.class);
     }
 
     @GetMapping(path = "/response", produces = MediaType.APPLICATION_JSON_VALUE)

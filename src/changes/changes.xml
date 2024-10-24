@@ -29,7 +29,7 @@
             Fixed void response wrapping.
          </action>
       </release>
-      <release version=".1.4" date="2024-06-12" description="Cleaned up code">
+      <release version="0.1.4" date="2024-06-12" description="Cleaned up code">
          <action dev="bmg" type="update">
             Updated dependencies.
          </action>
@@ -44,6 +44,14 @@
          </action>
          <action dev="bmg" type="update">
             Reorganized factory methods.
+         </action>
+      </release>
+      <release version="0.1.5" date="2024-10-24" description="Ignore resource responses">
+         <action dev="bmg" type="fix">
+            Ignore resource responses.
+         </action>
+         <action dev="bmg" type="update">
+            Moved to records.
          </action>
       </release>
    </body>

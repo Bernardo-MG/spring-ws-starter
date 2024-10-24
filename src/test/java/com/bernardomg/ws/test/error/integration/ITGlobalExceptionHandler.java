@@ -53,7 +53,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_FieldValidationError() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.fieldValidation());
+
+        // THEN
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
@@ -70,10 +73,8 @@ class ITGlobalExceptionHandler {
         result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field'][0].value", Matchers.equalTo("value")));
 
         // The response contains no generic error fields
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code")
-            .doesNotExist());
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.message")
-            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("400")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Field validation failure")));
 
         // The response contains no content field
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
@@ -85,14 +86,17 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_IllegalArgument() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.illegalArgument());
+
+        // THEN
 
         // The value was not found
         result.andExpect(MockMvcResultMatchers.status()
             .isBadRequest());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Bad request")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("400")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Bad request")));
 
         // The response contains no content field
@@ -109,7 +113,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_MethodArgumentError() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.methodArgument());
+
+        // THEN
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
@@ -127,10 +134,8 @@ class ITGlobalExceptionHandler {
             MockMvcResultMatchers.jsonPath("$.failures['name'][0].message", Matchers.equalTo("must not be null")));
 
         // The response contains no generic error fields
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code")
-            .doesNotExist());
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.message")
-            .doesNotExist());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("400")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Field validation failure")));
 
         // The response contains no content field
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content")
@@ -142,14 +147,17 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_MissingId() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.missingId());
+
+        // THEN
 
         // The value was not found
         result.andExpect(MockMvcResultMatchers.status()
             .isNotFound());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("idNotFound")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("404")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Id 1 not found")));
 
         // The response contains no content field
@@ -166,14 +174,17 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_RuntimeException() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.runtime());
+
+        // THEN
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
             .isInternalServerError());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Internal error")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("500")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Internal error")));
 
         // The response contains no content field
@@ -190,14 +201,17 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_TypeMismatch() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.typeMismatch());
+
+        // THEN
 
         // The value was not found
         result.andExpect(MockMvcResultMatchers.status()
             .isBadRequest());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("Bad request")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("400")));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("Bad request")));
 
         // The response contains no content field
@@ -214,7 +228,10 @@ class ITGlobalExceptionHandler {
     void testErrorHandling_UnhandledSpring() throws Exception {
         final ResultActions result;
 
+        // WHEN
         result = mockMvc.perform(TestExceptionRequest.unhandledSpring());
+
+        // THEN
 
         // The operation was rejected
         result.andExpect(MockMvcResultMatchers.status()
