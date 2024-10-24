@@ -184,7 +184,7 @@
       <!-- ============================================== -->
       <archunit.version>1.3.0</archunit.version>
       <bernardomg.framework.test.architecture>1.0.2</bernardomg.framework.test.architecture>
-      <bernardomg.framework.validation.version>0.2.1</bernardomg.framework.validation.version>
+      <bernardomg.framework.validation.version>0.2.2</bernardomg.framework.validation.version>
       <lombok.version>1.18.34</lombok.version>
       <spring.boot.version>3.3.4</spring.boot.version>
       <spring.version>6.1.14</spring.version>

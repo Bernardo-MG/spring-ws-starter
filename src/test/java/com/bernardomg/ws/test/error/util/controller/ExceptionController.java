@@ -55,7 +55,7 @@ public class ExceptionController {
         failures = new ArrayList<>();
         failures.add(failure);
 
-        throw new FieldFailureException(null, failures);
+        throw new FieldFailureException("", failures);
     }
 
     @PostMapping(path = "/methodArg", produces = MediaType.APPLICATION_JSON_VALUE)
