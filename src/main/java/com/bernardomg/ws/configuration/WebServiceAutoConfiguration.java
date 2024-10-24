@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.ws.config;
+package com.bernardomg.ws.configuration;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;

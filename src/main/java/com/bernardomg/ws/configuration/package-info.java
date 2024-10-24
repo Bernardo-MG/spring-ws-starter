@@ -26,4 +26,4 @@
  * Web service configuration.
  */
 
-package com.bernardomg.ws.config;
+package com.bernardomg.ws.configuration;
