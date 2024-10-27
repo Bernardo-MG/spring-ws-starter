@@ -38,6 +38,8 @@ import com.bernardomg.validation.domain.model.FieldFailure;
 public record FailureResponse(String code, String message, Map<String, List<FieldFailure>> failures) {
 
     public FailureResponse {
+        Objects.requireNonNull(code, "Received null code");
+        Objects.requireNonNull(message, "Received null message");
         Objects.requireNonNull(failures, "Received null failures");
     }
 
