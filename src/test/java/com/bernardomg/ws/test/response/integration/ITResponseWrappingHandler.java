@@ -124,6 +124,22 @@ class ITResponseWrappingHandler {
     }
 
     @Test
+    @DisplayName("With a paginated response wrapper, it doesn't wrap the response")
+    void testResponseWrapping_PaginatedResponse() throws Exception {
+        final ResultActions result;
+
+        // WHEN
+        result = mockMvc.perform(TestResponseRequest.paginatedResponse());
+
+        // THEN
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // The response contains the expected attributes
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("abc")));
+    }
+
+    @Test
     @DisplayName("With a resource, it doesn't wrap the response")
     void testResponseWrapping_Resource() throws Exception {
         final ResultActions result;

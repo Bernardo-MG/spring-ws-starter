@@ -73,8 +73,8 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
         final Object result;
 
         log.trace("Received {} as response body", body);
-        if ((body instanceof ResponseEntity<?>) || (body instanceof Response) || (body instanceof ErrorResponse)
-                || (body instanceof FailureResponse)) {
+        if ((body instanceof ResponseEntity<?>) || (body instanceof Response) || (body instanceof PaginatedResponse)
+                || (body instanceof ErrorResponse) || (body instanceof FailureResponse)) {
             // Avoid wrapping wrapped responses
             result = body;
         } else if (body instanceof Resource) {
@@ -87,10 +87,16 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             log.debug("Received null as response body");
             result = Response.empty();
         } else {
-            result = Response.of(body);
+            result = new Response<>(body);
         }
 
         return result;
+    }
+
+    @Override
+    public final boolean supports(final MethodParameter returnType,
+            final Class<? extends HttpMessageConverter<?>> converterType) {
+        return true;
     }
 
     private final PropertySort getPropertySort(final Order order) {
@@ -103,12 +109,6 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
         }
 
         return new PropertySort(order.getProperty(), direction);
-    }
-
-    @Override
-    public final boolean supports(final MethodParameter returnType,
-            final Class<? extends HttpMessageConverter<?>> converterType) {
-        return true;
     }
 
     private final <T> PaginatedResponse<Iterable<T>> toPaginated(final Page<T> page) {

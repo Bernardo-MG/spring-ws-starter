@@ -24,14 +24,7 @@
 
 package com.bernardomg.web.response.domain.model;
 
-import java.util.ArrayList;
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 /**
  * Paginated response to the frontend.
@@ -41,78 +34,8 @@ import lombok.NonNull;
  * @param <T>
  *            response content type
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder(setterPrefix = "with")
-public final class PaginatedResponse<T> extends Response<T> {
-
-    /**
-     * Response content.
-     */
-    @NonNull
-    private T                      content;
-
-    /**
-     * Number of elements in the page.
-     */
-    @Builder.Default
-    private int                    elementsInPage = -1;
-
-    /**
-     * Flags this is as the first page.
-     */
-    @Builder.Default
-    private boolean                first          = false;
-
-    /**
-     * Flags this is as the last page.
-     */
-    @Builder.Default
-    private boolean                last           = false;
-
-    /**
-     * Number of this page.
-     */
-    @Builder.Default
-    private int                    page           = -1;
-
-    /**
-     * Size of this page.
-     */
-    @Builder.Default
-    private int                    size           = -1;
-
-    /**
-     * Properties used for sorting.
-     */
-    @NonNull
-    @Builder.Default
-    private Iterable<PropertySort> sort           = new ArrayList<>();
-
-    /**
-     * Total number of elements among all the pages.
-     */
-    @Builder.Default
-    private long                   totalElements  = -1L;
-
-    /**
-     * Total number of pages.
-     */
-    @Builder.Default
-    private int                    totalPages     = -1;
-
-    /**
-     * Constructs a response with the specified content.
-     *
-     * @param cont
-     *            content
-     */
-    public PaginatedResponse(@NonNull final T cont) {
-        super();
-
-        content = cont;
-    }
+public record PaginatedResponse<T>(T content, int size, int page, long totalElements, long totalPages,
+        int elementsInPage, boolean first, boolean last, Iterable<PropertySort> sort) {
 
 }

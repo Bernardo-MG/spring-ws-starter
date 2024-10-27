@@ -24,10 +24,6 @@
 
 package com.bernardomg.web.response.domain.model;
 
-import java.util.Objects;
-
-import lombok.Data;
-
 /**
  * Response to the frontend.
  *
@@ -36,32 +32,10 @@ import lombok.Data;
  * @param <T>
  *            response content type
  */
-@Data
-public class Response<T> {
+public record Response<T>(T content) {
 
     public static final <T> Response<T> empty() {
-        return new Response<>();
-    }
-
-    public static final <T> Response<T> of(final T content) {
-        return new Response<>(content);
-    }
-
-    /**
-     * Response content.
-     */
-    private final T content;
-
-    public Response() {
-        super();
-
-        content = null;
-    }
-
-    public Response(final T cnt) {
-        super();
-
-        content = Objects.requireNonNull(cnt);
+        return new Response<>(null);
     }
 
 }

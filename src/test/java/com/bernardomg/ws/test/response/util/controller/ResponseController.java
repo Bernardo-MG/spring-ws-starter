@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.web.response.domain.model.ErrorResponse;
 import com.bernardomg.web.response.domain.model.FailureResponse;
+import com.bernardomg.web.response.domain.model.PaginatedResponse;
 import com.bernardomg.web.response.domain.model.Response;
 
 @RestController
@@ -39,6 +40,8 @@ public class ResponseController {
     public static final String PATH_OBJECT             = PATH + "/object";
 
     public static final String PATH_RESOURCE           = PATH + "/resource";
+
+    public static final String PATH_PAGINATED_RESPONSE           = PATH + "/paginatedResponse";
 
     public static final String PATH_RESPONSE           = PATH + "/response";
 
@@ -102,7 +105,12 @@ public class ResponseController {
 
     @GetMapping(path = "/response", produces = MediaType.APPLICATION_JSON_VALUE)
     public Response<String> response() {
-        return Response.of("abc");
+        return new Response<>("abc");
+    }
+
+    @GetMapping(path = "/paginatedResponse", produces = MediaType.APPLICATION_JSON_VALUE)
+    public PaginatedResponse<String> paginatedResponse() {
+        return new PaginatedResponse<>("abc", 0, 0, 0, 0, 0, false, false, null);
     }
 
     @GetMapping(path = "/responseEntity", produces = MediaType.APPLICATION_JSON_VALUE)
