@@ -37,7 +37,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.bernardomg.ws.test.config.annotation.IntegrationTest;
-import com.bernardomg.ws.test.response.util.controller.TestResponseRequest;
+import com.bernardomg.ws.test.response.config.controller.TestResponseRequest;
 
 @IntegrationTest
 @AutoConfigureMockMvc

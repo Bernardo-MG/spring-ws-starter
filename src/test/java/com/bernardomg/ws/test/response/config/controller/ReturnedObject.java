@@ -1,5 +1,5 @@
 
-package com.bernardomg.ws.test.response.util.controller;
+package com.bernardomg.ws.test.response.config.controller;
 
 import lombok.Builder;
 import lombok.Value;
