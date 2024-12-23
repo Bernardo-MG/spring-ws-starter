@@ -32,7 +32,7 @@ public final class PaginationArgumentResolver implements HandlerMethodArgumentRe
         } else {
             parsedPage = Integer.parseInt(pageParam);
             if (parsedPage > 0) {
-                page = parsedPage - 1;
+                page = parsedPage;
             } else {
                 log.warn("Received page {}, changed to 0", parsedPage);
                 page = 0;
