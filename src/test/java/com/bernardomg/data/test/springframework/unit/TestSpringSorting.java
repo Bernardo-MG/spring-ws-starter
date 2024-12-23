@@ -22,40 +22,36 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.data.springframework;
+package com.bernardomg.data.test.springframework.unit;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
 import com.bernardomg.data.domain.Sorting;
-import com.bernardomg.data.domain.Sorting.Direction;
-import com.bernardomg.data.domain.Sorting.Property;
+import com.bernardomg.data.springframework.SpringSorting;
 
-/**
- * Utilities to transform {@link Sorting} into {@link Sort}.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
- */
-public final class SpringSorting {
+@DisplayName("Spring sorting")
+class TestSpringSorting {
 
-    public static final Sort toSort(final Sorting sorting) {
-        return Sort.by(sorting.properties()
-            .stream()
-            .map(SpringSorting::toOrder)
-            .toList());
-    }
+    @Test
+    @DisplayName("With ascending sorting, it creates an ascending sort")
+    void testToSort_Ascending() throws Exception {
+        final Sorting sorting;
+        final Sort    sort;
 
-    private static final Order toOrder(final Property property) {
-        final Order order;
+        // GIVEN
+        sorting = Sorting.asc("field");
 
-        if (Direction.ASC.equals(property.direction())) {
-            order = Order.asc(property.name());
-        } else {
-            order = Order.desc(property.name());
-        }
+        // WHEN
+        sort = SpringSorting.toSort(sorting);
 
-        return order;
+        // THEN
+        Assertions.assertThat(sort)
+            .as("sort")
+            .containsExactly(Order.asc("field"));
     }
 
 }
