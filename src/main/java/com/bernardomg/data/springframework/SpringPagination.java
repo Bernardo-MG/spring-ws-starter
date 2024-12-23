@@ -22,25 +22,34 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.domain.model;
+package com.bernardomg.data.springframework;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
-import com.bernardomg.validation.domain.model.FieldFailure;
+import com.bernardomg.data.domain.Pagination;
+import com.bernardomg.data.domain.Sorting;
 
 /**
- * Failure response to the frontend.
+ * Utilities to transform {@link Pagination} into {@link Pageable}.
+ * <p>
+ * Spring pages start with index 0, so the page number has to be corrected.
  *
  * @author Bernardo Mart&iacute;nez Garrido
+ *
  */
-public record FailureResponse(String code, String message, Map<String, List<FieldFailure>> failures) {
+public final class SpringPagination {
 
-    public FailureResponse {
-        Objects.requireNonNull(code, "Received null code");
-        Objects.requireNonNull(message, "Received null message");
-        Objects.requireNonNull(failures, "Received null failures");
+    public static final Pageable toPageable(final Pagination pagination) {
+        return PageRequest.of(pagination.page() - 1, pagination.size());
+    }
+
+    public static final Pageable toPageable(final Pagination pagination, final Sorting sorting) {
+        final Sort sort;
+
+        sort = SpringSorting.toSort(sorting);
+        return PageRequest.of(pagination.page() - 1, pagination.size(), sort);
     }
 
 }

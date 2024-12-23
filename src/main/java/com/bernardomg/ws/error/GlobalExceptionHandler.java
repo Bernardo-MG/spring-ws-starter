@@ -48,8 +48,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.bernardomg.exception.MissingIdException;
 import com.bernardomg.validation.domain.exception.FieldFailureException;
 import com.bernardomg.validation.domain.model.FieldFailure;
-import com.bernardomg.web.response.domain.model.ErrorResponse;
-import com.bernardomg.web.response.domain.model.FailureResponse;
+import com.bernardomg.ws.response.domain.model.ErrorResponse;
+import com.bernardomg.ws.response.domain.model.FailureResponse;
 
 import lombok.extern.slf4j.Slf4j;
 

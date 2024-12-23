@@ -21,8 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/**
- * Response model.
- */
 
-package com.bernardomg.web.response.domain.model;
+package com.bernardomg.ws.response.domain.model;
+
+import java.util.Objects;
+
+/**
+ * Error response to the frontend.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ */
+public record ErrorResponse(String code, String message) {
+
+    public ErrorResponse {
+        Objects.requireNonNull(code, "Received null code");
+        Objects.requireNonNull(message, "Received null message");
+    }
+
+}

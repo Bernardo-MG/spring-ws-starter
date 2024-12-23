@@ -22,20 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.domain.model;
-
-import java.util.Objects;
-
 /**
- * Error response to the frontend.
- *
- * @author Bernardo Mart&iacute;nez Garrido
+ * Data domain.
  */
-public record ErrorResponse(String code, String message) {
 
-    public ErrorResponse {
-        Objects.requireNonNull(code, "Received null code");
-        Objects.requireNonNull(message, "Received null message");
-    }
-
-}
+package com.bernardomg.data.domain;

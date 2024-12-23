@@ -1,5 +1,5 @@
 
-package com.bernardomg.ws.test.response.util.controller;
+package com.bernardomg.ws.test.response.config.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -27,6 +27,11 @@ public final class TestResponseRequest {
             .contentType(MediaType.APPLICATION_JSON);
     }
 
+    public static final RequestBuilder paginatedResponse() {
+        return MockMvcRequestBuilders.get(ResponseController.PATH_PAGINATED_RESPONSE)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
     public static final RequestBuilder resource() {
         return MockMvcRequestBuilders.get(ResponseController.PATH_RESOURCE)
             .contentType(MediaType.APPLICATION_JSON);
@@ -34,11 +39,6 @@ public final class TestResponseRequest {
 
     public static final RequestBuilder response() {
         return MockMvcRequestBuilders.get(ResponseController.PATH_RESPONSE)
-            .contentType(MediaType.APPLICATION_JSON);
-    }
-
-    public static final RequestBuilder paginatedResponse() {
-        return MockMvcRequestBuilders.get(ResponseController.PATH_PAGINATED_RESPONSE)
             .contentType(MediaType.APPLICATION_JSON);
     }
 

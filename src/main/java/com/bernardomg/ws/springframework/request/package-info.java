@@ -22,21 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.domain.model;
-
-import java.util.Objects;
-
 /**
- * Property used for sorting. Including direction.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
+ * Spring framework data components.
  */
-public record PropertySort(String property, String direction) {
 
-    public PropertySort {
-        Objects.requireNonNull(property, "Received null property");
-        Objects.requireNonNull(direction, "Received null direction");
-    }
-
-}
+package com.bernardomg.ws.springframework.request;
