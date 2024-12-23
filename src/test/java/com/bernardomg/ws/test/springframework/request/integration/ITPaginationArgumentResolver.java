@@ -71,8 +71,10 @@ class ITPaginationArgumentResolver {
         // Received the pagination
         verify(paginationReceiver).receive(assertArg(p -> SoftAssertions.assertSoftly(soft -> {
             soft.assertThat(p.page())
+                .as("page")
                 .isEqualTo(TestPaginationRequest.PAGE);
             soft.assertThat(p.size())
+                .as("size")
                 .isEqualTo(TestPaginationRequest.SIZE);
         })));
     }

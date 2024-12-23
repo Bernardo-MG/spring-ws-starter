@@ -45,7 +45,7 @@ public final class PaginationArgumentResolver implements HandlerMethodArgumentRe
         } else {
             parsedSize = Integer.parseInt(sizeParam);
             if (parsedSize > 0) {
-                size = parsedSize - 1;
+                size = parsedSize;
             } else {
                 log.warn("Received size {}, changed to {}", parsedSize, DEFAULT_SIZE);
                 size = DEFAULT_SIZE;
