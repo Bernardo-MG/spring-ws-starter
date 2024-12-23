@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class PaginationArgumentResolver implements HandlerMethodArgumentResolver {
 
+    private static final int DEFAULT_PAGE = 1;
+
     private static final int DEFAULT_SIZE = 10;
 
     @Override
@@ -28,14 +30,14 @@ public final class PaginationArgumentResolver implements HandlerMethodArgumentRe
 
         pageParam = webRequest.getParameter("page");
         if (pageParam == null) {
-            page = 0;
+            page = DEFAULT_PAGE;
         } else {
             parsedPage = Integer.parseInt(pageParam);
             if (parsedPage > 0) {
                 page = parsedPage;
             } else {
-                log.warn("Received page {}, changed to 0", parsedPage);
-                page = 0;
+                page = DEFAULT_PAGE;
+                log.warn("Received page {}, changed to {}", parsedPage, page);
             }
         }
 
@@ -47,8 +49,8 @@ public final class PaginationArgumentResolver implements HandlerMethodArgumentRe
             if (parsedSize > 0) {
                 size = parsedSize;
             } else {
-                log.warn("Received size {}, changed to {}", parsedSize, DEFAULT_SIZE);
                 size = DEFAULT_SIZE;
+                log.warn("Received size {}, changed to {}", parsedSize, size);
             }
         }
 
