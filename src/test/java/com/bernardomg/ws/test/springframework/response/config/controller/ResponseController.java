@@ -1,5 +1,5 @@
 
-package com.bernardomg.ws.test.response.config.controller;
+package com.bernardomg.ws.test.springframework.response.config.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;

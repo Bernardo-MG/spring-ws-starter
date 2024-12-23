@@ -1,5 +1,5 @@
 
-package com.bernardomg.ws.test.response.config.controller;
+package com.bernardomg.ws.test.springframework.response.config.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.RequestBuilder;

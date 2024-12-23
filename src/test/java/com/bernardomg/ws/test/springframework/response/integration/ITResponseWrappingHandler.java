@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.ws.test.response.integration;
+package com.bernardomg.ws.test.springframework.response.integration;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.bernardomg.ws.test.config.annotation.IntegrationTest;
-import com.bernardomg.ws.test.response.config.controller.TestResponseRequest;
+import com.bernardomg.ws.test.springframework.response.config.controller.TestResponseRequest;
 
 @IntegrationTest
 @AutoConfigureMockMvc

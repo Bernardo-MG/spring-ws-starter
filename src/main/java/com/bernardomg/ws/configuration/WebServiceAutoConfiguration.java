@@ -31,10 +31,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.bernardomg.ws.error.GlobalExceptionHandler;
-import com.bernardomg.ws.response.ResponseWrappingHandler;
+import com.bernardomg.ws.springframework.error.GlobalExceptionHandler;
 import com.bernardomg.ws.springframework.request.PaginationArgumentResolver;
 import com.bernardomg.ws.springframework.request.SortingArgumentResolver;
+import com.bernardomg.ws.springframework.response.ResponseWrappingHandler;
 
 /**
  * Web service auto configuration.

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.ws.response;
+package com.bernardomg.ws.springframework.response;
 
 import java.util.Collection;
 

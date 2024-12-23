@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.ws.test.error.integration;
+package com.bernardomg.ws.test.springframework.error.integration;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +34,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.bernardomg.ws.test.config.annotation.IntegrationTest;
-import com.bernardomg.ws.test.error.util.controller.TestExceptionRequest;
+import com.bernardomg.ws.test.springframework.error.util.controller.TestExceptionRequest;
 
 @IntegrationTest
 @AutoConfigureMockMvc

@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
- * Response handling.
+ * Spring framework error handling.
  */
 
-package com.bernardomg.ws.response;
+package com.bernardomg.ws.springframework.error;

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.ws.error;
+package com.bernardomg.ws.springframework.error;
 
 import java.util.Arrays;
 import java.util.Collection;

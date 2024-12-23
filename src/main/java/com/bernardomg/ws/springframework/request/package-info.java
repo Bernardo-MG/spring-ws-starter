@@ -23,7 +23,7 @@
  */
 
 /**
- * Spring framework data components.
+ * Spring framework request handling.
  */
 
 package com.bernardomg.ws.springframework.request;
