@@ -1,5 +1,5 @@
 
-package com.bernardomg.web.springframework.request;
+package com.bernardomg.ws.springframework.request;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;

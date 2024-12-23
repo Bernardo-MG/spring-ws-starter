@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.response.domain.model;
+package com.bernardomg.ws.response.domain.model;
 
 import java.util.List;
 import java.util.Map;

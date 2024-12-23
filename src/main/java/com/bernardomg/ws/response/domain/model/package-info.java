@@ -21,23 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.bernardomg.web.response.domain.model;
-
-import com.bernardomg.data.domain.Sorting;
-
-import lombok.Builder;
-
 /**
- * Paginated response to the frontend.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
- * @param <T>
- *            response content type
+ * Response model.
  */
-@Builder(setterPrefix = "with")
-public record PaginatedResponse<T>(T content, int size, int page, long totalElements, long totalPages,
-        int elementsInPage, boolean first, boolean last, Sorting sort) {
 
-}
+package com.bernardomg.ws.response.domain.model;

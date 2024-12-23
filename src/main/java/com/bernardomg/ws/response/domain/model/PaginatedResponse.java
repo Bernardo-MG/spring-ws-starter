@@ -22,30 +22,22 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.web.configuration;
+package com.bernardomg.ws.response.domain.model;
 
-import java.util.List;
+import com.bernardomg.data.domain.Sorting;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.bernardomg.web.springframework.request.PaginationArgumentResolver;
-import com.bernardomg.web.springframework.request.SortingArgumentResolver;
+import lombok.Builder;
 
 /**
- * Web auto configuration.
+ * Paginated response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
+ * @param <T>
+ *            response content type
  */
-@AutoConfiguration
-public class WebAutoConfiguration implements WebMvcConfigurer {
-
-    @Override
-    public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new PaginationArgumentResolver());
-        resolvers.add(new SortingArgumentResolver());
-    }
+@Builder(setterPrefix = "with")
+public record PaginatedResponse<T>(T content, int size, int page, long totalElements, long totalPages,
+        int elementsInPage, boolean first, boolean last, Sorting sort) {
 
 }

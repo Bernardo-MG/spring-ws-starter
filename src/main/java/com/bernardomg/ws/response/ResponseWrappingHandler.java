@@ -41,10 +41,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import com.bernardomg.data.domain.Sorting;
 import com.bernardomg.data.domain.Sorting.Direction;
 import com.bernardomg.data.domain.Sorting.Property;
-import com.bernardomg.web.response.domain.model.ErrorResponse;
-import com.bernardomg.web.response.domain.model.FailureResponse;
-import com.bernardomg.web.response.domain.model.PaginatedResponse;
-import com.bernardomg.web.response.domain.model.Response;
+import com.bernardomg.ws.response.domain.model.ErrorResponse;
+import com.bernardomg.ws.response.domain.model.FailureResponse;
+import com.bernardomg.ws.response.domain.model.PaginatedResponse;
+import com.bernardomg.ws.response.domain.model.Response;
 
 import lombok.extern.slf4j.Slf4j;
 

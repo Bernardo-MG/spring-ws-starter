@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bernardomg.validation.domain.model.FieldFailure;
-import com.bernardomg.web.response.domain.model.ErrorResponse;
-import com.bernardomg.web.response.domain.model.FailureResponse;
-import com.bernardomg.web.response.domain.model.PaginatedResponse;
-import com.bernardomg.web.response.domain.model.Response;
+import com.bernardomg.ws.response.domain.model.ErrorResponse;
+import com.bernardomg.ws.response.domain.model.FailureResponse;
+import com.bernardomg.ws.response.domain.model.PaginatedResponse;
+import com.bernardomg.ws.response.domain.model.Response;
 
 @RestController
 @RequestMapping(ResponseController.PATH)

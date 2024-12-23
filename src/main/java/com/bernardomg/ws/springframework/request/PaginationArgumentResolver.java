@@ -1,5 +1,5 @@
 
-package com.bernardomg.web.springframework.request;
+package com.bernardomg.ws.springframework.request;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;

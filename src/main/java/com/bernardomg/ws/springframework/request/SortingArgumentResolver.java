@@ -1,5 +1,5 @@
 
-package com.bernardomg.web.springframework.request;
+package com.bernardomg.ws.springframework.request;
 
 import java.util.Arrays;
 import java.util.Collection;
