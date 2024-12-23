@@ -206,7 +206,7 @@ class ITResponseWrappingHandler {
         result.andExpect(MockMvcResultMatchers.jsonPath("$.totalPages", Matchers.equalTo(1)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.first", Matchers.equalTo(true)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.last", Matchers.equalTo(true)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort", Matchers.equalTo(List.of())));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort.properties", Matchers.equalTo(List.of())));
     }
 
     @Test
@@ -230,9 +230,9 @@ class ITResponseWrappingHandler {
         result.andExpect(MockMvcResultMatchers.jsonPath("$.totalPages", Matchers.equalTo(1)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.first", Matchers.equalTo(true)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.last", Matchers.equalTo(true)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort", Matchers.hasSize(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort[0].property", Matchers.equalTo("field")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort[0].direction", Matchers.equalTo("asc")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort.properties", Matchers.hasSize(1)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort.properties[0].name", Matchers.equalTo("field")));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort.properties[0].direction", Matchers.equalTo("ASC")));
     }
 
     @Test

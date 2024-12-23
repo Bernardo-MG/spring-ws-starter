@@ -24,6 +24,8 @@
 
 package com.bernardomg.ws.response;
 
+import java.util.Collection;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -36,10 +38,12 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import com.bernardomg.data.domain.Sorting;
+import com.bernardomg.data.domain.Sorting.Direction;
+import com.bernardomg.data.domain.Sorting.Property;
 import com.bernardomg.web.response.domain.model.ErrorResponse;
 import com.bernardomg.web.response.domain.model.FailureResponse;
 import com.bernardomg.web.response.domain.model.PaginatedResponse;
-import com.bernardomg.web.response.domain.model.PropertySort;
 import com.bernardomg.web.response.domain.model.Response;
 
 import lombok.extern.slf4j.Slf4j;
@@ -99,29 +103,31 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
         return true;
     }
 
-    private final PropertySort getPropertySort(final Order order) {
-        final String direction;
+    private final Property getProperty(final Order order) {
+        final Direction direction;
 
         if (order.isAscending()) {
-            direction = "asc";
+            direction = Direction.ASC;
         } else {
-            direction = "desc";
+            direction = Direction.DESC;
         }
 
-        return new PropertySort(order.getProperty(), direction);
+        return new Property(order.getProperty(), direction);
     }
 
     private final <T> PaginatedResponse<Iterable<T>> toPaginated(final Page<T> page) {
-        final Iterable<PropertySort> sort;
+        final Sorting              sorting;
+        final Collection<Property> properties;
 
-        sort = page.getSort()
+        properties = page.getSort()
             .stream()
-            .map(this::getPropertySort)
+            .map(this::getProperty)
             .toList();
+        sorting = new Sorting(properties);
 
         return PaginatedResponse.<Iterable<T>> builder()
             .withContent(page.getContent())
-            .withSort(sort)
+            .withSort(sorting)
             .withElementsInPage(page.getNumberOfElements())
             .withFirst(page.isFirst())
             .withLast(page.isLast())
