@@ -54,4 +54,22 @@ class TestSpringSorting {
             .containsExactly(Order.asc("field"));
     }
 
+    @Test
+    @DisplayName("With empty sorting, it creates an empty sort")
+    void testToSort_Empty() throws Exception {
+        final Sorting sorting;
+        final Sort    sort;
+
+        // GIVEN
+        sorting = Sorting.unsorted();
+
+        // WHEN
+        sort = SpringSorting.toSort(sorting);
+
+        // THEN
+        Assertions.assertThat(sort)
+            .as("sort")
+            .isEmpty();
+    }
+
 }
