@@ -73,9 +73,9 @@ public final class SortingArgumentResolver implements HandlerMethodArgumentResol
     }
 
     private final Property toProperty(final String[] parts) {
-        String    propertyName;
-        String    directionName;
-        Direction direction;
+        final String    propertyName;
+        final String    directionName;
+        final Direction direction;
 
         directionName = parts[1].trim()
             .toUpperCase();
