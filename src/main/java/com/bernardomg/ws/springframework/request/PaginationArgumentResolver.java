@@ -35,8 +35,8 @@ import com.bernardomg.data.domain.Pagination;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Argument resolver to acquire a {@link Pagination} from the request parameters. In case these parameters are missing, it applies
- * default values.
+ * Argument resolver to acquire a {@link Pagination} from the request parameters. In case these parameters are missing,
+ * it applies default values.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
@@ -69,6 +69,7 @@ public final class PaginationArgumentResolver implements HandlerMethodArgumentRe
         pageParam = webRequest.getParameter("page");
         if (pageParam == null) {
             page = DEFAULT_PAGE;
+            log.debug("Received no page, changed to {}", page);
         } else {
             parsedPage = Integer.parseInt(pageParam);
             if (parsedPage > 0) {
@@ -83,6 +84,7 @@ public final class PaginationArgumentResolver implements HandlerMethodArgumentRe
         sizeParam = webRequest.getParameter("size");
         if (sizeParam == null) {
             size = DEFAULT_SIZE;
+            log.debug("Received no size, changed to {}", size);
         } else {
             parsedSize = Integer.parseInt(sizeParam);
             if (parsedSize > 0) {

@@ -15,6 +15,13 @@ public final class TestPaginationRequest {
 
     public static final int SIZE         = 20;
 
+    public static final RequestBuilder negativePagination() {
+        return MockMvcRequestBuilders.get(PaginationController.PATH)
+            .param("page", "-1")
+            .param("size", "-1")
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
     public static final RequestBuilder noPagination() {
         return MockMvcRequestBuilders.get(PaginationController.PATH)
             .contentType(MediaType.APPLICATION_JSON);

@@ -56,8 +56,31 @@ class ITPaginationArgumentResolver {
     }
 
     @Test
+    @DisplayName("With the pagination params are negative, it parses the default pagination")
+    void testPagination_NegativePagination() throws Exception {
+        final ResultActions result;
+
+        // WHEN
+        result = mockMvc.perform(TestPaginationRequest.negativePagination());
+
+        // THEN
+        result.andExpect(MockMvcResultMatchers.status()
+            .isOk());
+
+        // Received the pagination
+        verify(paginationReceiver).receive(assertArg(p -> SoftAssertions.assertSoftly(soft -> {
+            soft.assertThat(p.page())
+                .as("page")
+                .isEqualTo(TestPaginationRequest.DEFAULT_PAGE);
+            soft.assertThat(p.size())
+                .as("size")
+                .isEqualTo(TestPaginationRequest.DEFAULT_SIZE);
+        })));
+    }
+
+    @Test
     @DisplayName("With no pagination params, it parses the default pagination")
-    void testPagination_DefaultPagination() throws Exception {
+    void testPagination_NoPagination() throws Exception {
         final ResultActions result;
 
         // WHEN
