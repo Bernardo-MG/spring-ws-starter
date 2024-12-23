@@ -1,1 +1,2 @@
 com.bernardomg.ws.configuration.WebServiceAutoConfiguration
+com.bernardomg.web.configuration.WebAutoConfiguration
