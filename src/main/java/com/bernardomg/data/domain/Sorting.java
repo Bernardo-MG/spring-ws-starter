@@ -28,38 +28,90 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Sorting to apply when reading data.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
 public record Sorting(Collection<Property> properties) {
 
+    /**
+     * Unsorted sorting.
+     *
+     * @return an unsorted sorting
+     */
     public static final Sorting unsorted() {
         return new Sorting(List.of());
     }
 
+    /**
+     * Ascending sorting.
+     *
+     * @param property
+     *            property to sort by
+     * @return ascending sorting
+     */
     public static final Sorting asc(final String property) {
         return new Sorting(List.of(Property.asc(property)));
     }
 
+    /**
+     * Descending sorting.
+     *
+     * @param property
+     *            property to sort by
+     * @return descending sorting
+     */
     public static final Sorting desc(final String property) {
         return new Sorting(List.of(Property.desc(property)));
     }
 
-    public static final Sorting by(final String... properties) {
+    /**
+     * Ascending sorting.
+     *
+     * @param properties
+     *            properties to sort by
+     * @return ascending sorting
+     */
+    public static final Sorting asc(final String... properties) {
         return new Sorting(Arrays.asList(properties)
             .stream()
             .map(Property::asc)
             .toList());
     }
 
+    /**
+     * Property to sort by.
+     */
     public record Property(String name, Direction direction) {
 
+        /**
+         * Property with ascending direction.
+         *
+         * @param property
+         *            property to sort by
+         * @return ascending property
+         */
         public static final Property asc(final String property) {
             return new Property(property, Direction.ASC);
         }
 
+        /**
+         * Property with descending direction.
+         *
+         * @param property
+         *            property to sort by
+         * @return descending property
+         */
         public static final Property desc(final String property) {
             return new Property(property, Direction.DESC);
         }
     }
 
+    /**
+     * Direction to sort by.
+     */
     public enum Direction {
         ASC, DESC
     }

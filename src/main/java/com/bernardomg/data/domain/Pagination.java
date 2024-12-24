@@ -24,6 +24,12 @@
 
 package com.bernardomg.data.domain;
 
+/**
+ * Pagination to apply when reading data.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
 public record Pagination(int page, int size) {
 
 }
