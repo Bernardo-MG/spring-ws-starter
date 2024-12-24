@@ -54,7 +54,10 @@
             Moved to records.
          </action>
       </release>
-      <release version="1.0.0" date="2024-10-24" description="">
+      <release version="0.2.0" date="2024-12-25" description="Pagination support">
+         <action dev="bmg" type="add">
+            Added support for pagination apart from Spring.
+         </action>
       </release>
    </body>
 </document>
