@@ -118,6 +118,7 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
     private final <T> PaginatedResponse<Iterable<T>> toPaginated(final Page<T> page) {
         final Sorting              sorting;
         final Collection<Property> properties;
+        final Integer              pageNumber;
 
         properties = page.getSort()
             .stream()
@@ -125,13 +126,15 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
             .toList();
         sorting = new Sorting(properties);
 
+        // Spring starts pages by 0
+        pageNumber = page.getNumber() + 1;
         return PaginatedResponse.<Iterable<T>> builder()
             .withContent(page.getContent())
             .withSort(sorting)
             .withElementsInPage(page.getNumberOfElements())
             .withFirst(page.isFirst())
             .withLast(page.isLast())
-            .withPage(page.getNumber())
+            .withPage(pageNumber)
             .withSize(page.getSize())
             .withTotalElements(page.getTotalElements())
             .withTotalPages(page.getTotalPages())

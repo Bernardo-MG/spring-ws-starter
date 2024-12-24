@@ -200,7 +200,7 @@ class ITResponseWrappingHandler {
         // The response contains the expected attributes
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo(List.of("abc"))));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.elementsInPage", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.page", Matchers.equalTo(0)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.page", Matchers.equalTo(1)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.size", Matchers.equalTo(1)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.totalPages", Matchers.equalTo(1)));
@@ -224,7 +224,7 @@ class ITResponseWrappingHandler {
         // The response contains the expected attributes
         result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo(List.of("abc"))));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.elementsInPage", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.page", Matchers.equalTo(0)));
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.page", Matchers.equalTo(1)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.size", Matchers.equalTo(1)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)));
         result.andExpect(MockMvcResultMatchers.jsonPath("$.totalPages", Matchers.equalTo(1)));
