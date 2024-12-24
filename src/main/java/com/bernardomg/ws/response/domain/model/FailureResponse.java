@@ -22,8 +22,25 @@
  * SOFTWARE.
  */
 
-/**
- * Application exceptions.
- */
+package com.bernardomg.ws.response.domain.model;
 
-package com.bernardomg.exception;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import com.bernardomg.validation.domain.model.FieldFailure;
+
+/**
+ * Failure response to the frontend.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ */
+public record FailureResponse(String code, String message, Map<String, List<FieldFailure>> failures) {
+
+    public FailureResponse {
+        Objects.requireNonNull(code, "Received null code");
+        Objects.requireNonNull(message, "Received null message");
+        Objects.requireNonNull(failures, "Received null failures");
+    }
+
+}

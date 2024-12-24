@@ -22,8 +22,22 @@
  * SOFTWARE.
  */
 
-/**
- * Application exceptions.
- */
+package com.bernardomg.ws.response.domain.model;
 
-package com.bernardomg.exception;
+import com.bernardomg.data.domain.Sorting;
+
+import lombok.Builder;
+
+/**
+ * Paginated response to the frontend.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ * @param <T>
+ *            response content type
+ */
+@Builder(setterPrefix = "with")
+public record PaginatedResponse<T>(T content, int size, int page, long totalElements, long totalPages,
+        int elementsInPage, boolean first, boolean last, Sorting sort) {
+
+}

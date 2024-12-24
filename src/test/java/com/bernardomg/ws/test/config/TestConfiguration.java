@@ -22,8 +22,21 @@
  * SOFTWARE.
  */
 
-/**
- * Application exceptions.
- */
+package com.bernardomg.ws.test.config;
 
-package com.bernardomg.exception;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Configuration;
+
+import com.bernardomg.ws.test.springframework.request.config.controller.PaginationController.PaginationReceiver;
+import com.bernardomg.ws.test.springframework.request.config.controller.SortingController.SortingReceiver;
+
+@Configuration
+public class TestConfiguration {
+
+    @MockBean
+    private PaginationReceiver paginationReceiver;
+
+    @MockBean
+    private SortingReceiver    sortingReceiver;
+
+}

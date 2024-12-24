@@ -21,9 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 /**
- * Application exceptions.
+ * Response model.
  */
 
-package com.bernardomg.exception;
+package com.bernardomg.ws.response.domain.model;

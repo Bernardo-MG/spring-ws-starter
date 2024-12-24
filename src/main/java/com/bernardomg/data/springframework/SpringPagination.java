@@ -22,8 +22,34 @@
  * SOFTWARE.
  */
 
-/**
- * Application exceptions.
- */
+package com.bernardomg.data.springframework;
 
-package com.bernardomg.exception;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import com.bernardomg.data.domain.Pagination;
+import com.bernardomg.data.domain.Sorting;
+
+/**
+ * Utilities to transform {@link Pagination} into {@link Pageable}.
+ * <p>
+ * Spring pages start with index 0, so the page number has to be corrected.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
+public final class SpringPagination {
+
+    public static final Pageable toPageable(final Pagination pagination) {
+        return PageRequest.of(pagination.page() - 1, pagination.size());
+    }
+
+    public static final Pageable toPageable(final Pagination pagination, final Sorting sorting) {
+        final Sort sort;
+
+        sort = SpringSorting.toSort(sorting);
+        return PageRequest.of(pagination.page() - 1, pagination.size(), sort);
+    }
+
+}

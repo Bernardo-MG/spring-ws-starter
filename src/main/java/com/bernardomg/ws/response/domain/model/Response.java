@@ -22,8 +22,20 @@
  * SOFTWARE.
  */
 
-/**
- * Application exceptions.
- */
+package com.bernardomg.ws.response.domain.model;
 
-package com.bernardomg.exception;
+/**
+ * Response to the frontend.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ * @param <T>
+ *            response content type
+ */
+public record Response<T>(T content) {
+
+    public static final <T> Response<T> empty() {
+        return new Response<>(null);
+    }
+
+}

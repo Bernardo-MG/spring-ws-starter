@@ -23,7 +23,7 @@
  */
 
 /**
- * Application exceptions.
+ * Spring framework response handling.
  */
 
-package com.bernardomg.exception;
+package com.bernardomg.ws.springframework.response;

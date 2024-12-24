@@ -22,8 +22,14 @@
  * SOFTWARE.
  */
 
-/**
- * Application exceptions.
- */
+package com.bernardomg.data.domain;
 
-package com.bernardomg.exception;
+/**
+ * Pagination to apply when reading data.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
+public record Pagination(int page, int size) {
+
+}

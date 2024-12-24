@@ -23,7 +23,7 @@
  */
 
 /**
- * Application exceptions.
+ * Data domain.
  */
 
-package com.bernardomg.exception;
+package com.bernardomg.data.domain;
