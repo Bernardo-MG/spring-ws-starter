@@ -36,6 +36,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.bernardomg.data.domain.Pagination;
 import com.bernardomg.ws.test.config.annotation.IntegrationTest;
 import com.bernardomg.ws.test.springframework.request.config.controller.PaginationController.PaginationReceiver;
 import com.bernardomg.ws.test.springframework.request.config.controller.TestPaginationRequest;
@@ -69,10 +70,14 @@ class ITPaginationArgumentResolver {
 
         // Received the pagination
         verify(paginationReceiver).receive(assertArg(p -> SoftAssertions.assertSoftly(soft -> {
-            soft.assertThat(p.page())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::page)
                 .as("page")
                 .isEqualTo(TestPaginationRequest.DEFAULT_PAGE);
-            soft.assertThat(p.size())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::size)
                 .as("size")
                 .isEqualTo(TestPaginationRequest.DEFAULT_SIZE);
         })));
@@ -92,10 +97,14 @@ class ITPaginationArgumentResolver {
 
         // Received the pagination
         verify(paginationReceiver).receive(assertArg(p -> SoftAssertions.assertSoftly(soft -> {
-            soft.assertThat(p.page())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::page)
                 .as("page")
                 .isEqualTo(TestPaginationRequest.DEFAULT_PAGE);
-            soft.assertThat(p.size())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::size)
                 .as("size")
                 .isEqualTo(TestPaginationRequest.DEFAULT_SIZE);
         })));
@@ -115,10 +124,14 @@ class ITPaginationArgumentResolver {
 
         // Received the pagination
         verify(paginationReceiver).receive(assertArg(p -> SoftAssertions.assertSoftly(soft -> {
-            soft.assertThat(p.page())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::page)
                 .as("page")
                 .isEqualTo(TestPaginationRequest.PAGE);
-            soft.assertThat(p.size())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::size)
                 .as("size")
                 .isEqualTo(TestPaginationRequest.SIZE);
         })));

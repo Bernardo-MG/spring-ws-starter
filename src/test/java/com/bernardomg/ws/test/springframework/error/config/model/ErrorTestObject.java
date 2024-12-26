@@ -1,5 +1,5 @@
 
-package com.bernardomg.ws.test.springframework.error.util.model;
+package com.bernardomg.ws.test.springframework.error.config.model;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

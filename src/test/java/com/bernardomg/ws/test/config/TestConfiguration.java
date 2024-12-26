@@ -24,8 +24,8 @@
 
 package com.bernardomg.ws.test.config;
 
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import com.bernardomg.ws.test.springframework.request.config.controller.PaginationController.PaginationReceiver;
 import com.bernardomg.ws.test.springframework.request.config.controller.SortingController.SortingReceiver;
@@ -33,10 +33,10 @@ import com.bernardomg.ws.test.springframework.request.config.controller.SortingC
 @Configuration
 public class TestConfiguration {
 
-    @MockBean
+    @MockitoBean
     private PaginationReceiver paginationReceiver;
 
-    @MockBean
+    @MockitoBean
     private SortingReceiver    sortingReceiver;
 
 }
