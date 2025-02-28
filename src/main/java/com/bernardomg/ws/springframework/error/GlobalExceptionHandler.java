@@ -148,7 +148,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             code = "";
         }
 
-        return new FieldFailure(code, error.getDefaultMessage(), error.getField(), error.getRejectedValue());
+        return new FieldFailure(code, error.getField(), error.getDefaultMessage(), error.getRejectedValue());
     }
 
     @Override

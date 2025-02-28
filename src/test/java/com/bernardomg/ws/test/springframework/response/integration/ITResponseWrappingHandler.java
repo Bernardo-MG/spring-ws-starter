@@ -37,16 +37,21 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import com.bernardomg.ws.test.config.annotation.IntegrationTest;
+import com.bernardomg.ws.test.springframework.response.config.ResponseWrappingTestConfig;
+import com.bernardomg.ws.test.springframework.response.config.controller.ResponseController;
 import com.bernardomg.ws.test.springframework.response.config.controller.TestResponseRequest;
 
-@IntegrationTest
-@AutoConfigureMockMvc
+@WebMvcTest(ResponseController.class)
+@ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(ResponseWrappingTestConfig.class)
 @DisplayName("Response wrapping handler")
 class ITResponseWrappingHandler {
 

@@ -33,16 +33,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import com.bernardomg.ws.test.config.annotation.IntegrationTest;
+import com.bernardomg.ws.test.springframework.error.config.ExceptionHandlerTestConfig;
+import com.bernardomg.ws.test.springframework.error.config.controller.ExceptionController;
 import com.bernardomg.ws.test.springframework.error.config.controller.TestExceptionRequest;
 
-@IntegrationTest
-@AutoConfigureMockMvc
+@WebMvcTest(ExceptionController.class)
+@ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(ExceptionHandlerTestConfig.class)
 @DisplayName("Global exception handler")
 class ITGlobalExceptionHandler {
 
