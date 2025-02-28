@@ -24,23 +24,34 @@
 
 package com.bernardomg.ws.test.springframework.response.integration;
 
+import static org.hamcrest.Matchers.aMapWithSize;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.nullValue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.List;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.bernardomg.ws.test.config.annotation.IntegrationTest;
+import com.bernardomg.ws.test.springframework.response.config.ResponseWrappingTestConfig;
+import com.bernardomg.ws.test.springframework.response.config.controller.ResponseController;
 import com.bernardomg.ws.test.springframework.response.config.controller.TestResponseRequest;
 
-@IntegrationTest
-@AutoConfigureMockMvc
+@WebMvcTest(ResponseController.class)
+@ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(ResponseWrappingTestConfig.class)
 @DisplayName("Response wrapping handler")
 class ITResponseWrappingHandler {
 
@@ -60,12 +71,11 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.errorResponse());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.equalTo("code")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.equalTo("message")));
+        result.andExpect(jsonPath("$.code", equalTo("code")));
+        result.andExpect(jsonPath("$.message", equalTo("message")));
     }
 
     @Test
@@ -77,18 +87,16 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.failureResponse());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures", Matchers.aMapWithSize(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures", Matchers.hasKey("field")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field']", Matchers.hasSize(1)));
-        result.andExpect(
-            MockMvcResultMatchers.jsonPath("$.failures['field'][0].message", Matchers.equalTo("Error message")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field'][0].field", Matchers.equalTo("field")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field'][0].code", Matchers.equalTo("code")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.failures['field'][0].value", Matchers.equalTo("value")));
+        result.andExpect(jsonPath("$.failures", aMapWithSize(1)));
+        result.andExpect(jsonPath("$.failures", hasKey("field")));
+        result.andExpect(jsonPath("$.failures['field']", hasSize(1)));
+        result.andExpect(jsonPath("$.failures['field'][0].message", equalTo("Error message")));
+        result.andExpect(jsonPath("$.failures['field'][0].field", equalTo("field")));
+        result.andExpect(jsonPath("$.failures['field'][0].code", equalTo("code")));
+        result.andExpect(jsonPath("$.failures['field'][0].value", equalTo("value")));
     }
 
     @Test
@@ -100,11 +108,10 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.nullResponse());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.nullValue()));
+        result.andExpect(jsonPath("$.content", nullValue()));
     }
 
     @Test
@@ -116,11 +123,10 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.object());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content.name", Matchers.equalTo("name")));
+        result.andExpect(jsonPath("$.content.name", equalTo("name")));
     }
 
     @Test
@@ -132,11 +138,10 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.paginatedResponse());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("abc")));
+        result.andExpect(jsonPath("$.content", equalTo("abc")));
     }
 
     @Test
@@ -148,8 +153,7 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.resource());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
     }
 
     @Test
@@ -161,11 +165,10 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.response());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("abc")));
+        result.andExpect(jsonPath("$.content", equalTo("abc")));
     }
 
     @Test
@@ -178,11 +181,10 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.responseEntity());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("abc")));
+        result.andExpect(jsonPath("$.content", equalTo("abc")));
     }
 
     @Test
@@ -194,19 +196,18 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.springPage());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo(List.of("abc"))));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.elementsInPage", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.page", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.size", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.totalPages", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.first", Matchers.equalTo(true)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.last", Matchers.equalTo(true)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort.properties", Matchers.equalTo(List.of())));
+        result.andExpect(jsonPath("$.content", equalTo(List.of("abc"))));
+        result.andExpect(jsonPath("$.elementsInPage", equalTo(1)));
+        result.andExpect(jsonPath("$.page", equalTo(1)));
+        result.andExpect(jsonPath("$.size", equalTo(1)));
+        result.andExpect(jsonPath("$.totalElements", equalTo(1)));
+        result.andExpect(jsonPath("$.totalPages", equalTo(1)));
+        result.andExpect(jsonPath("$.first", equalTo(true)));
+        result.andExpect(jsonPath("$.last", equalTo(true)));
+        result.andExpect(jsonPath("$.sort.properties", equalTo(List.of())));
     }
 
     @Test
@@ -218,21 +219,20 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.springPageSorted());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo(List.of("abc"))));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.elementsInPage", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.page", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.size", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.totalPages", Matchers.equalTo(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.first", Matchers.equalTo(true)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.last", Matchers.equalTo(true)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort.properties", Matchers.hasSize(1)));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort.properties[0].name", Matchers.equalTo("field")));
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.sort.properties[0].direction", Matchers.equalTo("ASC")));
+        result.andExpect(jsonPath("$.content", equalTo(List.of("abc"))));
+        result.andExpect(jsonPath("$.elementsInPage", equalTo(1)));
+        result.andExpect(jsonPath("$.page", equalTo(1)));
+        result.andExpect(jsonPath("$.size", equalTo(1)));
+        result.andExpect(jsonPath("$.totalElements", equalTo(1)));
+        result.andExpect(jsonPath("$.totalPages", equalTo(1)));
+        result.andExpect(jsonPath("$.first", equalTo(true)));
+        result.andExpect(jsonPath("$.last", equalTo(true)));
+        result.andExpect(jsonPath("$.sort.properties", hasSize(1)));
+        result.andExpect(jsonPath("$.sort.properties[0].name", equalTo("field")));
+        result.andExpect(jsonPath("$.sort.properties[0].direction", equalTo("ASC")));
     }
 
     @Test
@@ -245,11 +245,10 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.string());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.equalTo("abc")));
+        result.andExpect(jsonPath("$.content", equalTo("abc")));
     }
 
     @Test
@@ -261,11 +260,10 @@ class ITResponseWrappingHandler {
         result = mockMvc.perform(TestResponseRequest.voidResponse());
 
         // THEN
-        result.andExpect(MockMvcResultMatchers.status()
-            .isOk());
+        result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.nullValue()));
+        result.andExpect(jsonPath("$.content", nullValue()));
     }
 
 }

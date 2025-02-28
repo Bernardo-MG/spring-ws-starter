@@ -75,7 +75,7 @@ public class ResponseController {
         final List<FieldFailure>              failuresList;
         final Map<String, List<FieldFailure>> failures;
 
-        failure = new FieldFailure("code", "Error message", "field", "value");
+        failure = new FieldFailure("code", "field", "Error message", "value");
 
         failuresList = new ArrayList<>();
         failuresList.add(failure);

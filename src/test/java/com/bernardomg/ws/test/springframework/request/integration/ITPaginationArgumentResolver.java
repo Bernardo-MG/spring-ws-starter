@@ -30,26 +30,37 @@ import static org.mockito.Mockito.verify;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.bernardomg.ws.test.config.annotation.IntegrationTest;
+import com.bernardomg.data.domain.Pagination;
+import com.bernardomg.ws.test.springframework.request.config.PaginationTestConfig;
+import com.bernardomg.ws.test.springframework.request.config.controller.PaginationController;
 import com.bernardomg.ws.test.springframework.request.config.controller.PaginationController.PaginationReceiver;
+import com.bernardomg.ws.test.springframework.request.config.controller.SortingController.SortingReceiver;
 import com.bernardomg.ws.test.springframework.request.config.controller.TestPaginationRequest;
 
-@IntegrationTest
-@AutoConfigureMockMvc
+@WebMvcTest(PaginationController.class)
+@ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(PaginationTestConfig.class)
 @DisplayName("Pagination argument resolver")
 class ITPaginationArgumentResolver {
 
     @Autowired
     private MockMvc            mockMvc;
 
-    @Autowired
+    @MockitoBean
     private PaginationReceiver paginationReceiver;
+
+    @MockitoBean
+    private SortingReceiver    sortingReceiver;
 
     public ITPaginationArgumentResolver() {
         super();
@@ -69,10 +80,14 @@ class ITPaginationArgumentResolver {
 
         // Received the pagination
         verify(paginationReceiver).receive(assertArg(p -> SoftAssertions.assertSoftly(soft -> {
-            soft.assertThat(p.page())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::page)
                 .as("page")
                 .isEqualTo(TestPaginationRequest.DEFAULT_PAGE);
-            soft.assertThat(p.size())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::size)
                 .as("size")
                 .isEqualTo(TestPaginationRequest.DEFAULT_SIZE);
         })));
@@ -92,10 +107,14 @@ class ITPaginationArgumentResolver {
 
         // Received the pagination
         verify(paginationReceiver).receive(assertArg(p -> SoftAssertions.assertSoftly(soft -> {
-            soft.assertThat(p.page())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::page)
                 .as("page")
                 .isEqualTo(TestPaginationRequest.DEFAULT_PAGE);
-            soft.assertThat(p.size())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::size)
                 .as("size")
                 .isEqualTo(TestPaginationRequest.DEFAULT_SIZE);
         })));
@@ -115,10 +134,14 @@ class ITPaginationArgumentResolver {
 
         // Received the pagination
         verify(paginationReceiver).receive(assertArg(p -> SoftAssertions.assertSoftly(soft -> {
-            soft.assertThat(p.page())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::page)
                 .as("page")
                 .isEqualTo(TestPaginationRequest.PAGE);
-            soft.assertThat(p.size())
+            soft.assertThat(p)
+                .as("pagination")
+                .extracting(Pagination::size)
                 .as("size")
                 .isEqualTo(TestPaginationRequest.SIZE);
         })));
