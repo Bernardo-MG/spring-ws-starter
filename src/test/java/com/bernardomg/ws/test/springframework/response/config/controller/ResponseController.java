@@ -93,9 +93,7 @@ public class ResponseController {
 
     @GetMapping(path = "/object", produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnedObject object() {
-        return ReturnedObject.builder()
-            .withName("name")
-            .build();
+        return new ReturnedObject("name");
     }
 
     @GetMapping(path = "/paginatedResponse", produces = MediaType.APPLICATION_JSON_VALUE)

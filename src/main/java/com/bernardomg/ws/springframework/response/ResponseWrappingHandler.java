@@ -26,6 +26,8 @@ package com.bernardomg.ws.springframework.response;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -46,8 +48,6 @@ import com.bernardomg.ws.response.domain.model.FailureResponse;
 import com.bernardomg.ws.response.domain.model.PaginatedResponse;
 import com.bernardomg.ws.response.domain.model.Response;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Advice to wrap all the responses into an instance of {@link Response}. Unless it is already an instance of
  * {@code Response}, or the Spring {@link ResponseEntity}.
@@ -60,8 +60,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 // TODO: This path should be parameterized
 @ControllerAdvice("com.bernardomg")
-@Slf4j
 public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object> {
+
+    /**
+     * Logger for the class.
+     */
+    private static final Logger log = LoggerFactory.getLogger(ResponseWrappingHandler.class);
 
     /**
      * Default constructor.
@@ -128,17 +132,9 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
 
         // Spring starts pages by 0
         pageNumber = page.getNumber() + 1;
-        return PaginatedResponse.<Iterable<T>> builder()
-            .withContent(page.getContent())
-            .withSort(sorting)
-            .withElementsInPage(page.getNumberOfElements())
-            .withFirst(page.isFirst())
-            .withLast(page.isLast())
-            .withPage(pageNumber)
-            .withSize(page.getSize())
-            .withTotalElements(page.getTotalElements())
-            .withTotalPages(page.getTotalPages())
-            .build();
+        return new PaginatedResponse<>(page.getContent(), page.getSize(), pageNumber,
+            page.getTotalElements(), page.getTotalPages(), page.getNumberOfElements(), page.isFirst(), page.isLast(),
+            sorting);
     }
 
 }
