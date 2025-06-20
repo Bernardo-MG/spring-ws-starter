@@ -176,9 +176,10 @@
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
       <archunit.version>1.4.1</archunit.version>
-      <bernardomg.framework.test.architecture>1.0.2</bernardomg.framework.test.architecture>
-      <bernardomg.framework.validation.version>0.2.4</bernardomg.framework.validation.version>
+      <bernardomg.framework.test.architecture>1.0.5</bernardomg.framework.test.architecture>
+      <bernardomg.framework.validation.version>0.2.5</bernardomg.framework.validation.version>
       <jakarta.validation.version>3.1.1</jakarta.validation.version>
+      <micrometer.version>1.14.8</micrometer.version>
       <slf4j.version>2.0.17</slf4j.version>
       <spring.boot.version>3.4.6</spring.boot.version>
       <spring.version>6.2.8</spring.version>
@@ -332,6 +333,19 @@
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-web</artifactId>
          <scope>provided</scope>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ============ VERSION CONVERGENCE ============= -->
+      <!-- ============================================== -->
+      <dependency>
+         <groupId>io.micrometer</groupId>
+         <artifactId>micrometer-observation</artifactId>
+         <version>${micrometer.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>io.micrometer</groupId>
+         <artifactId>micrometer-commons</artifactId>
+         <version>${micrometer.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->

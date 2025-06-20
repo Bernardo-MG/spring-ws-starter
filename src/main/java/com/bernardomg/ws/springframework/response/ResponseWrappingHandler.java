@@ -132,9 +132,8 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
 
         // Spring starts pages by 0
         pageNumber = page.getNumber() + 1;
-        return new PaginatedResponse<>(page.getContent(), page.getSize(), pageNumber,
-            page.getTotalElements(), page.getTotalPages(), page.getNumberOfElements(), page.isFirst(), page.isLast(),
-            sorting);
+        return new PaginatedResponse<>(page.getContent(), page.getSize(), pageNumber, page.getTotalElements(),
+            page.getTotalPages(), page.getNumberOfElements(), page.isFirst(), page.isLast(), sorting);
     }
 
 }
