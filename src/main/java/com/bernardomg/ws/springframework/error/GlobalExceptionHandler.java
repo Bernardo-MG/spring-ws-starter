@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -51,16 +53,18 @@ import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.ws.response.domain.model.ErrorResponse;
 import com.bernardomg.ws.response.domain.model.FailureResponse;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Captures and handles general use exceptions. This includes validation exceptions.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
 @RestControllerAdvice
-@Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    /**
+     * Logger for the class.
+     */
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * Default constructor.
