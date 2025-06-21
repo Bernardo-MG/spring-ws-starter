@@ -24,6 +24,8 @@
 
 package com.bernardomg.ws.springframework.request;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -32,8 +34,6 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.bernardomg.data.domain.Pagination;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Argument resolver to acquire a {@link Pagination} from the request parameters. In case these parameters are missing,
  * it applies default values.
@@ -41,12 +41,16 @@ import lombok.extern.slf4j.Slf4j;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-@Slf4j
 public final class PaginationArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private static final int DEFAULT_PAGE = 1;
+    private static final int    DEFAULT_PAGE = 1;
 
-    private static final int DEFAULT_SIZE = 10;
+    private static final int    DEFAULT_SIZE = 10;
+
+    /**
+     * Logger for the class.
+     */
+    private static final Logger log          = LoggerFactory.getLogger(PaginationArgumentResolver.class);
 
     /**
      * Default constructor.
