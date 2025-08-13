@@ -77,6 +77,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             DataAccessException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public final ErrorResponse handleBadRequestException(final Exception ex) {
+        // TODO: doesn't seem to be capturing the exceptions correctly
         log.warn(ex.getMessage(), ex);
 
         return new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Bad request");
