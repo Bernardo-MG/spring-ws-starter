@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2023-2025 the original author or authors.
+ * Copyright (c) 2023 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,19 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.ws.response.domain.model;
+package com.bernardomg.event.test.config;
 
-import com.bernardomg.data.domain.Sorting;
+import com.bernardomg.event.domain.AbstractEvent;
 
 /**
- * Paginated response to the frontend.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
- * @param <T>
- *            response content type
+ * Log in attempt event. It is created no matter if the attempt was succesful or not.
  */
-public record PaginatedResponse<T>(T content, int size, int page, long totalElements, long totalPages,
-        int elementsInPage, boolean first, boolean last, Sorting sort) {
+public final class TestEvent extends AbstractEvent {
+
+    private static final long serialVersionUID = 1L;
+
+    public TestEvent(final Object source) {
+        super(source);
+    }
 
 }

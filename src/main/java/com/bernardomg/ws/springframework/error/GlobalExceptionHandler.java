@@ -76,7 +76,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({ IllegalArgumentException.class, HttpMessageConversionException.class,
             DataAccessException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public final ErrorResponse handleBadRequestException(final Exception ex, final WebRequest request) {
+    public final ErrorResponse handleBadRequestException(final Exception ex) {
+        // TODO: doesn't seem to be capturing the exceptions correctly
         log.warn(ex.getMessage(), ex);
 
         return new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Bad request");
@@ -87,13 +88,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      *
      * @param ex
      *            exception to handle
-     * @param request
-     *            request
      * @return internal error response
      */
     @ExceptionHandler({ RuntimeException.class })
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public final ErrorResponse handleExceptionDefault(final Exception ex, final WebRequest request) {
+    public final ErrorResponse handleExceptionDefault(final Exception ex) {
         log.warn(ex.getMessage(), ex);
 
         return new ErrorResponse(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), "Internal error");
@@ -101,7 +100,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ MissingIdException.class })
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public final ErrorResponse handleMissingDataException(final MissingIdException ex, final WebRequest request) {
+    public final ErrorResponse handleMissingDataException(final MissingIdException ex) {
         final String message;
 
         log.warn(ex.getMessage(), ex);
@@ -113,7 +112,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ FieldFailureException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public final FailureResponse handleValidationException(final FieldFailureException ex, final WebRequest request) {
+    public final FailureResponse handleValidationException(final FieldFailureException ex) {
         final Map<String, List<FieldFailure>> failures;
 
         log.warn(ex.getMessage(), ex);
@@ -161,7 +160,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         final ErrorResponse response;
         final String        message;
 
-        log.error(ex.getMessage());
+        log.error(ex.getMessage(), ex);
 
         message = "Server error. Contact admin.";
 

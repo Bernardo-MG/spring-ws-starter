@@ -34,7 +34,7 @@ import com.bernardomg.data.domain.Pagination;
 import com.bernardomg.data.domain.Sorting;
 import com.bernardomg.data.springframework.SpringPagination;
 
-@DisplayName("Spring pageable")
+@DisplayName("Spring pageable tools")
 class TestSpringPageable {
 
     @Test
