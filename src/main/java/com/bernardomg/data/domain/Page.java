@@ -22,21 +22,17 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.ws.response.domain.model;
+package com.bernardomg.data.domain;
 
 import java.util.Collection;
 
-import com.bernardomg.data.domain.Sorting;
-
 /**
- * Paginated response to the frontend.
+ * Page containing a paged collection.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
- * @param <T>
- *            response content type
  */
-public record PaginatedResponse<T>(Collection<T> content, int size, int page, long totalElements, long totalPages,
+public record Page<T>(Collection<T> content, int size, int page, long totalElements, long totalPages,
         int elementsInPage, boolean first, boolean last, Sorting sort) {
 
 }

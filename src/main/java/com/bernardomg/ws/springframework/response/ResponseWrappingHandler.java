@@ -30,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,12 +39,12 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import com.bernardomg.data.domain.Page;
 import com.bernardomg.data.domain.Sorting;
 import com.bernardomg.data.domain.Sorting.Direction;
 import com.bernardomg.data.domain.Sorting.Property;
 import com.bernardomg.ws.response.domain.model.ErrorResponse;
 import com.bernardomg.ws.response.domain.model.FailureResponse;
-import com.bernardomg.ws.response.domain.model.PaginatedResponse;
 import com.bernardomg.ws.response.domain.model.Response;
 
 /**
@@ -81,16 +80,16 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
         final Object result;
 
         log.trace("Received {} as response body", body);
-        if ((body instanceof ResponseEntity<?>) || (body instanceof Response) || (body instanceof PaginatedResponse)
-                || (body instanceof ErrorResponse) || (body instanceof FailureResponse)) {
+        if ((body instanceof ResponseEntity<?>) || (body instanceof Response) || (body instanceof ErrorResponse)
+                || (body instanceof FailureResponse)) {
             // Avoid wrapping wrapped responses
             result = body;
-        } else if (body instanceof Resource) {
-            // Avoid wrapping resources
+        } else if ((body instanceof Page) || (body instanceof Resource)) {
+            // Avoid wrapping pages
             result = body;
-        } else if (body instanceof Page<?>) {
+        } else if (body instanceof org.springframework.data.domain.Page<?>) {
             // Spring pagination
-            result = toPaginated((Page<?>) body);
+            result = toPaginated((org.springframework.data.domain.Page<?>) body);
         } else if (body == null) {
             log.debug("Received null as response body");
             result = Response.empty();
@@ -119,7 +118,7 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
         return new Property(order.getProperty(), direction);
     }
 
-    private final <T> PaginatedResponse<T> toPaginated(final Page<T> page) {
+    private final <T> Page<T> toPaginated(final org.springframework.data.domain.Page<T> page) {
         final Sorting              sorting;
         final Collection<Property> properties;
         final Integer              pageNumber;
@@ -132,8 +131,8 @@ public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object>
 
         // Spring starts pages by 0
         pageNumber = page.getNumber() + 1;
-        return new PaginatedResponse<>(page.getContent(), page.getSize(), pageNumber, page.getTotalElements(),
-            page.getTotalPages(), page.getNumberOfElements(), page.isFirst(), page.isLast(), sorting);
+        return new Page<>(page.getContent(), page.getSize(), pageNumber, page.getTotalElements(), page.getTotalPages(),
+            page.getNumberOfElements(), page.isFirst(), page.isLast(), sorting);
     }
 
 }

@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bernardomg.data.domain.Page;
 import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.ws.response.domain.model.ErrorResponse;
 import com.bernardomg.ws.response.domain.model.FailureResponse;
-import com.bernardomg.ws.response.domain.model.PaginatedResponse;
 import com.bernardomg.ws.response.domain.model.Response;
 
 @RestController
@@ -97,8 +97,8 @@ public class ResponseController {
     }
 
     @GetMapping(path = "/paginatedResponse", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PaginatedResponse<String> paginatedResponse() {
-        return new PaginatedResponse<>(List.of("abc"), 0, 0, 0, 0, 0, false, false, null);
+    public Page<String> paginatedResponse() {
+        return new Page<>(List.of("abc"), 0, 0, 0, 0, 0, false, false, null);
     }
 
     @GetMapping(path = "/resource", produces = MediaType.APPLICATION_JSON_VALUE)
