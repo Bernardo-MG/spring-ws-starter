@@ -98,7 +98,7 @@ public class ResponseController {
 
     @GetMapping(path = "/paginatedResponse", produces = MediaType.APPLICATION_JSON_VALUE)
     public PaginatedResponse<String> paginatedResponse() {
-        return new PaginatedResponse<>("abc", 0, 0, 0, 0, 0, false, false, null);
+        return new PaginatedResponse<>(List.of("abc"), 0, 0, 0, 0, 0, false, false, null);
     }
 
     @GetMapping(path = "/resource", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -141,7 +141,7 @@ class ITResponseWrappingHandler {
         result.andExpect(status().isOk());
 
         // The response contains the expected attributes
-        result.andExpect(jsonPath("$.content", equalTo("abc")));
+        result.andExpect(jsonPath("$.content", equalTo(List.of("abc"))));
     }
 
     @Test

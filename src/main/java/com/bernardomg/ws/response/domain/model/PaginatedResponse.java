@@ -24,6 +24,8 @@
 
 package com.bernardomg.ws.response.domain.model;
 
+import java.util.Collection;
+
 import com.bernardomg.data.domain.Sorting;
 
 /**
@@ -34,7 +36,7 @@ import com.bernardomg.data.domain.Sorting;
  * @param <T>
  *            response content type
  */
-public record PaginatedResponse<T>(T content, int size, int page, long totalElements, long totalPages,
+public record PaginatedResponse<T>(Collection<T> content, int size, int page, long totalElements, long totalPages,
         int elementsInPage, boolean first, boolean last, Sorting sort) {
 
 }
