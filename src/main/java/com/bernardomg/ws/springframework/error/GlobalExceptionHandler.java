@@ -88,8 +88,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      *
      * @param ex
      *            exception to handle
-     * @param request
-     *            request
      * @return internal error response
      */
     @ExceptionHandler({ RuntimeException.class })
