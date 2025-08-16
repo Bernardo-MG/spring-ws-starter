@@ -33,7 +33,7 @@ import org.springframework.data.domain.Sort.Order;
 import com.bernardomg.data.domain.Sorting;
 import com.bernardomg.data.springframework.SpringSorting;
 
-@DisplayName("Spring sorting")
+@DisplayName("Spring sorting tools")
 class TestSpringSorting {
 
     @Test
