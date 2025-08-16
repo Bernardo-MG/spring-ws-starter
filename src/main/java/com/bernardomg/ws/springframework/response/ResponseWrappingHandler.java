@@ -52,7 +52,7 @@ import com.bernardomg.ws.response.domain.model.Response;
  * {@code Response}, or the Spring {@link ResponseEntity}.
  * <h2>Pagination</h2>
  * <p>
- * Paginated data will be wrapped into an instance of {@link PaginatedResponse}.
+ * Paginated data will be wrapped into an instance of {@link Page}.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
