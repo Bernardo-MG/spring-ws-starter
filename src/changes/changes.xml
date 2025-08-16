@@ -72,7 +72,13 @@
             Removed Lombok.
          </action>
       </release>
-      <release version="1.0.0" date="2025-03-01" description="">
+      <release version="0.3.0" date="2025-08-16" description="Cleaned up mode">
+         <action dev="bmg" type="update">
+            Updated pagination model.
+         </action>
+         <action dev="bmg" type="add">
+            Temporarily added event classes.
+         </action>
       </release>
    </body>
 </document>
