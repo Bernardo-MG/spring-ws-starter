@@ -57,8 +57,7 @@ import com.bernardomg.ws.response.domain.model.Response;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-// TODO: This path should be parameterized
-@ControllerAdvice("com.bernardomg")
+@ControllerAdvice
 public final class ResponseWrappingHandler implements ResponseBodyAdvice<Object> {
 
     /**

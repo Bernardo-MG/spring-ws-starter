@@ -80,5 +80,13 @@
             Temporarily added event classes.
          </action>
       </release>
+      <release version="0.3.1" date="2025-08-21" description="Fixes">
+         <action dev="bmg" type="fix">
+            Validation exception as bad request.
+         </action>
+         <action dev="bmg" type="fix">
+            Apply response wrapper to all code.
+         </action>
+      </release>
    </body>
 </document>
