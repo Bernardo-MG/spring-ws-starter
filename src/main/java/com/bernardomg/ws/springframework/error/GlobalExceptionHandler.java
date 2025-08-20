@@ -53,6 +53,8 @@ import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.ws.response.domain.model.ErrorResponse;
 import com.bernardomg.ws.response.domain.model.FailureResponse;
 
+import jakarta.validation.ValidationException;
+
 /**
  * Captures and handles general use exceptions. This includes validation exceptions.
  *
@@ -73,8 +75,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         super();
     }
 
-    @ExceptionHandler({ IllegalArgumentException.class, HttpMessageConversionException.class,
-            DataAccessException.class })
+    @ExceptionHandler({ IllegalArgumentException.class, HttpMessageConversionException.class, DataAccessException.class,
+            ValidationException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public final ErrorResponse handleBadRequestException(final Exception ex) {
         // TODO: doesn't seem to be capturing the exceptions correctly
