@@ -88,5 +88,10 @@
             Apply response wrapper to all code.
          </action>
       </release>
+      <release version="0.4.0" date="2025-09-14" description="Removed response wrapping">
+         <action dev="bmg" type="delete">
+            Removed response auto wrapping.
+         </action>
+      </release>
    </body>
 </document>
