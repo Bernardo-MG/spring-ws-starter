@@ -58,4 +58,8 @@ public final class SpringSorting {
         return order;
     }
 
+    private SpringSorting() {
+        super();
+    }
+
 }

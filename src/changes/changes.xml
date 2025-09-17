@@ -93,5 +93,10 @@
             Removed response auto wrapping.
          </action>
       </release>
+      <release version="0.4.1" date="2025-09-17" description="Parse Spring pages">
+         <action dev="bmg" type="add">
+            Factory method to parse Spring pages.
+         </action>
+      </release>
    </body>
 </document>

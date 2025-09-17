@@ -87,4 +87,8 @@ public final class WebSorting {
         return new Property(propertyName, direction);
     }
 
+    private WebSorting() {
+        super();
+    }
+
 }
