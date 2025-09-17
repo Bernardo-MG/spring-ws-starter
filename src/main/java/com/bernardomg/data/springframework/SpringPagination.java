@@ -80,4 +80,8 @@ public final class SpringPagination {
         return new Property(order.getProperty(), direction);
     }
 
+    private SpringPagination() {
+        super();
+    }
+
 }

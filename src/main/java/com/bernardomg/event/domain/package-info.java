@@ -22,23 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.event.emitter;
-
-import com.bernardomg.event.domain.AbstractEvent;
-
 /**
- * Emits an event to be intercepted by the listeners.
+ * Event domain.
  */
-public interface EventEmitter {
 
-    /**
-     * Emit an event.
-     *
-     * @param <E>
-     *            type if the event
-     * @param event
-     *            event to emit
-     */
-    public <E extends AbstractEvent> void emit(final E event);
-
-}
+package com.bernardomg.event.domain;
