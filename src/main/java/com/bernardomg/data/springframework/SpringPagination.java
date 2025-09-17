@@ -24,12 +24,18 @@
 
 package com.bernardomg.data.springframework;
 
+import java.util.List;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 
+import com.bernardomg.data.domain.Page;
 import com.bernardomg.data.domain.Pagination;
 import com.bernardomg.data.domain.Sorting;
+import com.bernardomg.data.domain.Sorting.Direction;
+import com.bernardomg.data.domain.Sorting.Property;
 
 /**
  * Utilities to transform {@link Pagination} into {@link Pageable}.
@@ -41,6 +47,17 @@ import com.bernardomg.data.domain.Sorting;
  */
 public final class SpringPagination {
 
+    public static final <T> Page<T> toPage(final org.springframework.data.domain.Page<T> page) {
+        List<Property> properties;
+
+        properties = page.getSort()
+            .stream()
+            .map(SpringPagination::toProperty)
+            .toList();
+        return new Page<>(page.getContent(), page.getSize(), page.getNumber() + 1, page.getTotalElements(),
+            page.getTotalPages(), page.getNumberOfElements(), page.isFirst(), page.isLast(), new Sorting(properties));
+    }
+
     public static final Pageable toPageable(final Pagination pagination) {
         return PageRequest.of(pagination.page() - 1, pagination.size());
     }
@@ -50,6 +67,17 @@ public final class SpringPagination {
 
         sort = SpringSorting.toSort(sorting);
         return PageRequest.of(pagination.page() - 1, pagination.size(), sort);
+    }
+
+    private static final Property toProperty(final Order order) {
+        Direction direction;
+
+        if (order.isAscending()) {
+            direction = Direction.ASC;
+        } else {
+            direction = Direction.DESC;
+        }
+        return new Property(order.getProperty(), direction);
     }
 
 }
