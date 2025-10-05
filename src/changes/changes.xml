@@ -98,7 +98,10 @@
             Factory method to parse Spring pages.
          </action>
       </release>
-      <release version="1.0.0" date="2025-09-17" description="">
+      <release version="0.4.2" date="2025-10-05" description="Sorting fix">
+         <action dev="bmg" type="fix">
+            Changed separator for sorting.
+         </action>
       </release>
    </body>
 </document>
