@@ -53,7 +53,7 @@ public final class WebSorting {
             properties = List.of();
         } else {
             properties = sort.stream()
-                .map(p -> p.split(","))
+                .map(p -> p.split("\\|"))
                 .filter(p -> p.length >= 2)
                 .map(WebSorting::toProperty)
                 .toList();
