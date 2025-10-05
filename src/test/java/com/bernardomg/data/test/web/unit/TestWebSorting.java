@@ -45,7 +45,7 @@ class TestWebSorting {
         final List<String> sort;
 
         // GIVEN
-        sort = List.of("field,asc");
+        sort = List.of("field|asc");
 
         // WHEN
         sorting = WebSorting.toSorting(sort);
@@ -65,7 +65,7 @@ class TestWebSorting {
         final List<String> sort;
 
         // GIVEN
-        sort = List.of("field,desc");
+        sort = List.of("field|desc");
 
         // WHEN
         sorting = WebSorting.toSorting(sort);
