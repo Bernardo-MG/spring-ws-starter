@@ -30,6 +30,14 @@ package com.bernardomg.data.domain;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-public record Pagination(int page, int size) {
+public record Pagination(int page, int size, boolean paged) {
+
+    public Pagination(final int page, final int size) {
+        this(page, size, true);
+    }
+
+    public static Pagination unpaged() {
+        return new Pagination(0, 0, false);
+    }
 
 }
