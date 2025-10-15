@@ -188,6 +188,7 @@
       <!-- ============================================== -->
       <!-- Checkstyle customized rules file -->
       <checkstyle.config.location>${project.basedir}/src/config/checkstyle/checkstyle-rules.xml</checkstyle.config.location>
+      <plugin.openapi.version>7.14.0</plugin.openapi.version>
       <!-- ============================================== -->
       <!-- ================= MAVEN SITE ================= -->
       <!-- ============================================== -->
@@ -477,6 +478,47 @@
 
    <build>
       <defaultGoal>clean package</defaultGoal>
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <!-- OpenApi -->
+               <groupId>org.openapitools</groupId>
+               <artifactId>openapi-generator-maven-plugin</artifactId>
+               <version>${plugin.openapi.version}</version>
+               <executions>
+                  <execution>
+                     <goals>
+                        <goal>generate</goal>
+                     </goals>
+                     <configuration>
+                        <generatorName>spring</generatorName>
+                        <library>spring-boot</library>
+                        <modelNameSuffix>Dto</modelNameSuffix>
+                        <typeMappings>
+                          <typeMapping>string+date-time=Instant</typeMapping>
+                          <typeMapping>InstantDto=Instant</typeMapping>
+                        </typeMappings>
+                        <importMappings>
+                          <importMapping>InstantDto=java.time.Instant</importMapping>
+                        </importMappings>
+                        <configOptions>
+                           <interfaceOnly>true</interfaceOnly>
+                           <skipDefaultInterface>true</skipDefaultInterface>
+                           <requestMappingMode>api_interface</requestMappingMode>
+                           <useTags>true</useTags>
+                           <dateLibrary>java8</dateLibrary>
+                           <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                           <useSpringBoot3>true</useSpringBoot3>
+                           <useSpringBuiltInValidation>true</useSpringBuiltInValidation>
+                           <useSpringController>true</useSpringController>
+                           <useResponseEntity>false</useResponseEntity>
+                        </configOptions>
+                     </configuration>
+                  </execution>
+               </executions>
+            </plugin>
+         </plugins>
+      </pluginManagement>
       <plugins>
          <plugin>
             <!-- Changes -->
