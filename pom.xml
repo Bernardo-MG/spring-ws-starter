@@ -21,7 +21,7 @@
 
    <groupId>com.bernardomg.framework.spring</groupId>
    <artifactId>spring-ws-starter</artifactId>
-   <version>0.4.2</version>
+   <version>0.4.3</version>
    <packaging>jar</packaging>
 
    <name>Starter for Spring Web Services</name>
@@ -179,10 +179,9 @@
       <bernardomg.framework.test.architecture>1.0.5</bernardomg.framework.test.architecture>
       <bernardomg.framework.validation.version>0.2.5</bernardomg.framework.validation.version>
       <jakarta.validation.version>3.1.1</jakarta.validation.version>
-      <micrometer.version>1.14.8</micrometer.version>
       <slf4j.version>2.0.17</slf4j.version>
-      <spring.boot.version>3.4.6</spring.boot.version>
-      <spring.version>6.2.8</spring.version>
+      <spring.boot.version>3.5.6</spring.boot.version>
+      <spring.version>6.2.11</spring.version>
       <!-- ============================================== -->
       <!-- ============ PLUGIN CONFIGURATION ============ -->
       <!-- ============================================== -->
@@ -302,7 +301,6 @@
          <!-- SL4J API -->
          <groupId>org.slf4j</groupId>
          <artifactId>slf4j-api</artifactId>
-         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
          <!-- Log4j SLF4J Bridge -->
@@ -333,19 +331,6 @@
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-web</artifactId>
          <scope>provided</scope>
-      </dependency>
-      <!-- ============================================== -->
-      <!-- ============ VERSION CONVERGENCE ============= -->
-      <!-- ============================================== -->
-      <dependency>
-         <groupId>io.micrometer</groupId>
-         <artifactId>micrometer-observation</artifactId>
-         <version>${micrometer.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>io.micrometer</groupId>
-         <artifactId>micrometer-commons</artifactId>
-         <version>${micrometer.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->

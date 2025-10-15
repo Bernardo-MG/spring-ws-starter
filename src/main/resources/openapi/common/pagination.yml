@@ -1,0 +1,87 @@
+components:
+  parameters:
+    pageParam:
+      name: page
+      description: Page to return.
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+        default: 1
+    sizeParam:
+      name: size
+      description: Page size.
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        example: 10
+        default: 10
+    sortParam:
+      name: sort
+      description: Sorting to apply.
+      in: query
+      style: form
+      explode: true
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          example: property|asc
+    unpagedParam:
+      name: paged
+      description: Param to disable pagination.
+      in: query
+      required: false
+      schema:
+        type: boolean
+        example: true
+        default: true
+  schemas:
+    Page:
+      description: Paged data.
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        size:
+          type: integer
+        page:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        elementsInPage:
+          type: integer
+        first:
+          type: boolean
+        last:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sorting'
+    Sorting:
+      description: Sorting to apply.
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+    Property:
+      description: Property to sort.
+      type: object
+      properties:
+        name:
+          type: string
+        direction:
+          type: string
+          enum: [asc, desc]
