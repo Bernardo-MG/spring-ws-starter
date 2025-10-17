@@ -29,12 +29,10 @@ import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 
 import com.bernardomg.data.domain.Page;
 import com.bernardomg.data.domain.Pagination;
 import com.bernardomg.data.domain.Sorting;
-import com.bernardomg.data.domain.Sorting.Direction;
 import com.bernardomg.data.domain.Sorting.Property;
 
 /**
@@ -52,32 +50,36 @@ public final class SpringPagination {
 
         properties = page.getSort()
             .stream()
-            .map(SpringPagination::toProperty)
+            .map(SpringSorting::toProperty)
             .toList();
         return new Page<>(page.getContent(), page.getSize(), page.getNumber() + 1, page.getTotalElements(),
             page.getTotalPages(), page.getNumberOfElements(), page.isFirst(), page.isLast(), new Sorting(properties));
     }
 
     public static final Pageable toPageable(final Pagination pagination) {
-        return PageRequest.of(pagination.page() - 1, pagination.size());
+        final Pageable pageable;
+
+        if (pagination.paged()) {
+            pageable = PageRequest.of(pagination.page() - 1, pagination.size());
+        } else {
+            pageable = Pageable.unpaged();
+        }
+
+        return pageable;
     }
 
     public static final Pageable toPageable(final Pagination pagination, final Sorting sorting) {
-        final Sort sort;
+        final Sort     sort;
+        final Pageable pageable;
 
         sort = SpringSorting.toSort(sorting);
-        return PageRequest.of(pagination.page() - 1, pagination.size(), sort);
-    }
-
-    private static final Property toProperty(final Order order) {
-        Direction direction;
-
-        if (order.isAscending()) {
-            direction = Direction.ASC;
+        if (pagination.paged()) {
+            pageable = PageRequest.of(pagination.page() - 1, pagination.size(), sort);
         } else {
-            direction = Direction.DESC;
+            pageable = Pageable.unpaged(sort);
         }
-        return new Property(order.getProperty(), direction);
+
+        return pageable;
     }
 
     private SpringPagination() {

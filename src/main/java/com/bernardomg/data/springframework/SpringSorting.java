@@ -39,6 +39,17 @@ import com.bernardomg.data.domain.Sorting.Property;
  */
 public final class SpringSorting {
 
+    public static final Property toProperty(final Order order) {
+        Direction direction;
+
+        if (order.isAscending()) {
+            direction = Direction.ASC;
+        } else {
+            direction = Direction.DESC;
+        }
+        return new Property(order.getProperty(), direction);
+    }
+
     public static final Sort toSort(final Sorting sorting) {
         return Sort.by(sorting.properties()
             .stream()
