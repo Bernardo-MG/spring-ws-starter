@@ -103,7 +103,7 @@
             Changed separator for sorting.
          </action>
       </release>
-      <release version="0.4.3" date="2025-10-05" description="Pagination">
+      <release version="0.4.3" date="2025-10-15" description="Pagination">
          <action dev="bmg" type="add">
             Common openAPI definitions.
          </action>
@@ -114,7 +114,10 @@
             Updated dependencies.
          </action>
       </release>
-      <release version="1.0.0" date="2025-10-05" description="">
+      <release version="0.4.4" date="2025-10-17" description="Map unpaged">
+         <action dev="bmg" type="fix">
+            Map unpaged pagination.
+         </action>
       </release>
    </body>
 </document>
