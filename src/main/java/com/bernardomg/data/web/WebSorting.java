@@ -52,9 +52,12 @@ public final class WebSorting {
         if (sort == null) {
             properties = List.of();
         } else {
+            // TODO: show a log with errors, or throw exception
             properties = sort.stream()
+                .distinct()
                 .map(p -> p.split("\\|"))
-                .filter(p -> p.length >= 2)
+                .filter(p -> p.length == 2)
+                .filter(WebSorting::validDirection)
                 .map(WebSorting::toProperty)
                 .toList();
         }
@@ -85,6 +88,20 @@ public final class WebSorting {
         propertyName = parts[0].trim();
 
         return new Property(propertyName, direction);
+    }
+
+    /**
+     * Checks if the direction is valid. It should be ascending or descending, nothing else.
+     *
+     * @param parts
+     *            parts to parse
+     * @return {@code true} if the direction is valid, {@code false} otherwise
+     */
+    private static boolean validDirection(final String[] parts) {
+        final String direction;
+
+        direction = parts[1];
+        return "asc".equals(direction.toLowerCase()) || "desc".equals(direction.toLowerCase());
     }
 
     private WebSorting() {
