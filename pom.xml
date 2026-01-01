@@ -21,7 +21,7 @@
 
    <groupId>com.bernardomg.framework.spring</groupId>
    <artifactId>spring-ws-starter</artifactId>
-   <version>0.4.5</version>
+   <version>0.4.6</version>
    <packaging>jar</packaging>
 
    <name>Starter for Spring Web Services</name>
@@ -176,12 +176,11 @@
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
       <archunit.version>1.4.1</archunit.version>
-      <bernardomg.framework.test.architecture>1.0.5</bernardomg.framework.test.architecture>
+      <bernardomg.framework.test.architecture>1.0.6</bernardomg.framework.test.architecture>
       <bernardomg.framework.validation.version>0.2.5</bernardomg.framework.validation.version>
       <jakarta.validation.version>3.1.1</jakarta.validation.version>
-      <slf4j.version>2.0.17</slf4j.version>
-      <spring.boot.version>3.5.6</spring.boot.version>
-      <spring.version>6.2.11</spring.version>
+      <spring.boot.version>3.5.9</spring.boot.version>
+      <spring.version>6.2.15</spring.version>
       <!-- ============================================== -->
       <!-- ============ PLUGIN CONFIGURATION ============ -->
       <!-- ============================================== -->

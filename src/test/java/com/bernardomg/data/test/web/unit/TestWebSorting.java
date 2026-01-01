@@ -59,6 +59,26 @@ class TestWebSorting {
     }
 
     @Test
+    @DisplayName("With ascending sort in upper case, it creates an ascending sorting")
+    void testToSort_Ascending_UpperCase() {
+        final Sorting      sorting;
+        final List<String> sort;
+
+        // GIVEN
+        sort = List.of("field|ASC");
+
+        // WHEN
+        sorting = WebSorting.toSorting(sort);
+
+        // THEN
+        Assertions.assertThat(sorting)
+            .as("sorting")
+            .extracting(Sorting::properties)
+            .asInstanceOf(InstanceOfAssertFactories.LIST)
+            .containsExactly(Property.asc("field"));
+    }
+
+    @Test
     @DisplayName("With ascending sort, it creates a descending sorting")
     void testToSort_Descending() {
         final Sorting      sorting;
@@ -79,7 +99,107 @@ class TestWebSorting {
     }
 
     @Test
-    @DisplayName("With no sort, it creates an empty")
+    @DisplayName("With ascending sort in upper case, it creates a descending sorting")
+    void testToSort_Descending_UpperCase() {
+        final Sorting      sorting;
+        final List<String> sort;
+
+        // GIVEN
+        sort = List.of("field|DESC");
+
+        // WHEN
+        sorting = WebSorting.toSorting(sort);
+
+        // THEN
+        Assertions.assertThat(sorting)
+            .as("sorting")
+            .extracting(Sorting::properties)
+            .asInstanceOf(InstanceOfAssertFactories.LIST)
+            .containsExactly(Property.desc("field"));
+    }
+
+    @Test
+    @DisplayName("With a duplicated sort, it creates a single one")
+    void testToSort_Duplicated() {
+        final Sorting      sorting;
+        final List<String> sort;
+
+        // GIVEN
+        sort = List.of("field|asc", "field|asc");
+
+        // WHEN
+        sorting = WebSorting.toSorting(sort);
+
+        // THEN
+        Assertions.assertThat(sorting)
+            .as("sorting")
+            .extracting(Sorting::properties)
+            .asInstanceOf(InstanceOfAssertFactories.LIST)
+            .containsExactly(Property.asc("field"));
+    }
+
+    @Test
+    @DisplayName("With an invalid direction, it creates an empty list")
+    void testToSort_InvalidDirection() {
+        final Sorting      sorting;
+        final List<String> sort;
+
+        // GIVEN
+        sort = List.of("field|abc");
+
+        // WHEN
+        sorting = WebSorting.toSorting(sort);
+
+        // THEN
+        Assertions.assertThat(sorting)
+            .as("sorting")
+            .extracting(Sorting::properties)
+            .asInstanceOf(InstanceOfAssertFactories.LIST)
+            .isEmpty();
+    }
+
+    @Test
+    @DisplayName("With an invalid structure, it creates an empty list")
+    void testToSort_InvalidStructure() {
+        final Sorting      sorting;
+        final List<String> sort;
+
+        // GIVEN
+        sort = List.of("field|asc|asc");
+
+        // WHEN
+        sorting = WebSorting.toSorting(sort);
+
+        // THEN
+        Assertions.assertThat(sorting)
+            .as("sorting")
+            .extracting(Sorting::properties)
+            .asInstanceOf(InstanceOfAssertFactories.LIST)
+            .isEmpty();
+    }
+
+    @Test
+    @DisplayName("Without direction, it creates an empty list")
+    void testToSort_NoDirection() {
+        final Sorting      sorting;
+        final List<String> sort;
+
+        // GIVEN
+        sort = List.of("field|");
+
+        // WHEN
+        sorting = WebSorting.toSorting(sort);
+
+        // THEN
+        Assertions.assertThat(sorting)
+            .as("sorting")
+            .extracting(Sorting::properties)
+            .asInstanceOf(InstanceOfAssertFactories.LIST)
+            .isEmpty();
+    }
+
+    @Test
+    @DisplayName("With no sort, it creates an empty list")
     void testToSort_NoSort() {
         final Sorting      sorting;
         final List<String> sort;
