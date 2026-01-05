@@ -25,6 +25,7 @@
 package com.bernardomg.data.domain;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Page containing a paged collection.
@@ -34,5 +35,16 @@ import java.util.Collection;
  */
 public record Page<T>(Collection<T> content, int size, int page, long totalElements, long totalPages,
         int elementsInPage, boolean first, boolean last, Sorting sort) {
+
+    /**
+     * Empty page.
+     *
+     * @param <E>
+     *            content type
+     * @return an empty page
+     */
+    public static final <E> Page<E> empty() {
+        return new Page<>(List.of(), 0, 0, 0, 0, 0, true, true, Sorting.unsorted());
+    }
 
 }
