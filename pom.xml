@@ -231,7 +231,7 @@
          <version>${bernardomg.framework.validation.version}</version>
       </dependency>
       <dependency>
-         <!-- Validation -->
+         <!-- Pagination -->
          <groupId>com.bernardomg.framework</groupId>
          <artifactId>pagination</artifactId>
          <version>${bernardomg.framework.pagination.version}</version>
