@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.data.domain.Page;
+import com.bernardomg.pagination.domain.Page;
 import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.ws.response.domain.model.ErrorResponse;
 import com.bernardomg.ws.response.domain.model.FailureResponse;
