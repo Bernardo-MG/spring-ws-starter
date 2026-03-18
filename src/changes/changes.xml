@@ -127,7 +127,13 @@
             Updated dependencies.
          </action>
       </release>
-      <release version="1.0.0" date="2025-10-17" description="">
+      <release version="0.4.6" date="2026-01-02" description="Excel responses">
+         <action dev="bmg" type="fix">
+            Corrected errors when parsing web sorting.
+         </action>
+         <action dev="bmg" type="add">
+            Excel responses.
+         </action>
       </release>
    </body>
 </document>
