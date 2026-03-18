@@ -40,7 +40,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.bernardomg.data.domain.Pagination;
+import com.bernardomg.pagination.domain.Pagination;
 import com.bernardomg.ws.test.springframework.request.config.PaginationTestConfig;
 import com.bernardomg.ws.test.springframework.request.config.controller.PaginationController;
 import com.bernardomg.ws.test.springframework.request.config.controller.PaginationController.PaginationReceiver;

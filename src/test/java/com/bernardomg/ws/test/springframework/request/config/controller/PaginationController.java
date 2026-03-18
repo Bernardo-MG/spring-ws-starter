@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.data.domain.Pagination;
+import com.bernardomg.pagination.domain.Pagination;
 
 @RestController
 @RequestMapping(PaginationController.PATH)

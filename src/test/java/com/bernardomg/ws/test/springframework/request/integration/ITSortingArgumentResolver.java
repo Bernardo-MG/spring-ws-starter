@@ -40,8 +40,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.bernardomg.data.domain.Sorting.Direction;
-import com.bernardomg.data.domain.Sorting.Property;
+import com.bernardomg.pagination.domain.Sorting.Direction;
+import com.bernardomg.pagination.domain.Sorting.Property;
 import com.bernardomg.ws.test.springframework.request.config.SortingTestConfig;
 import com.bernardomg.ws.test.springframework.request.config.controller.SortingController;
 import com.bernardomg.ws.test.springframework.request.config.controller.SortingController.SortingReceiver;

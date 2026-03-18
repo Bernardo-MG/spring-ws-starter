@@ -32,7 +32,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.bernardomg.data.domain.Pagination;
+import com.bernardomg.pagination.domain.Pagination;
 
 /**
  * Argument resolver to acquire a {@link Pagination} from the request parameters. In case these parameters are missing,

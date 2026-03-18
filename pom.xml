@@ -21,7 +21,7 @@
 
    <groupId>com.bernardomg.framework.spring</groupId>
    <artifactId>spring-ws-starter</artifactId>
-   <version>0.4.6</version>
+   <version>0.4.7</version>
    <packaging>jar</packaging>
 
    <name>Starter for Spring Web Services</name>
@@ -177,6 +177,7 @@
       <!-- ============================================== -->
       <archunit.version>1.4.1</archunit.version>
       <bernardomg.framework.test.architecture>1.0.6</bernardomg.framework.test.architecture>
+      <bernardomg.framework.pagination.version>1.0.1</bernardomg.framework.pagination.version>
       <bernardomg.framework.validation.version>0.2.5</bernardomg.framework.validation.version>
       <jakarta.validation.version>3.1.1</jakarta.validation.version>
       <spring.boot.version>3.5.9</spring.boot.version>
@@ -228,6 +229,12 @@
          <groupId>com.bernardomg.framework</groupId>
          <artifactId>validation</artifactId>
          <version>${bernardomg.framework.validation.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Validation -->
+         <groupId>com.bernardomg.framework</groupId>
+         <artifactId>pagination</artifactId>
+         <version>${bernardomg.framework.pagination.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ================== SPRING ==================== -->
