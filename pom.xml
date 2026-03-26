@@ -176,8 +176,9 @@
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
       <archunit.version>1.4.1</archunit.version>
+      <bernardomg.framework.event.version>1.0.0</bernardomg.framework.event.version>
       <bernardomg.framework.test.architecture>1.0.6</bernardomg.framework.test.architecture>
-      <bernardomg.framework.pagination.version>1.0.1</bernardomg.framework.pagination.version>
+      <bernardomg.framework.pagination.version>1.0.2</bernardomg.framework.pagination.version>
       <bernardomg.framework.validation.version>0.2.5</bernardomg.framework.validation.version>
       <jakarta.validation.version>3.1.1</jakarta.validation.version>
       <spring.boot.version>3.5.9</spring.boot.version>
@@ -229,6 +230,12 @@
          <groupId>com.bernardomg.framework</groupId>
          <artifactId>validation</artifactId>
          <version>${bernardomg.framework.validation.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Event -->
+         <groupId>com.bernardomg.framework</groupId>
+         <artifactId>event</artifactId>
+         <version>${bernardomg.framework.event.version}</version>
       </dependency>
       <dependency>
          <!-- Pagination -->

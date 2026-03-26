@@ -24,6 +24,7 @@
 
 package com.bernardomg.schedule.event;
 
+import java.io.Serializable;
 import java.time.YearMonth;
 import java.util.Objects;
 
@@ -38,7 +39,7 @@ public final class MonthStartEvent extends AbstractEvent {
 
     private final YearMonth   month;
 
-    public MonthStartEvent(final Object source, final YearMonth date) {
+    public MonthStartEvent(final Serializable source, final YearMonth date) {
         super(source);
 
         month = date;
