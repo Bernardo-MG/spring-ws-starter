@@ -23,11 +23,6 @@ public final class TestExceptionRequest {
             .contentType(MediaType.APPLICATION_JSON);
     }
 
-    public static final RequestBuilder missingId() {
-        return MockMvcRequestBuilders.get(ExceptionController.PATH_MISSING_ID)
-            .contentType(MediaType.APPLICATION_JSON);
-    }
-
     public static final RequestBuilder runtime() {
         return MockMvcRequestBuilders.get(ExceptionController.PATH_RUNTIME)
             .contentType(MediaType.APPLICATION_JSON);

@@ -14,8 +14,6 @@ public class ModulesArchitectureRulesTest {
     @ArchTest
     static final ArchRule module_dependencies_are_respected = layeredArchitecture().consideringAllDependencies()
 
-        .layer("Exceptions")
-        .definedBy("com.bernardomg.exception..")
         .layer("WS response")
         .definedBy("com.bernardomg.ws.response..")
         .layer("WS config")
@@ -25,8 +23,6 @@ public class ModulesArchitectureRulesTest {
         .layer("WS Spring request")
         .definedBy("com.bernardomg.ws.springframework.request..")
 
-        .whereLayer("Exceptions")
-        .mayOnlyBeAccessedByLayers("WS Spring error")
         .whereLayer("WS response")
         .mayOnlyBeAccessedByLayers("WS Spring error")
         .whereLayer("WS Spring error")
