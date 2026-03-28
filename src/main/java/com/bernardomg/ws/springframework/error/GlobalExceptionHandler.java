@@ -47,7 +47,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.bernardomg.exception.MissingIdException;
 import com.bernardomg.validation.domain.exception.FieldFailureException;
 import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.ws.response.domain.model.ErrorResponse;
@@ -98,18 +97,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.warn(ex.getMessage(), ex);
 
         return new ErrorResponse(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), "Internal error");
-    }
-
-    @ExceptionHandler({ MissingIdException.class })
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public final ErrorResponse handleMissingDataException(final MissingIdException ex) {
-        final String message;
-
-        log.warn(ex.getMessage(), ex);
-
-        message = String.format("Id %s not found", String.valueOf(ex.getId()));
-
-        return new ErrorResponse(String.valueOf(HttpStatus.NOT_FOUND.value()), message);
     }
 
     @ExceptionHandler({ FieldFailureException.class })

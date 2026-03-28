@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.exception.MissingIdException;
 import com.bernardomg.validation.domain.exception.FieldFailureException;
 import com.bernardomg.validation.domain.model.FieldFailure;
 import com.bernardomg.ws.test.springframework.error.config.model.ErrorTestObject;
@@ -66,11 +65,6 @@ public class ExceptionController {
     @GetMapping(path = "/illegalArgument", produces = MediaType.APPLICATION_JSON_VALUE)
     public void illegalArgument() {
         throw new IllegalArgumentException();
-    }
-
-    @GetMapping(path = "/missingId", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void missingId() {
-        throw new MissingIdException("source", 1L);
     }
 
     @GetMapping(path = "/runtime", produces = MediaType.APPLICATION_JSON_VALUE)

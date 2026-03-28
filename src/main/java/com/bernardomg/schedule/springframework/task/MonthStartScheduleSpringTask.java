@@ -58,7 +58,8 @@ public class MonthStartScheduleSpringTask {
     public void registerMonthFees() {
         // TODO: What about UTC hour displacement?
         log.info("Notifying new month");
-        eventEmitter.emit(new MonthStartEvent(this, YearMonth.now()));
+        // TODO: set a source
+        eventEmitter.emit(new MonthStartEvent(null, YearMonth.now()));
         log.info("Notified new month");
     }
 

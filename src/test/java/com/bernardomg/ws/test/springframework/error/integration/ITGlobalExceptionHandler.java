@@ -143,30 +143,6 @@ class ITGlobalExceptionHandler {
     }
 
     @Test
-    @DisplayName("With a missing id exception it returns the generic error response")
-    void testErrorHandling_MissingId() throws Exception {
-        final ResultActions result;
-
-        // WHEN
-        result = mockMvc.perform(TestExceptionRequest.missingId());
-
-        // THEN
-
-        // The value was not found
-        result.andExpect(status().isNotFound());
-
-        // The response contains the expected attributes
-        result.andExpect(jsonPath("$.code", equalTo("404")));
-        result.andExpect(jsonPath("$.message", equalTo("Id 1 not found")));
-
-        // The response contains no content field
-        result.andExpect(jsonPath("$.content").doesNotExist());
-
-        // The response contains no failures attribute
-        result.andExpect(jsonPath("$.failures").doesNotExist());
-    }
-
-    @Test
     @DisplayName("With a runtime exception it returns the generic error response")
     void testErrorHandling_RuntimeException() throws Exception {
         final ResultActions result;
