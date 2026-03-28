@@ -135,12 +135,12 @@
             Excel responses.
          </action>
       </release>
-      <release version="0.4.7" date="2026-01-02" description="Pagination library">
+      <release version="0.4.7" date="2026-03-18" description="Pagination library">
          <action dev="bmg" type="remove">
             Moved pagination to a library.
          </action>
       </release>
-      <release version="0.5.0" date="2026-01-02" description="Removed events">
+      <release version="0.5.0" date="2026-03-28" description="Removed events">
          <action dev="bmg" type="remove">
             Removed events.
          </action>
@@ -148,7 +148,10 @@
             Removed missing id exception.
          </action>
       </release>
-      <release version="1.0.0" date="2026-01-02" description="">
+      <release version="0.5.1" date="2026-03-28" description="Auto config error">
+         <action dev="bmg" type="fix">
+            Removed missing id exception.
+         </action>
       </release>
    </body>
 </document>
