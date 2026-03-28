@@ -1,3 +1,2 @@
-com.bernardomg.event.configuration.EventConfiguration
 com.bernardomg.schedule.configuration.ScheduleAutoConfiguration
 com.bernardomg.ws.configuration.WebServiceAutoConfiguration

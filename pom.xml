@@ -21,7 +21,7 @@
 
    <groupId>com.bernardomg.framework.spring</groupId>
    <artifactId>spring-ws-starter</artifactId>
-   <version>0.5.0</version>
+   <version>0.5.1</version>
    <packaging>jar</packaging>
 
    <name>Starter for Spring Web Services</name>
@@ -130,7 +130,6 @@
                   <configuration>
                      <publishingServerId>central</publishingServerId>
                      <autoPublish>true</autoPublish>
-                     <waitUntil>published</waitUntil>
                   </configuration>
                </plugin>
             </plugins>
