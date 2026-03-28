@@ -135,7 +135,10 @@
             Excel responses.
          </action>
       </release>
-      <release version="1.0.0" date="2026-01-02" description="">
+      <release version="0.4.7" date="2026-01-02" description="Pagination library">
+         <action dev="bmg" type="remove">
+            Moved pagination to a library.
+         </action>
       </release>
    </body>
 </document>
