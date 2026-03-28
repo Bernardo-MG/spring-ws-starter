@@ -140,7 +140,13 @@
             Moved pagination to a library.
          </action>
       </release>
-      <release version="1.0.0" date="2026-01-02" description="">
+      <release version="0.5.0" date="2026-01-02" description="Removed events">
+         <action dev="bmg" type="remove">
+            Removed events.
+         </action>
+         <action dev="bmg" type="remove">
+            Removed missing id exception.
+         </action>
       </release>
    </body>
 </document>
