@@ -153,5 +153,10 @@
             Removed missing id exception.
          </action>
       </release>
+      <release version="0.6.0" date="2026-06-06" description="Removed scheduler">
+         <action dev="bmg" type="remove">
+            Removed scheduler.
+         </action>
+      </release>
    </body>
 </document>
