@@ -163,7 +163,10 @@
             Removed scheduler config scan.
          </action>
       </release>
-      <release version="1.0.0" date="2026-06-10" description="">
+      <release version="0.7.0" date="2026-07-19" description="Removed responses">
+         <action dev="bmg" type="remove">
+            Extracted response model.
+         </action>
       </release>
    </body>
 </document>
