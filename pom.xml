@@ -179,6 +179,7 @@
       <bernardomg.framework.test.architecture>1.0.6</bernardomg.framework.test.architecture>
       <bernardomg.framework.pagination.version>1.0.2</bernardomg.framework.pagination.version>
       <bernardomg.framework.validation.version>0.2.5</bernardomg.framework.validation.version>
+      <bernardomg.framework.ws.response.version>1.0.0</bernardomg.framework.ws.response.version>
       <jakarta.validation.version>3.1.1</jakarta.validation.version>
       <spring.boot.version>3.5.9</spring.boot.version>
       <spring.version>6.2.15</spring.version>
@@ -241,6 +242,12 @@
          <groupId>com.bernardomg.framework</groupId>
          <artifactId>pagination</artifactId>
          <version>${bernardomg.framework.pagination.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Web service responses -->
+         <groupId>com.bernardomg.framework</groupId>
+         <artifactId>ws-response</artifactId>
+         <version>${bernardomg.framework.ws.response.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ================== SPRING ==================== -->

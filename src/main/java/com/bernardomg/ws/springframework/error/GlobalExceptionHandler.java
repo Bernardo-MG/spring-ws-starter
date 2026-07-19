@@ -47,10 +47,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.bernardomg.framework.ws.response.ErrorResponse;
+import com.bernardomg.framework.ws.response.FailureResponse;
 import com.bernardomg.validation.domain.exception.FieldFailureException;
 import com.bernardomg.validation.domain.model.FieldFailure;
-import com.bernardomg.ws.response.domain.model.ErrorResponse;
-import com.bernardomg.ws.response.domain.model.FailureResponse;
 
 import jakarta.validation.ValidationException;
 
