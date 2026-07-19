@@ -158,7 +158,10 @@
             Removed scheduler.
          </action>
       </release>
-      <release version="1.0.0" date="2026-06-06" description="">
+      <release version="0.6.1" date="2026-06-10" description="Removed scheduler config scan">
+         <action dev="bmg" type="fix">
+            Removed scheduler config scan.
+         </action>
       </release>
    </body>
 </document>
